@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="APP">
+<head>
+	<meta charset="UTF-8">
+	<title>ngScreening</title>
+	<meta name="keywords" content="ngScreening">
+	<meta name="description" content="angular表单验证,angular form vaild">
+	<meta name="author" content="Moer,199525807@qq.com">
+	<meta name="robots" content="index,follow">
+
+	<link rel="stylesheet" href="lib/bootstarp.min.css">
+
+	<link rel="stylesheet" href="css/ngScreening.css">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<h1 class="PluginName">ngScreening</h2>
+	<p class="Version">ver: 0.0.1</p>
+	<div class="githubTag">
+		<a class="github" href="https://github.com/Moerj/ngScreening" target="_blank">STAR ON GITHUB</a>
+	</div>
+
+	<div class="container" ng-controller="testCtrl">
+
+		<ng-screening>
+			<screening data="data.g1" data-title="第一组"></screening>
+			<screening data="data.g2" data-title="第二组"></screening>
+		</ng-screening>
+
+
+	</div>
+
+</body>
+</html>
+
+<!-- qtip提示部分，正式版将会剔除 -->
+<script src="lib/angular-v1.5.5.js"></script>
+
+<script src="js/ngScreening.js"></script>
+<script src="js/index.js"></script>

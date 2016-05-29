@@ -1,0 +1,14 @@
+<div class="screening">
+    <div class="screening-name">{{title}}</div>
+    <div class="screening-container">
+        <input type="button"
+            ng-repeat="item in data"
+            ng-class="{'btn':true, 'btn-default':!data[$index].isChecked, 'btn-primary':data[$index].isChecked}"
+            ng-click="checkItem()"
+            ng-if="!data[$index].isHidden"
+            value="{{data[$index].name}}"
+            index="{{$index}}"
+        >
+    </div>
+    <div class="screening-switch"></div>
+</div>
