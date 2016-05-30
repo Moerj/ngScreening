@@ -36,7 +36,7 @@ m.directive('ngScreening',function () {
                 return $scope.callback();
             }
         }],
-        link: function (scope, el , attrs) {
+        link: function (scope, el ) {
             var container = angular.element(el[0].querySelector('.ngScreening-container'));//填充checkbox的部分
             var button = container.next();//控制容器收缩的按钮
             var buttonArrow1 = button.find('b');//按钮中的上箭头
@@ -67,7 +67,7 @@ m.directive('screening',function () {
                     '<div class="screening-switch"><b class="ngScreening-hide">></b><i>></i></div>'+
                 '</div>'
         ,
-        link: function (scope, el, attrs, pCtrl) {
+        link: function (scope, el) {
             var switchbtn = angular.element(el[0].querySelector('.screening-switch'));
             var btnArrow1 = switchbtn.find('b');
             var btnArrow2 = switchbtn.find('i');

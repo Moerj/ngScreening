@@ -14,6 +14,20 @@
     position: relative;
     border-top: 1px rgba(153, 153, 153, 0.16) solid;
 
+    // 按钮中的箭头
+    @mixin btnArrow($line-height, $deg){
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: block;
+        line-height: $line-height;
+        text-align: center;
+        width: 100%;
+        height: 100%;
+        font-weight: 300;
+        transform: rotate($deg);
+    }
+
     .ngScreening-hide{
         display: none !important;
     }
@@ -38,28 +52,10 @@
         border: 1px solid #ddd;
         border-top: 0;
         >b{
-            position: absolute;
-            top: 0;
-            left: 0;
-            display: block;
-            line-height: 40px;
-            text-align: center;
-            width: 100%;
-            height: 100%;
-            font-weight: 300;
-            transform: rotate(-90deg);
+            @include btnArrow($line-height:40px, $deg:-90deg);
         }
         >i{
-            position: absolute;
-            top: 0;
-            left: 0;
-            display: block;
-            line-height: 40px;
-            text-align: center;
-            width: 100%;
-            height: 100%;
-            font-weight: 300;
-            transform: rotate(90deg);
+            @include btnArrow($line-height:40px, $deg:90deg);
         }
     }
 
@@ -107,28 +103,10 @@
             }
 
             >b{
-                position: absolute;
-                top: 0;
-                left: 0;
-                display: block;
-                line-height: 25px;
-                text-align: center;
-                width: 100%;
-                height: 100%;
-                font-weight: 300;
-                transform: rotate(-90deg);
+                @include btnArrow($line-height:25px, $deg:-90deg);
             }
             >i{
-                position: absolute;
-                top: 0;
-                left: 0;
-                display: block;
-                line-height: 25px;
-                text-align: center;
-                width: 100%;
-                height: 100%;
-                font-weight: 300;
-                transform: rotate(90deg);
+                @include btnArrow($line-height:25px, $deg:90deg);
             }
         }
     }
