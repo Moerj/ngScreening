@@ -9,6 +9,7 @@
 	<meta name="robots" content="index,follow">
 
 	<link rel="stylesheet" href="lib/bootstarp.min.css">
+	<link rel="stylesheet" href="lib/select.min.css">
 
 	<link rel="stylesheet" href="css/ngScreening.css">
 	<link rel="stylesheet" href="css/style.css">
@@ -27,6 +28,9 @@
 			<screening data="data.g2" data-title="第二组"></screening>
 		</ng-screening>
 
+		<multi-select>
+			 <multi-select-cont loadData="selectData"></multi-select-cont>
+		 </multi-select>
 
 	</div>
 
@@ -35,6 +39,7 @@
 
 <!-- qtip提示部分，正式版将会剔除 -->
 <script src="lib/angular-v1.5.5.js"></script>
+<script src="lib/select.min.js"></script>
 
 <script src="js/ngScreening.js"></script>
 <script src="js/index.js"></script>
