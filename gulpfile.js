@@ -30,7 +30,7 @@ gulp.task('sass', function() {
 });
 
 gulp.task('js-compress', function(){
-	return gulp.src('js/ngVerify.js')
+	return gulp.src(['js/**/*.js','!js/index.js'])
 		.pipe(uglify({
             preserveComments: 'license'
         }))

@@ -30,17 +30,12 @@ m.directive('ngScreening',function () {
                     '<div class="ngScreening-container" ng-transclude></div>' +
                     '<div class="ngScreening-switch"><b>></b><i class="ngScreening-hide">></i></div>' +
                 '</div>',
-        controller: function ($scope) {
-            // console.log($scope); //这里的还是控制器里的scope
-
-            this.getScope = function () {
-                return $scope
-            }
+        controller: ['$scope', function ($scope) {
             this.callback = function () {
                 //执行控制器中的callback，通知控制器，数据已改变
                 return $scope.callback();
             }
-        },
+        }],
         link: function (scope, el , attrs) {
             var container = angular.element(el[0].querySelector('.ngScreening-container'));//填充checkbox的部分
             var button = container.next();//控制容器收缩的按钮
@@ -116,7 +111,7 @@ m.directive('screeningCheckbox',function () {
                 'ng-if="!item.isHidden"' +
                 'ng-value="item.name"' +
                 'index="{{$index}}">' ,
-        controller:function ($scope) {
+        controller: ['$scope', function ($scope) {
             $scope.mulitiActive = false;
             $scope.checkItem = function () {
                 this.item.isChecked = !this.item.isChecked;
@@ -130,7 +125,7 @@ m.directive('screeningCheckbox',function () {
                 })
                 this.pCtrl.callback();
             }
-        },
+        }],
         link: function (scope, el , attrs, pCtrl) {
             scope.pCtrl = pCtrl;
             // 多选或单选按钮
