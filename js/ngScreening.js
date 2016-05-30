@@ -21,7 +21,9 @@ var m = angular.module('ngScreening',[]);
 m.directive('ngScreening',function () {
     return{
         restrict: 'E',
-        scope: false, //使用控制器的$scope
+        scope: {
+            callback:'&'
+        },
         replace: true,
         transclude: true,
         template: '<div class="ngScreening">' +
@@ -35,7 +37,8 @@ m.directive('ngScreening',function () {
                 return $scope
             }
             this.callback = function () {
-                return $scope.dataCallback();//执行控制器中的callback，通知控制器，数据已改变
+                //执行控制器中的callback，通知控制器，数据已改变
+                return $scope.callback();
             }
         },
         link: function (scope, el , attrs) {
@@ -58,27 +61,94 @@ m.directive('screening',function () {
     return{
         restrict: 'AE',
         scope: {
-            data: "=",
             title: "@"
         },
         replace: true,
+        transclude: true,
         require: '^ngScreening',
-        templateUrl: "../tpls/screening-tpl.html",
-        controller: function ($scope) {
+        template: '<div class="screening">'+
+                    '<div class="screening-name">{{title}}:</div>'+
+                    '<div class="screening-container" ng-transclude></div>'+
+                    '<div class="screening-switch"><b class="ngScreening-hide">></b><i>></i></div>'+
+                '</div>'
+        ,
+        link: function (scope, el, attrs, pCtrl) {
+            var switchbtn = angular.element(el[0].querySelector('.screening-switch'));
+            var btnArrow1 = switchbtn.find('b');
+            var btnArrow2 = switchbtn.find('i');
+
+            // 给按钮绑定收缩事件
+            switchbtn.on('click',function () {
+                el.toggleClass('screening-fixed');
+                btnArrow1.toggleClass('ngScreening-hide');
+                btnArrow2.toggleClass('ngScreening-hide');
+                return false;
+            })
+            // 根据内容高度显示收缩菜单按钮
+            angular.element(document).ready(function() {
+                if (el[0].offsetHeight > 48) {
+                    switchbtn.css('display','block');
+                    el.addClass('screening-fixed')
+                }
+            })
+        }
+    }
+})
+
+// checkbox
+m.directive('screeningCheckbox',function () {
+    return{
+        restrict: 'AE',
+        scope:{
+            data:'=',
+            multi:'@'
+        },
+        // replace: true,
+        require: '^ngScreening',
+        template:// 多选或单选按钮
+                '<input type="button"'  +
+                "ng-class=\"{'btn':true,'btn-sm':true,'btn-default':true,'btn-primary':mulitiActive}\" /> | " +
+                // checkItemes
+                '<input type="button"' +
+                'ng-repeat="item in data"' +
+                "ng-class=\"{'btn':true,'btn-sm':true,'btn-default':!item.isChecked, 'btn-primary':item.isChecked}\"" +
+                'ng-click="checkItem()"' +
+                'ng-if="!item.isHidden"' +
+                'ng-value="item.name"' +
+                'index="{{$index}}">' ,
+        controller:function ($scope) {
+            $scope.mulitiActive = false;
             $scope.checkItem = function () {
                 this.item.isChecked = !this.item.isChecked;
                 this.pCtrl.callback();
                 return false;
             }
+            $scope.mulitiToggle = function () {
+                $scope.mulitiActive = !$scope.mulitiActive;
+                angular.forEach(this.data,function (val, key) {
+                    val.isChecked = $scope.mulitiActive
+                })
+                this.pCtrl.callback();
+            }
         },
-        link: function (scope, el, attrs, pCtrl) {
-            // 指令的渲染完成后，在这里获取总控制器上的$scope
+        link: function (scope, el , attrs, pCtrl) {
             scope.pCtrl = pCtrl;
-            // scope.res = scope.pScope.data; //返回控制器上的data数据
+            // 多选或单选按钮
+            var multiCtrl = el.children().eq(0)
+            if (attrs.multi!=undefined) {
+                multiCtrl.val('全选')
+                scope.mulitiActive = false;
+                multiCtrl.on('click',function () {
+                    scope.mulitiToggle();
+                    scope.$apply()
+                    return false;
+                })
+            }else{
+                multiCtrl.val('单选')
+            }
         }
     }
 })
-
 
 
 
