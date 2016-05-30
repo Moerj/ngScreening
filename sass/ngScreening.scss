@@ -20,7 +20,6 @@
 
     >.ngScreening-container{
         width: 100%;
-        min-height: 400px;
         overflow: hidden;
         border-bottom: 2px rgba(0,0,0,0.1) solid;
     }
@@ -66,15 +65,75 @@
 
     // 子容器
     .screening{
+        min-height: 47px;
+        line-height: 47px;
+        border-bottom: 1px #ddd solid;
+        position: relative;
+        padding: 0 30px 0 90px;
+
         >.screening-name{
             display: inline-block;
+            text-align: right;
+            width: 80px;
+            margin-right: 10px;
+            position: absolute;
+            left: 0;
+            top: 0;
         }
         >.screening-container{
-            >*{
+            display: inline-block;
+            input[type=button]{
                 list-style: none;
                 display: inline-block;
                 outline: none;
+                margin: 0 6px;
             }
         }
+        >.screening-switch{
+            width: 25px;
+            height: 25px;
+            line-height: 25px;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            text-align: center;
+            font-size: 12px;
+            cursor: pointer;
+            border-radius: 5px;
+            display: none;
+
+            &:hover{
+                background-color: #eee;
+            }
+
+            >b{
+                position: absolute;
+                top: 0;
+                left: 0;
+                display: block;
+                line-height: 25px;
+                text-align: center;
+                width: 100%;
+                height: 100%;
+                font-weight: 300;
+                transform: rotate(-90deg);
+            }
+            >i{
+                position: absolute;
+                top: 0;
+                left: 0;
+                display: block;
+                line-height: 25px;
+                text-align: center;
+                width: 100%;
+                height: 100%;
+                font-weight: 300;
+                transform: rotate(90deg);
+            }
+        }
+    }
+    .screening-fixed{
+        height: 47px !important;
+        overflow: hidden;
     }
 }

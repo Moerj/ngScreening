@@ -23,14 +23,25 @@
 
 	<div class="container" ng-controller="testCtrl">
 
-		<ng-screening>
-			<screening data="data.g1" data-title="第一组"></screening>
-			<screening data="data.g2" data-title="第二组"></screening>
+		<ng-screening callback="dataCallback()">
+			<screening data-title="第一组">
+				<screening-checkbox data="data.g1" multi />
+			</screening>
+			<screening data-title="第二组">
+				<screening-checkbox data="data.g2" />
+			</screening>
 		</ng-screening>
 
-		<multi-select>
-			 <multi-select-cont loadData="selectData"></multi-select-cont>
-		 </multi-select>
+		<!-- <ui-select multiple ng-model="ctrl.multipleDemo.deSelectedPeople" on-remove="removed($item, $model)" theme="bootstrap" ng-disabled="ctrl.disabled" close-on-select="false" style="width: 800px;" title="Choose a person">
+		    <ui-select-match placeholder="Select person...">{{$item.name}} &lt;{{$item.email}}&gt;</ui-select-match>
+		    <ui-select-choices repeat="person.email as person in ctrl.people | propsFilter: {name: $select.search, age: $select.search}">
+		      <div ng-bind-html="person.name | highlight: $select.search"></div>
+		      <small>
+		        email: {{person.email}}
+		        age: <span ng-bind-html="''+person.age | highlight: $select.search"></span>
+		      </small>
+		    </ui-select-choices>
+		</ui-select> -->
 
 	</div>
 
