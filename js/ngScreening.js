@@ -71,7 +71,7 @@ m.directive('screening',function () {
         transclude: true,
         require: '^ngScreening',
         template: '<div class="screening">'+
-                    '<div class="screening-name">{{label}}:</div>'+
+                    '<div class="screening-name">{{label}}</div>'+
                     '<div class="screening-container" ng-transclude></div>'+
                     '<div class="screening-switch"><b class="ngScreening-hide"><</b><i>></i></div>'+
                 '</div>'
