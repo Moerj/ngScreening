@@ -1,5 +1,5 @@
 /**
- * ngScreening v0.0.1
+ * ngScreening v0.1.1
  *
  * @license: MIT
  * Designed and built by Moer
@@ -11,11 +11,20 @@
 
 var m = angular.module('ngScreening',[]);
 
-/* m.service('ngScreening',function () {
+// 筛选服务
+m.service('ngScreening',function () {
     return{
-
+        getChecked: function (data) {
+            var newArray = [];
+            angular.forEach(data,function (key) {
+                if (key.isChecked && !key.isHidden) {
+                    newArray.push(key)
+                }
+            })
+            return newArray;
+        }
     }
-}) */
+})
 
 // 筛选器外壳
 m.directive('ngScreening',function () {
@@ -28,7 +37,7 @@ m.directive('ngScreening',function () {
         transclude: true,
         template: '<div class="ngScreening">' +
                     '<div class="ngScreening-container" ng-transclude></div>' +
-                    '<div class="ngScreening-switch"><b>></b><i class="ngScreening-hide">></i></div>' +
+                    '<div class="ngScreening-switch"><b><</b><i class="ngScreening-hide">></i></div>' +
                 '</div>',
         controller: ['$scope', function ($scope) {
             this.callback = function () {
@@ -56,15 +65,15 @@ m.directive('screening',function () {
     return{
         restrict: 'AE',
         scope: {
-            title: "@"
+            label: "@"
         },
         replace: true,
         transclude: true,
         require: '^ngScreening',
         template: '<div class="screening">'+
-                    '<div class="screening-name">{{title}}:</div>'+
+                    '<div class="screening-name">{{label}}:</div>'+
                     '<div class="screening-container" ng-transclude></div>'+
-                    '<div class="screening-switch"><b class="ngScreening-hide">></b><i>></i></div>'+
+                    '<div class="screening-switch"><b class="ngScreening-hide"><</b><i>></i></div>'+
                 '</div>'
         ,
         link: function (scope, el) {
@@ -90,13 +99,27 @@ m.directive('screening',function () {
     }
 })
 
-// checkbox
-m.directive('screeningCheckbox',function () {
+// 筛选容器中的布局
+m.directive('screeningDiv',function () {
+    return{
+        restrict:'E',
+        scope:{
+            width:'@',
+            label:'@'
+        },
+        // replace:true,
+        transclude: true,
+        template: '<span style="margin-right:10px">{{label}}</span><div class="screening-div" style="width:{{width}}" ng-transclude></div>'
+    }
+})
+
+// checkbox and radio
+var checkbox_radio = function (isCheckbox) {
     return{
         restrict: 'AE',
         scope:{
             data:'=',
-            multi:'@'
+            multiName:'@'
         },
         // replace: true,
         require: '^ngScreening',
@@ -130,8 +153,8 @@ m.directive('screeningCheckbox',function () {
             scope.pCtrl = pCtrl;
             // 多选或单选按钮
             var multiCtrl = el.children().eq(0)
-            if (attrs.multi!=undefined) {
-                multiCtrl.val('全选')
+            if (isCheckbox) {
+                scope.multiName ? multiCtrl.val(scope.multiName) : multiCtrl.val('全选')
                 scope.mulitiActive = false;
                 multiCtrl.on('click',function () {
                     scope.mulitiToggle();
@@ -139,13 +162,60 @@ m.directive('screeningCheckbox',function () {
                     return false;
                 })
             }else{
-                multiCtrl.val('单选')
+                scope.multiName ? multiCtrl.val(scope.multiName) : multiCtrl.val('单选')
             }
+        }
+    }
+}
+m.directive('screeningCheckbox',function () {
+    return checkbox_radio(true);//多选指令
+})
+m.directive('screeningRadio',function () {
+    return checkbox_radio();//单选
+})
+
+// watch modle
+m.directive('screeningWatch',function () {
+    return{
+        restrict:'E',
+        scope:{
+            watch:'='
+        },
+        require: '^ngScreening',
+        replace: true,
+        template: '<i>ngScreening watch</i>',
+        link: function (scope, el , attrs, pCtrl) {
+            el.css('display','none')
+            scope.$watch('watch',function (newVal,oldVal) {
+                if (oldVal != newVal && oldVal) {
+                    pCtrl.callback();
+                }
+            })
         }
     }
 })
 
-
+// DOM event listening
+m.directive('screeningEvent',function () {
+    return{
+        restrict:'A',
+        scope:{
+            screeningEvent:'@'
+        },
+        require: '^ngScreening',
+        replace: true,
+        link: function (scope, el , attrs, pCtrl) {
+            var event = 'change';
+            if (scope.screeningEvent) {
+                event = scope.screeningEvent;
+            }
+            el.on(event,function () {
+                pCtrl.callback();
+                return false;
+            })
+        }
+    }
+})
 
 
 })(angular)

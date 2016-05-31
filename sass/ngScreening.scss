@@ -1,5 +1,5 @@
 /**
- * ngScreening v0.0.1 last updated
+ * ngScreening v0.1.1 last updated
  *
  * License: MIT
  * Designed and built by Moer
@@ -15,17 +15,16 @@
     border-top: 1px rgba(153, 153, 153, 0.16) solid;
 
     // 按钮中的箭头
-    @mixin btnArrow($line-height, $deg){
+    @mixin btnArrow(){
         position: absolute;
-        top: 0;
-        left: 0;
-        display: block;
-        line-height: $line-height;
+        top: 25%;
+        left: 45%;
+        display: inline;
         text-align: center;
-        width: 100%;
-        height: 100%;
-        font-weight: 300;
-        transform: rotate($deg);
+        font-weight: 200;
+        line-height: normal;
+        transform: rotate(90deg) scale3d(0.7,1.3,1);
+
     }
 
     .ngScreening-hide{
@@ -34,7 +33,7 @@
 
     >.ngScreening-container{
         width: 100%;
-        overflow: hidden;
+        // overflow: hidden;
         border-bottom: 2px rgba(0,0,0,0.1) solid;
     }
 
@@ -44,18 +43,19 @@
         right: 5px;
         width: 40px;
         height: 40px;
-        font-size: 18px;
+        font-size: 15px;
         color: #66a6d1;
         cursor: pointer;
         background-color: inherit;
         box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.1);
         border: 1px solid #ddd;
         border-top: 0;
+        text-align: center;
         >b{
-            @include btnArrow($line-height:40px, $deg:-90deg);
+            @include btnArrow();
         }
         >i{
-            @include btnArrow($line-height:40px, $deg:90deg);
+            @include btnArrow();
         }
     }
 
@@ -77,12 +77,20 @@
             top: 0;
         }
         >.screening-container{
-            display: inline-block;
-            input[type=button]{
+            display: block;
+            input[type=button]{ /* checkbox */
                 list-style: none;
                 display: inline-block;
                 outline: none;
                 margin: 0 6px;
+            }
+            .screening-div{ /* 自定义div容器 */
+                display: inline-block;
+                margin-right: 20px;
+                input{
+                    display: inline-block;
+                    width: auto;
+                }
             }
         }
         >.screening-switch{
@@ -103,10 +111,10 @@
             }
 
             >b{
-                @include btnArrow($line-height:25px, $deg:-90deg);
+                @include btnArrow();
             }
             >i{
-                @include btnArrow($line-height:25px, $deg:90deg);
+                @include btnArrow();
             }
         }
     }

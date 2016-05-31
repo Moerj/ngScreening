@@ -1,10 +1,10 @@
 (function(){
 
 // 使用ngVerify前，先依赖注入
-var m = angular.module('APP',['ngScreening']);
+var m = angular.module('APP',['ngScreening', 'ui.select']);
 
 // 测试用控制器,调用公共方法的地方注入ngVerify
-m.controller('testCtrl',function ($scope, $timeout) {
+m.controller('testCtrl',function ($scope, ngScreening) {
     $scope._hellow = 'hellow scope!!!'
 
     // 初始化过滤组件的总数据
@@ -14,69 +14,40 @@ m.controller('testCtrl',function ($scope, $timeout) {
     $scope.data.g1 =
     [
         {
-            name:'香蕉',
-            isChecked: false,
-            isHidden: false
+            name:'香蕉'
         },
         {
-            name:'菠萝',
-            isChecked: false,
-            isHidden: false
+            name:'菠萝'
         },
         {
-            name:'梨子',
-            isChecked: false,
-            isHidden: false
-        },{
-            name:'火龙果',
-            isChecked: false,
-            isHidden: false
+            name:'梨子'
         },
         {
-            name:'榴莲',
-            isChecked: false,
-            isHidden: false
+            name:'火龙果'
         },
         {
-            name:'猕猴桃',
-            isChecked: false,
-            isHidden: false
+            name:'榴莲'
         },
         {
-            index:1,
-            name:'葡萄',
-            isChecked: false,
-            isHidden: false
+            name:'猕猴桃'
         },
         {
-            index:2,
-            name:'樱桃',
-            isChecked: false,
-            isHidden: false
+            name:'葡萄'
         },
         {
-            index:3,
-            name:'椰子',
-            isChecked: false,
-            isHidden: false
+            name:'樱桃'
         },
         {
-            index:1,
-            name:'芒果',
-            isChecked: false,
-            isHidden: false
+            name:'椰子'
         },
         {
-            index:2,
-            name:'桂圆',
-            isChecked: false,
-            isHidden: false
+            name:'芒果'
         },
         {
-            index:3,
-            name:'桑葚',
-            isChecked: false,
-            isHidden: false
+            name:'桂圆'
+        },
+        {
+            name:'桑葚'
         }
     ]
 
@@ -84,30 +55,51 @@ m.controller('testCtrl',function ($scope, $timeout) {
     [
         {
             name:'桃子',
-            isChecked: false,
-            isHidden: false
+            // isChecked: false,
+            // isHidden: false
         },
         {
             name:'苹果',
-            isChecked: false,
-            isHidden: false
+            // isChecked: false,
+            // isHidden: false
         },
         {
             name:'西瓜',
-            isChecked: false,
-            isHidden: false
+            // isChecked: false,
+            // isHidden: false
         }
     ]
 
     $scope.dataCallback = function () {
+        // 筛选数据，只会输出选中的数据
+        console.log('第一组数据：');
+        console.log(ngScreening.getChecked($scope.data.g1));
+        console.log('第二组数据：');
+        console.log(ngScreening.getChecked($scope.data.g2));
+
         // 输出数据
-        console.log($scope.data);
+        // console.log($scope.data);
+
+        // 输出ui-select数据
+        // console.log($scope.selected);
 
         // 利用数据控制筛选器的联动逻辑
         // console.log('吃了梨子就不能吃苹果 !!');
         // $scope.data.g2[1].isHidden = $scope.data.g1[2].isChecked
 
     }
+
+
+    // ui-select
+    $scope.itemArray = [
+        {id: 1, name: 'first'},
+        {id: 2, name: 'second'},
+        {id: 3, name: 'third'},
+        {id: 4, name: 'fourth'},
+        {id: 5, name: 'fifth'},
+    ];
+
+    $scope.selected = { value: $scope.itemArray[0] };
 
 })
 
