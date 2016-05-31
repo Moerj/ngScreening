@@ -51,30 +51,35 @@ m.directive('ngScreening',function () {
             var button = container.next();//控制容器收缩的按钮
             var buttonArrow1 = button.find('b');//按钮中的上箭头
             var buttonArrow2 = button.find('i');//下箭头
+            // 设置初始显示的行
+            if (scope.initrows>0) {
+                // 使用timeout延迟隐藏筛选行，避免隐藏情况行内组件初始化错误
+                setTimeout(function () {
+                    var rows = container.children();
+                    if (rows.length > scope.initrows) {
+                        buttonArrow1.toggleClass('ngScreening-hide');
+                        buttonArrow2.toggleClass('ngScreening-hide');
+                        for (var i = scope.initrows; i < rows.length; i++) {
+                            angular.element(rows[i]).addClass('ngScreening-hide');
+                        }
+                    }
+                },200)
+            }
+            // 面板收缩伸展
             button.on('click',function (e) {
                 e.preventDefault();
-                var containerH = container.css('height');
-                if (containerH=='' || containerH=='auto') {
-                    container.toggleClass('ngScreening-hide');
+                if (scope.initrows>0) {
+                    scope.initrows=0;
                     buttonArrow1.toggleClass('ngScreening-hide');
                     buttonArrow2.toggleClass('ngScreening-hide');
+                    container.children().removeClass('ngScreening-hide')
                 }else{
-                    container.css('height','auto');
+                    container.toggleClass('ngScreening-hide');
                     buttonArrow1.toggleClass('ngScreening-hide');
                     buttonArrow2.toggleClass('ngScreening-hide');
                 }
             })
-            // 设置初始显示的行
-            if (scope.initrows>0) {
-                angular.element(document).ready(function() {
-                    var rows = container.children();
-                    if (rows.length > scope.initrows) {
-                        container.css('height',rows[0].offsetHeight*scope.initrows + 'px');
-                        buttonArrow1.toggleClass('ngScreening-hide');
-                        buttonArrow2.toggleClass('ngScreening-hide');
-                    }
-                })
-            }
+
         }
     }
 })
