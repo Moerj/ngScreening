@@ -99,7 +99,7 @@ m.directive('screening',function () {
     }
 })
 
-// 筛选容器中的布局
+// 自定义筛选组件
 m.directive('screeningDiv',function () {
     return{
         restrict:'E',
@@ -107,9 +107,8 @@ m.directive('screeningDiv',function () {
             width:'@',
             label:'@'
         },
-        // replace:true,
         transclude: true,
-        template: '<span style="margin-right:10px">{{label}}</span><div class="screening-div" style="width:{{width}}" ng-transclude></div>'
+        template: '<span style="margin:0 10px 0 10px">{{label}}</span><div class="screening-div" style="width:{{width}}" ng-transclude></div>'
     }
 })
 
@@ -138,6 +137,13 @@ var checkbox_radio = function (isCheckbox) {
             $scope.mulitiActive = false;
             $scope.checkItem = function () {
                 this.item.isChecked = !this.item.isChecked;
+                if (!isCheckbox) { // radio单选
+                    angular.forEach($scope.data,function (val) {
+                        if (val != this.item) {
+                            val.isChecked = false;
+                        }
+                    }.bind(this));
+                }
                 this.pCtrl.callback();
                 return false;
             }

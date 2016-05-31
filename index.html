@@ -25,15 +25,15 @@
 
 		<ng-screening callback="dataCallback()">
 
-			<screening label="第一组">
-				<screening-checkbox data="data.g1" />
+			<screening label="多选器">
+				<screening-checkbox data="data.g1"></screening-radio>
 			</screening>
 
-			<screening label="第二组">
-				<screening-radio data="data.g2" />
+			<screening label="单选器">
+				<screening-radio data="data.g2"></screening-radio>
 			</screening>
 
-			<screening label="第三组">
+			<screening label="自定组件">
 
 				<!-- 普通输入框 -->
 				<screening-div label="输入框:">
@@ -44,7 +44,7 @@
 
 			</screening>
 
-			<screening label="第四组">
+			<screening label="外部组件">
 
 				<screening-div label="ui-select:" width="300px">
 					<!-- 监听数据模型 -->
@@ -59,6 +59,7 @@
 						</ui-select-choices>
 					</ui-select>
 				</screening-div>
+
 			</screening>
 
 		</ng-screening>

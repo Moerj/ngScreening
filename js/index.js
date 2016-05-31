@@ -72,10 +72,10 @@ m.controller('testCtrl',function ($scope, ngScreening) {
 
     $scope.dataCallback = function () {
         // 筛选数据，只会输出选中的数据
-        console.log('第一组数据：');
+        /* console.log('第一组数据：');
         console.log(ngScreening.getChecked($scope.data.g1));
         console.log('第二组数据：');
-        console.log(ngScreening.getChecked($scope.data.g2));
+        console.log(ngScreening.getChecked($scope.data.g2)); */
 
         // 输出数据
         // console.log($scope.data);
