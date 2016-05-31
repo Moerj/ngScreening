@@ -33,7 +33,7 @@
 
     >.ngScreening-container{
         width: 100%;
-        // overflow: hidden;
+        overflow: hidden;
         border-bottom: 2px rgba(0,0,0,0.1) solid;
     }
 
@@ -62,7 +62,7 @@
     // 子容器
     .screening{
         min-height: 47px;
-        line-height: 47px;
+        line-height: 46px;
         border-bottom: 1px #ddd solid;
         position: relative;
         padding: 0 30px 0 90px;

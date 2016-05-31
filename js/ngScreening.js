@@ -31,7 +31,8 @@ m.directive('ngScreening',function () {
     return{
         restrict: 'E',
         scope: {
-            callback:'&'
+            callback:'&',
+            initrows:'@'
         },
         replace: true,
         transclude: true,
@@ -52,10 +53,28 @@ m.directive('ngScreening',function () {
             var buttonArrow2 = button.find('i');//下箭头
             button.on('click',function (e) {
                 e.preventDefault();
-                container.toggleClass('ngScreening-hide');
-                buttonArrow1.toggleClass('ngScreening-hide');
-                buttonArrow2.toggleClass('ngScreening-hide');
+                var containerH = container.css('height');
+                if (containerH=='' || containerH=='auto') {
+                    container.toggleClass('ngScreening-hide');
+                    buttonArrow1.toggleClass('ngScreening-hide');
+                    buttonArrow2.toggleClass('ngScreening-hide');
+                }else{
+                    container.css('height','auto');
+                    buttonArrow1.toggleClass('ngScreening-hide');
+                    buttonArrow2.toggleClass('ngScreening-hide');
+                }
             })
+            // 设置初始显示的行
+            if (scope.initrows>0) {
+                angular.element(document).ready(function() {
+                    var rows = container.children();
+                    if (rows.length > scope.initrows) {
+                        container.css('height',rows[0].offsetHeight*scope.initrows + 'px');
+                        buttonArrow1.toggleClass('ngScreening-hide');
+                        buttonArrow2.toggleClass('ngScreening-hide');
+                    }
+                })
+            }
         }
     }
 })
