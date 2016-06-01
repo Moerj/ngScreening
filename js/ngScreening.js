@@ -136,23 +136,23 @@ m.directive('screening',function () {
                 openState = !openState;
                 return false;
             })
-            // 根据内容高度显示收缩菜单按钮
-            setTimeout(function () {
-                if (el[0].offsetHeight > initHeight) {
-                    switchbtn.css('display','block');
-                    el.css({height:initHeight*initrows+'px', overflow:'hidden'})
-                }
-            },200)
 
             // $watch监听DOM container宽度,决定什么时候显示和隐藏右侧伸缩按钮
             var container = angular.element(el[0].querySelector('.screening-container'));
             scope.$watch(function () {
                 return container[0].offsetHeight;
             },function (newHeight) {
-                if (newHeight < initHeight) {
-                    switchbtn.addClass('ngScreening-hide')
-                }else{
+                // 容器宽度改变，控制伸缩按钮和容器行数
+                if (newHeight >= initHeight*initrows) {
                     switchbtn.removeClass('ngScreening-hide')
+                    el.css({height:initHeight*initrows+'px', overflow:'hidden'})
+                    if (openState) {
+                        el.css({height:'', overflow:''})
+                    }
+                }
+                else{
+                    switchbtn.addClass('ngScreening-hide')
+                    el.css({height:'', overflow:''})
                 }
             })
         }
