@@ -179,6 +179,7 @@ app.controller('yourCtrl',function ($scope) {
 <screening-watch watch="data"></screening-watch>
 ```
 
+<br>
 
 ## 数据更新
 <h3 id="step3">callback</h3>
@@ -196,6 +197,8 @@ app.controller('yourCtrl',function ($scope) {
     }
 })
 ```
+
+<br>
 
 ## 过滤数据
 ```javascript
@@ -225,7 +228,6 @@ app.controller('yourCtrl',function ($scope, ngScreening) {
 ```
 
 <br>
-------
 
 
 ## 配置参数
