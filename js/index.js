@@ -5,7 +5,6 @@ var m = angular.module('APP',['ngScreening', 'ui.select']);
 
 // 测试用控制器,调用公共方法的地方注入ngVerify
 m.controller('testCtrl',function ($scope, ngScreening) {
-    $scope._hellow = 'hellow scope!!!'
 
     // 初始化过滤组件的总数据
     $scope.data = {};

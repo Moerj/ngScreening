@@ -134,12 +134,12 @@ m.directive('screening',function () {
                 return false;
             })
             // 根据内容高度显示收缩菜单按钮
-            angular.element(document).ready(function() {
-                if (el[0].offsetHeight > 48) {
+            setTimeout(function () {
+                if (el[0].offsetHeight > initHeight) {
                     switchbtn.css('display','block');
                     el.css({height:initHeight*initrows+'px', overflow:'hidden'})
                 }
-            })
+            },200)
         }
     }
 })
@@ -167,17 +167,17 @@ function checkbox_radio(isCheckbox) {
         },
         // replace: true,
         require: '^ngScreening',
-        template:// 多选或单选按钮
-                '<input type="button" class="screening-item btn btn-sm btn-default"'  +
-                "ng-class=\"{'btn-primary':mulitiActive}\" /> | " +
+        template: // 多选或单选按钮
+                '<input type="button" class="screening-item btn"'  +
+                "ng-class=\"{'screening-item-checked':mulitiActive}\" /> | " +
                 // checkItemes
                 '<input type="button"' +
                 'ng-repeat="item in data"' +
-                "ng-class=\"{'btn-default':!item.isChecked, 'btn-primary':item.isChecked}\"" +
+                "ng-class=\"{'screening-item-checked':item.isChecked}\"" +
                 'ng-click="checkItem()"' +
                 'ng-if="!item.isHidden"' +
                 'ng-value="item.name"' +
-                'class="screening-item btn btn-sm"' +
+                'class="screening-item btn"' +
                 'index="{{$index}}">' ,
         controller: ['$scope', function ($scope) {
             $scope.mulitiActive = false;

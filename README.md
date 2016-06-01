@@ -9,11 +9,9 @@ http://moerj.com/Github/ngScreening/
 
 <br>
 ## Getting Started
-在使用前，你需要引入 angular 和 bootstrap
+在使用前，你需要引入 angular
 
 ```javascript
-
-require('bootstrap');//注意这里只是样式
 
 require('angular');
 

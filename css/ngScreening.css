@@ -77,7 +77,24 @@
         list-style: none;
         display: inline-block;
         outline: none;
-        margin: 0 6px; }
+        margin: 0 6px;
+        background-color: #fff;
+        border: 1px solid #E0E0E0;
+        padding: 5px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 11px;
+        color: #333;
+        line-height: normal;
+        height: auto !important; }
+        .ngScreening .screening > .screening-container .screening-item:hover {
+          background-color: #f2f2f2;
+          border-color: #d6d6d6; }
+      .ngScreening .screening > .screening-container .screening-item-checked {
+        background-color: #66A6D1;
+        color: #fff; }
+        .ngScreening .screening > .screening-container .screening-item-checked:hover {
+          background-color: #3f8fc5 !important; }
       .ngScreening .screening > .screening-container .screening-div {
         /* 自定义div容器 */
         display: inline-block;
