@@ -26,7 +26,8 @@ angular.module('yourProject',['ngScreening']);
 3. <a href="#step3">callback</a> 响应筛选数据变化
 
 <br>
---------
+
+
 
 <h2 id="step1">布局</h2>
 
@@ -90,7 +91,6 @@ angular.module('yourProject',['ngScreening']);
 
 
 <br>
---------
 
 <h2 id="step2">数据操作</h2>
 
@@ -153,6 +153,7 @@ app.controller('yourCtrl',function ($scope) {
 })
 ```
 
+<br>
 
 ## 监听
 
@@ -173,6 +174,8 @@ app.controller('yourCtrl',function ($scope) {
 监听数据模型，模型改变时会执行callback
 ```html
 <input type="text" ng-model="data">
+
+<!-- screening-watch 可以在筛选器内任意位置 -->
 <screening-watch watch="data"></screening-watch>
 ```
 
@@ -181,6 +184,7 @@ app.controller('yourCtrl',function ($scope) {
 <h3 id="step3">callback</h3>
 定义一个你的回调函数，它会在数据更新时通知你
 ```html
+<!-- callback 只能定义在 ng-screening 上 -->
 <ng-screening callback="yourCallback()">
     ...
 </ng-screening>
@@ -195,6 +199,7 @@ app.controller('yourCtrl',function ($scope) {
 
 ## 过滤数据
 ```javascript
+// 别忘了依赖注入 ngScreening
 app.controller('yourCtrl',function ($scope, ngScreening) {
     // 初始数据
     $scope.yourData = [
