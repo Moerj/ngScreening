@@ -1,9 +1,11 @@
 # ngScreening v0.1.1
 
 angular筛选器组件
+通过控制器定义数据，screening帮你完成数据的渲染、监听、过滤等功能。
 
 <br>
 ## DEMO
+http://moerj.com/Github/ngScreening/
 
 <br>
 ## Getting Started
@@ -266,3 +268,9 @@ app.controller('yourCtrl',function ($scope, ngScreening) {
 <!-- 单选的只有样式没有实际功能 -->
 <screening-radio multi-name="单选"></screening-radio>
 ```
+
+<br>
+
+## Support
+- IE 9+
+- angular 1.x
