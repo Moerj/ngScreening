@@ -71,6 +71,7 @@ m.controller('testCtrl',function ($scope, ngScreening) {
     ]
 
     $scope.dataCallback = function () {
+        console.log('callback has run.');
         // 筛选数据，只会输出选中的数据
         /* console.log('第一组数据：');
         console.log(ngScreening.getChecked($scope.data.g1));

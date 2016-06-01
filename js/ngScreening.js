@@ -51,6 +51,11 @@ m.directive('ngScreening',function () {
             var button = container.next();//控制容器收缩的按钮
             var buttonArrow1 = button.find('b');//按钮中的上箭头
             var buttonArrow2 = button.find('i');//下箭头
+            // 设置初始显示行为固定模式
+            if (scope.initrows==-1 || scope.initrows=='fixed') {
+                button.remove();
+                return;
+            }
             // 设置初始显示的行
             if (scope.initrows>0) {
                 // 使用timeout延迟隐藏筛选行，避免隐藏情况行内组件初始化错误
@@ -137,7 +142,7 @@ m.directive('screeningDiv',function () {
 })
 
 // checkbox and radio
-var checkbox_radio = function (isCheckbox) {
+function checkbox_radio(isCheckbox) {
     return{
         restrict: 'AE',
         scope:{
@@ -173,7 +178,7 @@ var checkbox_radio = function (isCheckbox) {
             }
             $scope.mulitiToggle = function () {
                 $scope.mulitiActive = !$scope.mulitiActive;
-                angular.forEach(this.data,function (val, key) {
+                angular.forEach(this.data,function (val) {
                     val.isChecked = $scope.mulitiActive
                 })
                 this.pCtrl.callback();
@@ -212,10 +217,8 @@ m.directive('screeningWatch',function () {
             watch:'='
         },
         require: '^ngScreening',
-        replace: true,
-        template: '<i>ngScreening watch</i>',
         link: function (scope, el , attrs, pCtrl) {
-            el.css('display','none')
+            el.remove();
             scope.$watch('watch',function (newVal,oldVal) {
                 if (oldVal != newVal && oldVal) {
                     pCtrl.callback();
