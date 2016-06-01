@@ -254,7 +254,7 @@ app.controller('yourCtrl',function ($scope, ngScreening) {
 </ng-screening>
 ```
 
-### multi-name
+### multi-name (defulat: checkbox-全选, radio-单选)
 全选的控制按钮名称
 ```html
 <!-- 控制按钮点击后可以全部选中或反选 -->
