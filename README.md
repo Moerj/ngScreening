@@ -1,4 +1,4 @@
-# ngScreening v0.1.1
+# ngScreening v0.1.2
 
 angular筛选器组件
 通过控制器定义数据，screening帮你完成数据的渲染、监听、过滤等功能。
@@ -247,13 +247,14 @@ app.controller('yourCtrl',function ($scope, ngScreening) {
 ```html
 <!-- 默认显示3行筛选器，其余的会收起隐藏 -->
 <ng-screening initrows="3">
-    <!-- radio组展开所有可选项，取消该组右侧的伸缩按钮 -->
-    <screening-radio data="yourData" initrows="fixed"></screening-radio>
+    <!-- radio组默认只显示1行，其余的元素会隐藏，右边出现伸缩按钮 -->
+    <screening-radio data="yourData" initrows="1"></screening-radio>
 </ng-screening>
 
 <!-- 固定初始化行数，隐藏组件右下角伸缩按钮 -->
-<ng-screening initrows="-1 || fixed">
-    ...
+<ng-screening>
+    <!-- checkbox组默认全部显示，没有伸缩按钮 -->
+    <screening-checkbox data="yourData" ></screening-checkbox>
 </ng-screening>
 ```
 

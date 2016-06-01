@@ -1,6 +1,6 @@
 @charset "UTF-8";
 /**
- * ngScreening v0.1.1 last updated
+ * ngScreening v0.1.2 last updated
  *
  * License: MIT
  * Designed and built by Moer
@@ -112,8 +112,7 @@
       text-align: center;
       font-size: 12px;
       cursor: pointer;
-      border-radius: 5px;
-      display: none; }
+      border-radius: 5px; }
       .ngScreening .screening > .screening-switch:hover {
         background-color: #eee; }
       .ngScreening .screening > .screening-switch > b {

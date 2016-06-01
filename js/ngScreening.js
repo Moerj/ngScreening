@@ -1,5 +1,5 @@
 /**
- * ngScreening v0.1.1
+ * ngScreening v0.1.2
  *
  * @license: MIT
  * Designed and built by Moer
@@ -47,24 +47,29 @@ m.directive('ngScreening',function () {
             }
         }],
         link: function (scope, el ) {
+            var initrows = scope.initrows;
             var container = angular.element(el[0].querySelector('.ngScreening-container'));//填充checkbox的部分
             var button = container.next();//控制容器收缩的按钮
-            var buttonArrow1 = button.find('b');//按钮中的上箭头
-            var buttonArrow2 = button.find('i');//下箭头
+
             // 设置初始显示行为固定模式
-            if (scope.initrows==-1 || scope.initrows=='fixed') {
+            if (!initrows || initrows<0) {
                 button.remove();
                 return;
             }
+
+            var buttonArrow1 = button.find('b');//按钮中的上箭头
+            var buttonArrow2 = button.find('i');//下箭头
+            var hasInit = initrows>0 && initrows<container.children().length;//设置了初始行数
+
             // 设置初始显示的行
-            if (scope.initrows>0) {
+            if (hasInit) {
                 // 使用timeout延迟隐藏筛选行，避免隐藏情况行内组件初始化错误
                 setTimeout(function () {
                     var rows = container.children();
-                    if (rows.length > scope.initrows) {
+                    if (rows.length > initrows) {
                         buttonArrow1.toggleClass('ngScreening-hide');
                         buttonArrow2.toggleClass('ngScreening-hide');
-                        for (var i = scope.initrows; i < rows.length; i++) {
+                        for (var i = initrows; i < rows.length; i++) {
                             angular.element(rows[i]).addClass('ngScreening-hide');
                         }
                     }
@@ -73,8 +78,8 @@ m.directive('ngScreening',function () {
             // 面板收缩伸展
             button.on('click',function (e) {
                 e.preventDefault();
-                if (scope.initrows>0) {
-                    scope.initrows=0;
+                if (hasInit) {
+                    hasInit=false;
                     buttonArrow1.toggleClass('ngScreening-hide');
                     buttonArrow2.toggleClass('ngScreening-hide');
                     container.children().removeClass('ngScreening-hide')
@@ -103,15 +108,13 @@ m.directive('screening',function () {
         template: '<div class="screening">'+
                     '<div class="screening-name">{{label}}</div>'+
                     '<div class="screening-container" ng-transclude></div>'+
-                    '<div class="screening-switch"><b class="ngScreening-hide"><</b><i>></i></div>'+
+                    '<div class="screening-switch ngScreening-hide"><b class="ngScreening-hide"><</b><i>></i></div>'+
                 '</div>'
         ,
         link: function (scope, el) {
             var initrows = scope.initrows;
             // 设置初始化行数
-            if (!initrows) {
-                initrows = 1;
-            }else if(initrows==-1 || initrows=='fixed'){
+            if (!initrows || initrows<=0) {
                 return;
             }
 
@@ -140,6 +143,18 @@ m.directive('screening',function () {
                     el.css({height:initHeight*initrows+'px', overflow:'hidden'})
                 }
             },200)
+
+            // $watch监听DOM container宽度,决定什么时候显示和隐藏右侧伸缩按钮
+            var container = angular.element(el[0].querySelector('.screening-container'));
+            scope.$watch(function () {
+                return container[0].offsetHeight;
+            },function (newHeight) {
+                if (newHeight < initHeight) {
+                    switchbtn.addClass('ngScreening-hide')
+                }else{
+                    switchbtn.removeClass('ngScreening-hide')
+                }
+            })
         }
     }
 })

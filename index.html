@@ -16,16 +16,16 @@
 </head>
 <body>
 	<h1 class="PluginName">ngScreening</h2>
-	<p class="Version">ver: 0.1.1</p>
+	<p class="Version">ver: 0.1.2</p>
 	<div class="githubTag">
 		<a class="github" href="https://github.com/Moerj/ngScreening" target="_blank">STAR ON GITHUB</a>
 	</div>
 
-	<div class="container" ng-controller="testCtrl">
+	<div style="padding-top:100px" ng-controller="testCtrl">
 
 		<ng-screening callback="dataCallback()" initrows="3">
 
-			<screening label="多选器:" >
+			<screening label="多选器:" initrows="1">
 				<screening-checkbox data="data.g1"></screening-radio>
 			</screening>
 
