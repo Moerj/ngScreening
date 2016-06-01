@@ -12,11 +12,9 @@
   display: block;
   width: 100%;
   position: relative;
-  border-top: 1px rgba(153, 153, 153, 0.16) solid; }
-  .ngScreening .btn-primary {
-    color: #fff;
-    background-color: #337ab7;
-    border-color: #2e6da4; }
+  border-top: 1px rgba(153, 153, 153, 0.16) solid;
+  /* 公共样式 */
+  /* 私有样式 */ }
   .ngScreening .ngScreening-hide {
     display: none !important; }
   .ngScreening > .ngScreening-container {
@@ -45,7 +43,8 @@
       font-weight: 200;
       line-height: normal;
       -webkit-transform: rotate(90deg) scale3d(0.7, 1.3, 1);
-      transform: rotate(90deg) scale3d(0.7, 1.3, 1); }
+      transform: rotate(90deg) scale3d(0.7, 1.3, 1);
+      font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; }
     .ngScreening > .ngScreening-switch > i {
       position: absolute;
       top: 25%;
@@ -55,7 +54,8 @@
       font-weight: 200;
       line-height: normal;
       -webkit-transform: rotate(90deg) scale3d(0.7, 1.3, 1);
-      transform: rotate(90deg) scale3d(0.7, 1.3, 1); }
+      transform: rotate(90deg) scale3d(0.7, 1.3, 1);
+      font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; }
   .ngScreening .screening {
     min-height: 47px;
     line-height: 46px;
@@ -72,7 +72,7 @@
       top: 0; }
     .ngScreening .screening > .screening-container {
       display: block; }
-      .ngScreening .screening > .screening-container input[type=button] {
+      .ngScreening .screening > .screening-container .screening-item {
         /* checkbox */
         list-style: none;
         display: inline-block;
@@ -108,7 +108,8 @@
         font-weight: 200;
         line-height: normal;
         -webkit-transform: rotate(90deg) scale3d(0.7, 1.3, 1);
-        transform: rotate(90deg) scale3d(0.7, 1.3, 1); }
+        transform: rotate(90deg) scale3d(0.7, 1.3, 1);
+        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; }
       .ngScreening .screening > .screening-switch > i {
         position: absolute;
         top: 25%;
@@ -118,7 +119,5 @@
         font-weight: 200;
         line-height: normal;
         -webkit-transform: rotate(90deg) scale3d(0.7, 1.3, 1);
-        transform: rotate(90deg) scale3d(0.7, 1.3, 1); }
-  .ngScreening .screening-fixed {
-    height: 47px !important;
-    overflow: hidden; }
+        transform: rotate(90deg) scale3d(0.7, 1.3, 1);
+        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; }

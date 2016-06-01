@@ -14,6 +14,7 @@
     position: relative;
     border-top: 1px rgba(153, 153, 153, 0.16) solid;
 
+    /* 公共样式 */
     // 按钮中的箭头
     @mixin btnArrow(){
         position: absolute;
@@ -24,20 +25,16 @@
         font-weight: 200;
         line-height: normal;
         transform: rotate(90deg) scale3d(0.7,1.3,1);
-
-    }
-
-    // 按钮选中，和bootstrap相同，重写一遍可在不引入bootstrap时可以生效
-    .btn-primary {
-        color: #fff;
-        background-color: #337ab7;
-        border-color: #2e6da4;
+        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     }
 
     .ngScreening-hide{
         display: none !important;
     }
 
+
+
+    /* 私有样式 */
     >.ngScreening-container{
         width: 100%;
         border-bottom: 2px rgba(0,0,0,0.1) solid;
@@ -84,7 +81,7 @@
         }
         >.screening-container{
             display: block;
-            input[type=button]{ /* checkbox */
+            .screening-item{ /* checkbox */
                 list-style: none;
                 display: inline-block;
                 outline: none;
@@ -123,9 +120,5 @@
                 @include btnArrow();
             }
         }
-    }
-    .screening-fixed{
-        height: 47px !important;
-        overflow: hidden;
     }
 }

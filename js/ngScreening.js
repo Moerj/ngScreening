@@ -94,7 +94,8 @@ m.directive('screening',function () {
     return{
         restrict: 'AE',
         scope: {
-            label: "@"
+            label: "@",
+            initrows:'@'
         },
         replace: true,
         transclude: true,
@@ -106,22 +107,37 @@ m.directive('screening',function () {
                 '</div>'
         ,
         link: function (scope, el) {
+            var initrows = scope.initrows;
+            // 设置初始化行数
+            if (!initrows) {
+                initrows = 1;
+            }else if(initrows==-1 || initrows=='fixed'){
+                return;
+            }
+
+            var openState = false;
             var switchbtn = angular.element(el[0].querySelector('.screening-switch'));
             var btnArrow1 = switchbtn.find('b');
             var btnArrow2 = switchbtn.find('i');
+            var initHeight = el[0].offsetHeight;
 
             // 给按钮绑定收缩事件
             switchbtn.on('click',function () {
-                el.toggleClass('screening-fixed');
+                if (openState) {
+                    el.css({height:initHeight*initrows+'px', overflow:'hidden'})
+                }else{
+                    el.css({height:'', overflow:''})
+                }
                 btnArrow1.toggleClass('ngScreening-hide');
                 btnArrow2.toggleClass('ngScreening-hide');
+                openState = !openState;
                 return false;
             })
             // 根据内容高度显示收缩菜单按钮
             angular.element(document).ready(function() {
                 if (el[0].offsetHeight > 48) {
                     switchbtn.css('display','block');
-                    el.addClass('screening-fixed')
+                    el.css({height:initHeight*initrows+'px', overflow:'hidden'})
                 }
             })
         }
@@ -152,15 +168,16 @@ function checkbox_radio(isCheckbox) {
         // replace: true,
         require: '^ngScreening',
         template:// 多选或单选按钮
-                '<input type="button"'  +
-                "ng-class=\"{'btn':true,'btn-sm':true,'btn-default':true,'btn-primary':mulitiActive}\" /> | " +
+                '<input type="button" class="screening-item btn btn-sm btn-default"'  +
+                "ng-class=\"{'btn-primary':mulitiActive}\" /> | " +
                 // checkItemes
                 '<input type="button"' +
                 'ng-repeat="item in data"' +
-                "ng-class=\"{'btn':true,'btn-sm':true,'btn-default':!item.isChecked, 'btn-primary':item.isChecked}\"" +
+                "ng-class=\"{'btn-default':!item.isChecked, 'btn-primary':item.isChecked}\"" +
                 'ng-click="checkItem()"' +
                 'ng-if="!item.isHidden"' +
                 'ng-value="item.name"' +
+                'class="screening-item btn btn-sm"' +
                 'index="{{$index}}">' ,
         controller: ['$scope', function ($scope) {
             $scope.mulitiActive = false;

@@ -7,9 +7,11 @@ angular筛选器组件
 
 <br>
 ## Getting Started
-在使用前，你需要引入angular
+在使用前，你需要引入 angular 和 bootstrap
 
 ```javascript
+
+require('bootstrap');//注意这里只是样式
 
 require('angular');
 
@@ -241,14 +243,15 @@ app.controller('yourCtrl',function ($scope, ngScreening) {
 ```
 
 ### initrows (defualt: undefined)
-初始化显示的screening行数
+初始化显示的 screening screening-checkbox screening-radio 的行数
 ```html
 <!-- 默认显示3行筛选器，其余的会收起隐藏 -->
 <ng-screening initrows="3">
-    ...
+    <!-- radio组展开所有可选项，取消该组右侧的伸缩按钮 -->
+    <screening-radio data="yourData" initrows="fixed"></screening-radio>
 </ng-screening>
 
-<!-- 固定初始化行数，并隐藏伸缩按钮 -->
+<!-- 固定初始化行数，隐藏组件右下角伸缩按钮 -->
 <ng-screening initrows="-1 || fixed">
     ...
 </ng-screening>
