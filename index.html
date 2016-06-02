@@ -36,7 +36,7 @@
 			<screening label="自定组件:">
 
 				<!-- 普通输入框 -->
-				<screening-div label="输入框:">
+				<screening-div label="事件监听">
 					<!-- 监听监听输入框事件 -->
 					<input screening-event="change" type="text" class="form-control" ></input>
 					<button screening-event="click" type="button" class="btn btn-default">搜索</button>
@@ -44,20 +44,16 @@
 
 			</screening>
 
-			<screening label="外部组件">
+			<screening label="外部组件:">
 
-				<screening-div label="ui-select:" width="300px">
+				<screening-div label="数据监听" width="300px">
 					<!-- 监听数据模型 -->
-					<screening-watch watch="selected.value"></screening-watch>
+					<screening-watch watch="myColor"></screening-watch>
 					<!-- ui-select组件 -->
-					<ui-select multiple ng-model="selected.value">
-						<ui-select-match>
-							<span ng-bind="$select.selected.name"></span>
-						</ui-select-match>
-						<ui-select-choices repeat="item in (itemArray | filter: $select.search) track by item.id">
-							<span ng-bind="item.name"></span>
-						</ui-select-choices>
-					</ui-select>
+					<select class="form-control" ng-model="myColor"
+					ng-options="option.name for option in colors">
+						<option value="">请选择</option>
+					</select>
 				</screening-div>
 
 			</screening>
@@ -73,6 +69,6 @@
 <script src="lib/angular-v1.5.5.js"></script>
 <script src="lib/select.min.js"></script>
 
-<!-- <script src="js/ngScreening.js"></script> -->
-<script src="js/ngScreening.min.js"></script>
+<script src="js/ngScreening.js"></script>
+<!-- <script src="js/ngScreening.min.js"></script> -->
 <script src="js/index.js"></script>

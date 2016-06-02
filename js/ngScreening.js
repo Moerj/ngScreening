@@ -71,25 +71,22 @@ m.directive('ngScreening',function () {
 
             var buttonArrow1 = button.find('b');//按钮中的上箭头
             var buttonArrow2 = button.find('i');//下箭头
-            var hasInit = initrows>0 && initrows<container.children().length;//设置了初始行数
+            var rows = container.children();
+            var hasInit = initrows>0 && initrows<rows.length;//设置了初始行数
 
             // 设置初始显示的行
             if (hasInit) {
                 // 使用timeout延迟隐藏筛选行，避免隐藏情况行内组件初始化错误
                 setTimeout(function () {
-                    var rows = container.children();
-                    if (rows.length > initrows) {
-                        buttonArrow1.toggleClass('ngScreening-hide');
-                        buttonArrow2.toggleClass('ngScreening-hide');
-                        for (var i = initrows; i < rows.length; i++) {
-                            angular.element(rows[i]).addClass('ngScreening-hide');
-                        }
+                    buttonArrow1.toggleClass('ngScreening-hide');
+                    buttonArrow2.toggleClass('ngScreening-hide');
+                    for (var i = initrows; i < rows.length; i++) {
+                        angular.element(rows[i]).addClass('ngScreening-hide');
                     }
                 },200)
             }
             // 面板收缩伸展
-            button.on('click',function (e) {
-                e.preventDefault();
+            button.on('click',function () {
                 if (hasInit) {
                     hasInit=false;
                     buttonArrow1.toggleClass('ngScreening-hide');
@@ -100,6 +97,7 @@ m.directive('ngScreening',function () {
                     buttonArrow1.toggleClass('ngScreening-hide');
                     buttonArrow2.toggleClass('ngScreening-hide');
                 }
+                return false;
             })
 
         }
@@ -270,7 +268,7 @@ m.directive('screeningWatch',function () {
         link: function (scope, el , attrs, pCtrl) {
             el.remove();
             scope.$watch('watch',function (newVal,oldVal) {
-                if (oldVal != newVal && oldVal) {
+                if (oldVal != newVal && newVal) {
                     pCtrl.callback();
                 }
             })
