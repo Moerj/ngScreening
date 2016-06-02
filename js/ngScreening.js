@@ -105,7 +105,7 @@ m.directive('ngScreening',function () {
 })
 
 // 筛选器容器
-m.directive('screening',function (ngScreening) {
+m.directive('screening', ['ngScreening', function (ngScreening) {
     return{
         restrict: 'AE',
         scope: {
@@ -173,7 +173,7 @@ m.directive('screening',function (ngScreening) {
 
         }
     }
-})
+}])
 
 // 自定义筛选组件
 m.directive('screeningDiv',function () {
