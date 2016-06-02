@@ -101,8 +101,8 @@ m.controller('testCtrl',function ($scope, ngScreening) {
 
     $scope.selected = { value: $scope.itemArray[0] };
 
-})
 
+})
 
 
 

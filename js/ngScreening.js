@@ -1,5 +1,5 @@
 /**
- * ngScreening v0.1.2
+ * ngScreening v0.1.3
  *
  * @license: MIT
  * Designed and built by Moer
@@ -22,6 +22,18 @@ m.service('ngScreening',function () {
                 }
             })
             return newArray;
+        },
+        resize: function (el) { //重置 screening 中 container高度，触发按钮隐藏显示
+            if (el) {
+                el._screening_resize();
+            }else{
+                var els = document.getElementsByClassName('screening');
+                angular.forEach(els,function (el) {
+                    if (el._screening_resize) {
+                        el._screening_resize();
+                    }
+                })
+            }
         }
     }
 })
@@ -95,7 +107,7 @@ m.directive('ngScreening',function () {
 })
 
 // 筛选器容器
-m.directive('screening',function () {
+m.directive('screening',function (ngScreening) {
     return{
         restrict: 'AE',
         scope: {
@@ -141,9 +153,14 @@ m.directive('screening',function () {
             var container = angular.element(el[0].querySelector('.screening-container'));
             scope.$watch(function () {
                 return container[0].offsetHeight;
-            },function (newHeight) {
+            },function () {
+                ngScreening.resize(el[0])//调用服务,重置容器尺寸
+            })
+
+            // 给元素绑定一个resize方法，可以在服务 ngScreening 中调用
+            el[0]._screening_resize = function () {
                 // 容器宽度改变，控制伸缩按钮和容器行数
-                if (newHeight >= initHeight*initrows) {
+                if (container[0].offsetHeight >= initHeight*initrows) {
                     switchbtn.removeClass('ngScreening-hide')
                     el.css({height:initHeight*initrows+'px', overflow:'hidden'})
                     if (openState) {
@@ -154,7 +171,8 @@ m.directive('screening',function () {
                     switchbtn.addClass('ngScreening-hide')
                     el.css({height:'', overflow:''})
                 }
-            })
+            }
+
         }
     }
 })

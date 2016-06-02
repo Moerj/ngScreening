@@ -1,4 +1,4 @@
-# ngScreening v0.1.2
+# ngScreening v0.1.3
 
 angular筛选器组件
 通过控制器定义数据，screening帮你完成数据的渲染、监听、过滤等功能。
@@ -202,7 +202,10 @@ app.controller('yourCtrl',function ($scope) {
 
 <br>
 
-## 过滤数据
+## API - 服务
+
+### getChecked()
+过滤掉未选择的数据，返回一个新数据
 ```javascript
 // 别忘了依赖注入 ngScreening
 app.controller('yourCtrl',function ($scope, ngScreening) {
@@ -229,10 +232,24 @@ app.controller('yourCtrl',function ($scope, ngScreening) {
 })
 ```
 
+### resize()
+重置screening尺寸，自动显示或隐藏伸缩按钮
+```javascript
+app.controller('yourCtrl',function ($scope, ngScreening) {
+    // 重置页面上所有screening容器
+    ngScreening.resize()
+
+    // 重置指定的screening容器，参数为DOM对象
+    var DOM = document.getElementById('yourScreening');
+    ngScreening.resize(DOM)
+
+})
+```
+
 <br>
 
 
-## 配置参数
+## OPTIONS 配置参数
 
 ### label
 设置筛选行标题
