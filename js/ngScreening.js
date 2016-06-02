@@ -176,7 +176,7 @@ m.directive('screening', function () {
             },function (newVal, oldVal) {
                 if (newVal!=oldVal) {
                     watch();//销毁watch
-                    resize();//重置容器尺寸
+                    resize(el[0]);//重置容器尺寸
                 }
             })
 
@@ -186,7 +186,7 @@ m.directive('screening', function () {
                 if (!resizeing) {
                     resizeing = true;
                     setTimeout(function () {
-                        resize();//重置容器尺寸
+                        resize(el[0]);//重置容器尺寸
                         resizeing = false;
                     },500)
                 }
