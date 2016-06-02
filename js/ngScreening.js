@@ -61,7 +61,7 @@ m.directive('ngScreening',function () {
         link: function (scope, el ) {
             var initrows = scope.initrows;
             var container = angular.element(el[0].querySelector('.ngScreening-container'));//填充checkbox的部分
-            var button = container.next();//控制容器收缩的按钮
+            var button = container.next();//控制容器尺寸的按钮
 
             // 设置初始显示行为固定模式
             if (!initrows || initrows<0) {
@@ -105,7 +105,7 @@ m.directive('ngScreening',function () {
 })
 
 // 筛选器容器
-m.directive('screening', ['ngScreening', function (ngScreening) {
+m.directive('screening', function () {
     return{
         restrict: 'AE',
         scope: {
@@ -123,12 +123,15 @@ m.directive('screening', ['ngScreening', function (ngScreening) {
         ,
         link: function (scope, el) {
             var initrows = scope.initrows;
+
             // 设置初始化行数
             if (!initrows || initrows<=0) {
                 return;
             }
+            // ---- 没有传入参数则不配置尺寸按钮
 
             var openState = false;
+            var container = angular.element(el[0].querySelector('.screening-container'));
             var switchbtn = angular.element(el[0].querySelector('.screening-switch'));
             var btnArrow1 = switchbtn.find('b');
             var btnArrow2 = switchbtn.find('i');
@@ -147,17 +150,10 @@ m.directive('screening', ['ngScreening', function (ngScreening) {
                 return false;
             })
 
-            // $watch监听DOM container宽度,决定什么时候显示和隐藏右侧伸缩按钮
-            var container = angular.element(el[0].querySelector('.screening-container'));
-            scope.$watch(function () {
-                return container[0].offsetHeight;
-            },function () {
-                ngScreening.resize(el[0])//调用服务,重置容器尺寸
-            })
 
-            // 给元素绑定一个resize方法，可以在服务 ngScreening 中调用
-            el[0]._screening_resize = function () {
-                // 容器宽度改变，控制伸缩按钮和容器行数
+            // 给元素绑定一个resize方法，决定什么时候显示和隐藏右侧尺寸按钮可以在服务
+            function resize() {
+                // 容器宽度改变，控制尺寸按钮和容器行数
                 if (container[0].offsetHeight >= initHeight*initrows) {
                     switchbtn.removeClass('ngScreening-hide')
                     el.css({height:initHeight*initrows+'px', overflow:'hidden'})
@@ -171,9 +167,34 @@ m.directive('screening', ['ngScreening', function (ngScreening) {
                 }
             }
 
+            // 将重置尺寸的方法绑定只元素，这样服务中可以直接使用。
+            el[0]._screening_resize = resize;
+
+            // 初始化数据 重置一次尺寸，用于显示尺寸按钮
+            var watch = scope.$watch(function () {
+                return container[0].offsetHeight;
+            },function (newVal, oldVal) {
+                if (newVal!=oldVal) {
+                    watch();//销毁watch
+                    resize();//重置容器尺寸
+                }
+            })
+
+            // 窗口尺寸改变，重置容器
+            var resizeing = false;
+            angular.element(window).on('resize',function () {
+                if (!resizeing) {
+                    resizeing = true;
+                    setTimeout(function () {
+                        resize();//重置容器尺寸
+                        resizeing = false;
+                    },500)
+                }
+            })
+
         }
     }
-}])
+})
 
 // 自定义筛选组件
 m.directive('screeningDiv',function () {

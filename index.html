@@ -21,12 +21,12 @@
 		<a class="github" href="https://github.com/Moerj/ngScreening" target="_blank">STAR ON GITHUB</a>
 	</div>
 
-	<div style="padding-top:100px" ng-controller="testCtrl">
+	<div style="padding-top:50px" ng-controller="testCtrl">
 
 		<ng-screening callback="dataCallback()" initrows="3">
 
 			<screening label="多选器:" initrows="1">
-				<screening-checkbox data="data.g1"></screening-radio>
+				<screening-checkbox data="data.g1"></screening-checkbox>
 			</screening>
 
 			<screening label="单选器:">
@@ -36,7 +36,7 @@
 			<screening label="自定组件:">
 
 				<!-- 普通输入框 -->
-				<screening-div label="事件监听">
+				<screening-div label="输入框:">
 					<!-- 监听监听输入框事件 -->
 					<input screening-event="change" type="text" class="form-control" ></input>
 					<button screening-event="click" type="button" class="btn btn-default">搜索</button>
