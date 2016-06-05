@@ -92,7 +92,7 @@ angular.module('yourProject',['ngScreening']);
 ```
 
 
-<br>
+  
 
 <h2 id="step2">数据操作</h2>
 
@@ -155,7 +155,7 @@ app.controller('yourCtrl',function ($scope) {
 })
 ```
 
-<br>
+  
 
 ## 监听
 
@@ -181,7 +181,7 @@ app.controller('yourCtrl',function ($scope) {
 <screening-watch watch="data"></screening-watch>
 ```
 
-<br>
+  
 
 ## 数据更新
 <h3 id="step3">callback</h3>
@@ -200,7 +200,7 @@ app.controller('yourCtrl',function ($scope) {
 })
 ```
 
-<br>
+  
 
 ## API - 服务
 
@@ -246,7 +246,7 @@ app.controller('yourCtrl',function ($scope, ngScreening) {
 })
 ```
 
-<br>
+  
 
 
 ## OPTIONS 配置参数
@@ -285,7 +285,7 @@ app.controller('yourCtrl',function ($scope, ngScreening) {
 <screening-radio multi-name="单选"></screening-radio>
 ```
 
-<br>
+  
 
 ## Support
 - IE 9+
