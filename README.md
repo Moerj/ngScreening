@@ -1,16 +1,13 @@
 # ngScreening v0.1.4
 
 angular筛选器组件
-通过控制器定义数据，screening帮你完成数据的渲染、监听、过滤等功能。  
+通过控制器定义数据，screening帮你完成数据的渲染、监听、过滤等功能。 
+ 
 
-  
-  
-  
-  
 ## DEMO
 http://moerj.com/Github/ngScreening/
+  
 
-<br>
 ## Getting Started
 在使用前，你需要引入 angular
 
@@ -24,13 +21,13 @@ angular.module('yourProject',['ngScreening']);
 
 ```
 
-<br>
+  
 ## How to use
 1. <a href="#step1">布局</a> 在html页面上定义好容器
 2. <a href="#step2">数据操作</a> 传入数据，开启监听
 3. <a href="#step3">callback</a> 响应筛选数据变化
 
-<br>
+  
 
 
 
