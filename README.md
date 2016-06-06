@@ -265,13 +265,17 @@ app.controller('yourCtrl',function ($scope, ngScreening) {
 <!-- 默认显示3行筛选器，其余的会收起隐藏 -->
 <ng-screening initrows="3">
     <!-- radio组默认只显示1行，其余的元素会隐藏，右边出现伸缩按钮 -->
-    <screening-radio data="yourData" initrows="1"></screening-radio>
+    <screening initrows="1">
+        <screening-radio data="yourData"></screening-radio>
+    </screening>
 </ng-screening>
 
 <!-- 固定初始化行数，隐藏组件右下角伸缩按钮 -->
 <ng-screening>
     <!-- checkbox组默认全部显示，没有伸缩按钮 -->
-    <screening-checkbox data="yourData" ></screening-checkbox>
+    <screening>
+        <screening-checkbox data="yourData" ></screening-checkbox>
+    </screening>
 </ng-screening>
 ```
 
