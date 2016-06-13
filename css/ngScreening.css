@@ -1,6 +1,6 @@
 @charset "UTF-8";
 /**
- * ngScreening v0.1.2 last updated
+ * ngScreening v0.1.4 last updated
  *
  * License: MIT
  * Designed and built by Moer
@@ -19,7 +19,7 @@
     display: none !important; }
   .ngScreening > .ngScreening-container {
     width: 100%;
-    border-bottom: 2px rgba(0, 0, 0, 0.1) solid; }
+    border-bottom: 1px rgba(0, 0, 0, 0.1) solid; }
   .ngScreening > .ngScreening-switch {
     position: absolute;
     bottom: -37px;

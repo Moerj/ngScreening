@@ -1,5 +1,5 @@
 /**
- * ngScreening v0.1.4
+ * ngScreening v0.1.5
  *
  * @license: MIT
  * Designed and built by Moer
@@ -154,17 +154,19 @@ m.directive('screening', function () {
             // 给元素绑定一个resize方法，决定什么时候显示和隐藏右侧尺寸按钮可以在服务
             function resize() {
                 // 容器宽度改变，控制尺寸按钮和容器行数
-                if (container[0].offsetHeight >= initHeight*initrows) {
-                    switchbtn.removeClass('ngScreening-hide')
-                    el.css({height:initHeight*initrows+'px', overflow:'hidden'})
-                    if (openState) {
+                setTimeout(function () {
+                    if (container[0].offsetHeight >= initHeight*initrows) {
+                        switchbtn.removeClass('ngScreening-hide')
+                        el.css({height:initHeight*initrows+'px', overflow:'hidden'})
+                        if (openState) {
+                            el.css({height:'', overflow:''})
+                        }
+                    }
+                    else{
+                        switchbtn.addClass('ngScreening-hide')
                         el.css({height:'', overflow:''})
                     }
-                }
-                else{
-                    switchbtn.addClass('ngScreening-hide')
-                    el.css({height:'', overflow:''})
-                }
+                })
             }
 
             // 将重置尺寸的方法绑定只元素，这样服务中可以直接使用。
