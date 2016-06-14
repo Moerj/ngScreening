@@ -181,6 +181,7 @@ m.directive('screening', function () {
 
             // 设置初始化行数
             if (!initrows || initrows<=0) {
+                el.css('overflow','hidden');
                 return;
             }
             // ---- 没有传入参数则不配置尺寸按钮

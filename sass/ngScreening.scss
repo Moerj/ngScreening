@@ -12,7 +12,6 @@
     display: block;
     width: 100%;
     position: relative;
-    // border-top: 1px rgba(153, 153, 153, 0.16) solid;
     padding: 0 15px;
 
     /* 公共样式 */
@@ -67,7 +66,8 @@
     }
 
     .screening-buttons{
-        text-align: center;
+        justify-content:center;
+        align-items:center;
         >*{
             margin-right: 20px;
         }
@@ -79,21 +79,21 @@
         line-height: 46px;
         border-bottom: 1px #ddd solid;
         position: relative;
-        padding: 0 30px 0 90px;
+        padding: 0 30px 0 0px;
+        display: flex;
 
         .screening-name{
             display: inline-block;
             text-align: right;
             width: 80px;
             margin-right: 10px;
-            position: absolute;
-            left: 0;
-            top: 0;
+            flex-shrink:0;
         }
         >.screening-container{
-            // display: block;
             display: flex;
             justify-content: flex-start;
+            flex-grow: 1;
+            flex-wrap:wrap;
 
             .screening-item{ /* checkbox */
                 list-style: none;
@@ -135,7 +135,7 @@
                 display:flex;
                 flex-grow:1;/* 每个元素平分剩余空间 */
                 align-items: center;
-                flex-wrap:wrap;
+                // flex-wrap:wrap;
                 align-content:flex-start;
             }
         }

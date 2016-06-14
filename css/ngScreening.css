@@ -60,7 +60,13 @@
     .ngScreening > .ngScreening-switch:hover {
       color: #235576; }
   .ngScreening .screening-buttons {
-    text-align: center; }
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -ms-grid-row-align: center;
+    align-items: center; }
     .ngScreening .screening-buttons > * {
       margin-right: 20px; }
   .ngScreening .screening {
@@ -68,22 +74,29 @@
     line-height: 46px;
     border-bottom: 1px #ddd solid;
     position: relative;
-    padding: 0 30px 0 90px; }
+    padding: 0 30px 0 0px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex; }
     .ngScreening .screening .screening-name {
       display: inline-block;
       text-align: right;
       width: 80px;
       margin-right: 10px;
-      position: absolute;
-      left: 0;
-      top: 0; }
+      -ms-flex-negative: 0;
+      flex-shrink: 0; }
     .ngScreening .screening > .screening-container {
       display: -webkit-box;
       display: -ms-flexbox;
       display: flex;
       -webkit-box-pack: start;
       -ms-flex-pack: start;
-      justify-content: flex-start; }
+      justify-content: flex-start;
+      -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+      flex-grow: 1;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap; }
       .ngScreening .screening > .screening-container .screening-item {
         /* checkbox */
         list-style: none;
@@ -125,8 +138,6 @@
         -webkit-box-align: center;
         -ms-flex-align: center;
         align-items: center;
-        -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
         -ms-flex-line-pack: start;
         align-content: flex-start; }
     .ngScreening .screening > .screening-switch {
