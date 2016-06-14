@@ -1,4 +1,4 @@
-# ngScreening v0.1.6
+# ngScreening v0.1.7
 
 angular筛选器组件
 通过控制器定义数据，screening帮你完成数据的渲染、监听、过滤等功能。 
@@ -200,6 +200,35 @@ app.controller('yourCtrl',function ($scope) {
 })
 ```
 
+### serarch
+定义搜索回调函数，界面会生成一个搜索按钮
+```html
+<ng-screening search="yourSearch()" >
+    ...
+</ng-screening>
+```
+```javascript
+app.controller('yourCtrl',function ($scope) {
+    $scope.yourSearch = function () {
+        // 按钮点击后，会执行这个函数
+    }
+})
+```
+
+### reset
+定义重置回调函数，界面会生成一个重置按钮
+```html
+<ng-screening search="yourReset()" >
+    ...
+</ng-screening>
+```
+```javascript
+app.controller('yourCtrl',function ($scope) {
+    $scope.yourReset = function () {
+        // 按钮点击后，会执行这个函数
+    }
+})
+```
   
 
 ## API - 服务
@@ -289,11 +318,11 @@ app.controller('yourCtrl',function ($scope, ngScreening) {
 <screening-radio multi-name="单选"></screening-radio>
 ```
 
-### width (default: 'px')
-screening-div设置宽度，没有单位时默认为px像素
+### width
+screening-div设置宽度
 ```html
 <!-- 设置容器为500像素 -->
-<screening-div width="500"></screening-div>
+<screening-div width="500px"></screening-div>
 ```
 
   

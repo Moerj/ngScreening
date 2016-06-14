@@ -1,5 +1,5 @@
 /**
- * ngScreening v0.1.5 last updated
+ * ngScreening v0.1.7 last updated
  *
  * @license: MIT
  * Designed and built by Moer
@@ -63,6 +63,13 @@
         }
         &:hover{
             color:#235576;
+        }
+    }
+
+    .screening-buttons{
+        text-align: center;
+        >*{
+            margin-right: 20px;
         }
     }
 

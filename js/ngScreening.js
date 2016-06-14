@@ -1,5 +1,5 @@
 /**
- * ngScreening v0.1.6
+ * ngScreening v0.1.7
  *
  * @license: MIT
  * Designed and built by Moer
@@ -43,8 +43,10 @@ m.directive('ngScreening',function () {
     return{
         restrict: 'E',
         scope: {
+            initrows:'@',
             callback:'&',
-            initrows:'@'
+            search:'&',
+            reset:'&'
         },
         replace: true,
         transclude: true,
@@ -62,6 +64,29 @@ m.directive('ngScreening',function () {
             var initrows = scope.initrows;
             var container = angular.element(el[0].querySelector('.ngScreening-container'));//填充checkbox的部分
             var button = container.next();//控制容器尺寸的按钮
+            var search = scope.search;
+            var reset = scope.reset;
+            var screeningButtons;
+
+            // 增加搜索和重置按钮 (如果有参数才生成)
+            if (el.attr('search') || el.attr('reset')) {
+                screeningButtons = angular.element('<div class="screening screening-buttons"></div>')
+                container.append(screeningButtons);
+                if (el.attr('search')) {
+                    var searchBtn = angular.element('<button type="button" class="btn btn-primary">搜索</button>');
+                    searchBtn.on('click',function () {
+                        search();
+                    });
+                    screeningButtons.append(searchBtn)
+                }
+                if (el.attr('reset')) {
+                    var resetBtn = angular.element('<button type="button" class="btn btn-default">重置</button>');
+                    resetBtn.on('click',function () {
+                        reset();
+                    });
+                    screeningButtons.append(resetBtn)
+                }
+            }
 
             // 设置初始显示行为固定模式
             if (!initrows || initrows<0) {
@@ -72,7 +97,7 @@ m.directive('ngScreening',function () {
             var buttonArrow1 = button.find('b');//按钮中的上箭头
             var buttonArrow2 = button.find('i');//下箭头
             var rows = container.children();
-            var hasInit = initrows>0 && initrows<rows.length;//设置了初始行数
+            var hasInit = initrows>0 && initrows<rows.length;//初始隐藏行
 
             // 设置初始显示的行
             if (hasInit) {
@@ -83,8 +108,16 @@ m.directive('ngScreening',function () {
                     for (var i = initrows; i < rows.length; i++) {
                         angular.element(rows[i]).addClass('ngScreening-hide');
                     }
+                    // screening-buttons行默认初始不隐藏
+                    if (screeningButtons) {
+                        screeningButtons.removeClass('ngScreening-hide');
+                    }
+
                 },200)
             }
+
+
+
             // 面板收缩伸展
             button.on('click',function () {
                 if (hasInit) {
@@ -198,24 +231,44 @@ m.directive('screening', function () {
     }
 })
 
-// 自定义筛选组件
-m.directive('screeningDiv',function () {
+// watch model
+m.directive('screeningWatch',function () {
     return{
         restrict:'E',
         scope:{
-            width:'@',
-            label:'@'
+            watch:'='
         },
-        transclude: true,
-        template: '<span style="margin:0 10px 0 10px">{{label}}</span><div class="screening-div" style="width:{{styleWidth}}" ng-transclude></div>',
-        controller:['$scope', function ($scope) {
-            if ($scope.width) {
-                var hasUnit = $scope.width.indexOf('p') + $scope.width.indexOf('em') >= 0;
-                if (!hasUnit) {
-                    $scope.styleWidth = $scope.width + 'px';
+        require: '^ngScreening',
+        link: function (scope, el , attrs, pCtrl) {
+            el.remove();
+            scope.$watch('watch',function (newVal,oldVal) {
+                if (oldVal != newVal && newVal) {
+                    pCtrl.callback();
                 }
+            })
+        }
+    }
+})
+
+// DOM event listening
+m.directive('screeningEvent',function () {
+    return{
+        restrict:'A',
+        scope:{
+            screeningEvent:'@'
+        },
+        require: '^ngScreening',
+        replace: true,
+        link: function (scope, el , attrs, pCtrl) {
+            var event = 'change';
+            if (scope.screeningEvent) {
+                event = scope.screeningEvent;
             }
-        }]
+            el.on(event,function () {
+                pCtrl.callback();
+                return false;
+            })
+        }
     }
 })
 
@@ -288,46 +341,35 @@ m.directive('screeningRadio',function () {
     return checkbox_radio();//单选
 })
 
-// watch modle
-m.directive('screeningWatch',function () {
+// 自定义筛选组件
+m.directive('screeningDiv',function () {
     return{
         restrict:'E',
         scope:{
-            watch:'='
+            width:'@',
+            label:'@'
         },
-        require: '^ngScreening',
-        link: function (scope, el , attrs, pCtrl) {
-            el.remove();
-            scope.$watch('watch',function (newVal,oldVal) {
-                if (oldVal != newVal && newVal) {
-                    pCtrl.callback();
-                }
-            })
-        }
+        transclude: true,
+        template: '<span style="margin:0 10px 0 10px">{{label}}</span><div class="screening-div" style="width:{{width}}" ng-transclude></div>',
     }
 })
 
-// DOM event listening
-m.directive('screeningEvent',function () {
+// 自定义按钮容器
+m.directive('screeningButtons',function () {
     return{
-        restrict:'A',
+        restrict:'E',
         scope:{
-            screeningEvent:'@'
+            align:'@'
         },
-        require: '^ngScreening',
+        transclude: true,
         replace: true,
-        link: function (scope, el , attrs, pCtrl) {
-            var event = 'change';
-            if (scope.screeningEvent) {
-                event = scope.screeningEvent;
+        template: '<div class="screening-buttons" style="text-align:center" ng-transclude></div>',
+        link:function (scope,el) {
+            if (scope.align) {
+                el.css('text-align',scope.align)
             }
-            el.on(event,function () {
-                pCtrl.callback();
-                return false;
-            })
         }
     }
 })
-
 
 })(angular)

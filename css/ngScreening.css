@@ -1,6 +1,6 @@
 @charset "UTF-8";
 /**
- * ngScreening v0.1.5 last updated
+ * ngScreening v0.1.7 last updated
  *
  * @license: MIT
  * Designed and built by Moer
@@ -59,6 +59,10 @@
       font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; }
     .ngScreening > .ngScreening-switch:hover {
       color: #235576; }
+  .ngScreening .screening-buttons {
+    text-align: center; }
+    .ngScreening .screening-buttons > * {
+      margin-right: 20px; }
   .ngScreening .screening {
     min-height: 47px;
     line-height: 46px;
