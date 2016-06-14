@@ -159,13 +159,13 @@ app.controller('yourCtrl',function ($scope) {
 
 ## 监听
 
-### screening-event
+### screening-event (default: 'change')
 监听dom元素事件，事件触发时会执行callback
 ```html
 <!-- 定义一个搜索功能 -->
 <screening-div label="搜索:">
     <!-- 监听监听输入框change事件 -->
-    <input screening-event="change" type="text" ></input>
+    <input screening-event type="text" ></input>
 
     <!-- 监听监听按钮click事件 -->
     <button screening-event="click" type="button" >搜索</button>
