@@ -1,5 +1,5 @@
 /**
- * ngScreening v0.1.5
+ * ngScreening v0.1.6
  *
  * @license: MIT
  * Designed and built by Moer
@@ -207,7 +207,15 @@ m.directive('screeningDiv',function () {
             label:'@'
         },
         transclude: true,
-        template: '<span style="margin:0 10px 0 10px">{{label}}</span><div class="screening-div" style="width:{{width}}" ng-transclude></div>'
+        template: '<span style="margin:0 10px 0 10px">{{label}}</span><div class="screening-div" style="width:{{styleWidth}}" ng-transclude></div>',
+        controller:['$scope', function ($scope) {
+            if ($scope.width) {
+                var hasUnit = $scope.width.indexOf('p') + $scope.width.indexOf('em') >= 0;
+                if (!hasUnit) {
+                    $scope.styleWidth = $scope.width + 'px';
+                }
+            }
+        }]
     }
 })
 

@@ -1,4 +1,4 @@
-# ngScreening v0.1.5
+# ngScreening v0.1.6
 
 angular筛选器组件
 通过控制器定义数据，screening帮你完成数据的渲染、监听、过滤等功能。 
@@ -279,7 +279,7 @@ app.controller('yourCtrl',function ($scope, ngScreening) {
 </ng-screening>
 ```
 
-### multi-name (defulat: checkbox-全选, radio-单选)
+### multi-name (default: checkbox-全选, radio-单选)
 全选的控制按钮名称
 ```html
 <!-- 控制按钮点击后可以全部选中或反选 -->
@@ -287,6 +287,13 @@ app.controller('yourCtrl',function ($scope, ngScreening) {
 
 <!-- 单选的只有样式没有实际功能 -->
 <screening-radio multi-name="单选"></screening-radio>
+```
+
+### width (default: 'px')
+screening-div设置宽度，没有单位时默认为px像素
+```html
+<!-- 设置容器为500像素 -->
+<screening-div width="500"></screening-div>
 ```
 
   
