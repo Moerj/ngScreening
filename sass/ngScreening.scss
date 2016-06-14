@@ -81,7 +81,7 @@
         position: relative;
         padding: 0 30px 0 90px;
 
-        >.screening-name{
+        .screening-name{
             display: inline-block;
             text-align: right;
             width: 80px;
@@ -91,7 +91,10 @@
             top: 0;
         }
         >.screening-container{
-            display: block;
+            // display: block;
+            display: flex;
+            justify-content: flex-start;
+
             .screening-item{ /* checkbox */
                 list-style: none;
                 display: inline-block;
@@ -127,6 +130,13 @@
                     display: inline-block;
                     width: auto;
                 }
+            }
+            .screening-flex{
+                display:flex;
+                flex-grow:1;/* 每个元素平分剩余空间 */
+                align-items: center;
+                flex-wrap:wrap;
+                align-content:flex-start;
             }
         }
         >.screening-switch{

@@ -24,28 +24,63 @@
 
 	<div style="padding-top:50px" ng-controller="testCtrl">
 
+	<!-- ngScreening start -->
+
 		<ng-screening initrows="3" callback="dataCallback()" search="yourSearch()" reset="yourRest()">
+
 
 			<screening label="多选器:" initrows="1">
 				<screening-checkbox data="data.g1"></screening-checkbox>
 			</screening>
 
+
 			<screening label="单选器:">
+
 				<screening-radio data="data.g2"></screening-radio>
+
+				<screening-flex label="flex1-center:" width="100px" justify-content="center">
+					<input type="text" class="form-control"></input>
+				</screening-flex>
+				<screening-flex label="flex2-center:" width="100px" justify-content="center">
+					<input type="text" class="form-control"></input>
+				</screening-flex>
+
 			</screening>
 
-			<screening label="自定组件:">
 
-				<!-- 普通输入框 -->
-				<screening-div label="输入框:">
+			<screening label="全flex布局(这里的label会被禁用):">
+
+				<screening-flex label="flex1:" width="200px">
+					<input type="text" class="form-control"></input>
+				</screening-flex>
+				<screening-flex label="flex2:" width="200px">
+					<input type="text" class="form-control"></input>
+				</screening-flex>
+				<screening-flex label="flex3:" width="200px">
+					<input type="text" class="form-control"></input>
+				</screening-flex>
+
+			</screening>
+
+
+			<screening label="案例4:">
+
+				<screening-div label="正常布局">
 					<!-- 监听监听输入框事件 -->
-					<input screening-event="change" type="text" class="form-control" ></input>
+					<input screening-event="change" type="text" class="form-control"></input>
 					<button screening-event="click" type="button" class="btn btn-default">搜索</button>
+				</screening-div>
+
+				<screening-div label="flex追加1:">
+					<input type="text" class="form-control"></input>
+				</screening-div>
+				<screening-div label="flex追加2:">
+					<input type="text" class="form-control"></input>
 				</screening-div>
 
 			</screening>
 
-			<screening label="外部组件:">
+			<screening label="案例5:">
 
 				<screening-div label="数据监听" width="200px">
 					<!-- 监听数据模型 -->
@@ -61,6 +96,7 @@
 
 		</ng-screening>
 
+	<!-- ngScreening end -->
 
 	</div>
 

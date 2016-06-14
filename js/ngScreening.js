@@ -117,7 +117,6 @@ m.directive('ngScreening',function () {
             }
 
 
-
             // 面板收缩伸展
             button.on('click',function () {
                 if (hasInit) {
@@ -154,8 +153,31 @@ m.directive('screening', function () {
                     '<div class="screening-switch ngScreening-hide"><b class="ngScreening-hide"><</b><i>></i></div>'+
                 '</div>'
         ,
+        controller: ['$scope','$element', function ($scope,$element) {
+            // 初始screening行容器高度，是由css控制的
+            $scope.initHeight = $element[0].offsetHeight;
+        }],
         link: function (scope, el) {
             var initrows = scope.initrows;
+            var container = angular.element(el[0].querySelector('.screening-container'));
+
+            // 检测容器中是否只有flex布局
+            var containerChildren = container.children();
+            var flexOnly = true;
+            angular.forEach(containerChildren,function (dom) {
+                var child = angular.element(dom);
+                if (!child.hasClass('screening-flex')) {
+                    flexOnly = false;
+                    return false;
+                }
+            });
+            if (flexOnly) {
+                //禁用screening-name元素
+                angular.element(el[0].querySelector('.screening-name')).remove();
+
+                //改变screening的样式
+                el.css('padding-left','0');
+            }
 
             // 设置初始化行数
             if (!initrows || initrows<=0) {
@@ -164,11 +186,10 @@ m.directive('screening', function () {
             // ---- 没有传入参数则不配置尺寸按钮
 
             var openState = false;
-            var container = angular.element(el[0].querySelector('.screening-container'));
             var switchbtn = angular.element(el[0].querySelector('.screening-switch'));
             var btnArrow1 = switchbtn.find('b');
             var btnArrow2 = switchbtn.find('i');
-            var initHeight = el[0].offsetHeight;
+            var initHeight = scope.initHeight;
 
             // 给按钮绑定收缩事件
             switchbtn.on('click',function () {
@@ -350,25 +371,31 @@ m.directive('screeningDiv',function () {
             label:'@'
         },
         transclude: true,
-        template: '<span style="margin:0 10px 0 10px">{{label}}</span><div class="screening-div" style="width:{{width}}" ng-transclude></div>',
+        replace:true,
+        template:
+        '<div>' +
+            '<span style="margin:0 10px 0 10px" ng-if="label">{{label}}</span>' +
+            '<div class="screening-div" style="width:{{width}}" ng-transclude></div>' +
+        '</div>'
     }
 })
 
 // 自定义按钮容器
-m.directive('screeningButtons',function () {
+m.directive('screeningFlex',function () {
     return{
         restrict:'E',
         scope:{
-            align:'@'
+            width:'@',
+            label:'@',
+            justifyContent:'@'
         },
         transclude: true,
-        replace: true,
-        template: '<div class="screening-buttons" style="text-align:center" ng-transclude></div>',
-        link:function (scope,el) {
-            if (scope.align) {
-                el.css('text-align',scope.align)
-            }
-        }
+        replace:true,
+        template:
+        '<div class="screening-flex" style="justify-content:{{justifyContent}}">' +
+            '<span class="screening-name" style="position:relative" ng-if="label">{{label}}</span>' +
+            '<div style="width:{{width}};" ng-transclude></div>' +
+        '</div>'
     }
 })
 

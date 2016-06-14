@@ -69,7 +69,7 @@
     border-bottom: 1px #ddd solid;
     position: relative;
     padding: 0 30px 0 90px; }
-    .ngScreening .screening > .screening-name {
+    .ngScreening .screening .screening-name {
       display: inline-block;
       text-align: right;
       width: 80px;
@@ -78,7 +78,12 @@
       left: 0;
       top: 0; }
     .ngScreening .screening > .screening-container {
-      display: block; }
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: start;
+      -ms-flex-pack: start;
+      justify-content: flex-start; }
       .ngScreening .screening > .screening-container .screening-item {
         /* checkbox */
         list-style: none;
@@ -109,6 +114,21 @@
         .ngScreening .screening > .screening-container .screening-div input {
           display: inline-block;
           width: auto; }
+      .ngScreening .screening > .screening-container .screening-flex {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        /* 每个元素平分剩余空间 */
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        -ms-flex-line-pack: start;
+        align-content: flex-start; }
     .ngScreening .screening > .screening-switch {
       width: 25px;
       height: 25px;
