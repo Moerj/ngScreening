@@ -1,5 +1,5 @@
 /**
- * ngScreening v0.1.7
+ * ngScreening v0.1.8
  *
  * @license: MIT
  * Designed and built by Moer
@@ -148,14 +148,14 @@ m.directive('screening', function () {
         transclude: true,
         require: '^ngScreening',
         template: '<div class="screening">'+
-                    '<div class="screening-name">{{label}}</div>'+
+                    '<div class="screening-name" ng-hide="flexOnly">{{label}}</div>'+
                     '<div class="screening-container" ng-transclude></div>'+
                     '<div class="screening-switch ngScreening-hide"><b class="ngScreening-hide"><</b><i>></i></div>'+
                 '</div>'
         ,
         controller: ['$scope','$element', function ($scope,$element) {
             // 初始screening行容器高度，是由css控制的
-            $scope.initHeight = $element[0].offsetHeight;
+            $scope.initHeight = $element[0].clientHeight;
         }],
         link: function (scope, el) {
             var initrows = scope.initrows;
@@ -173,7 +173,7 @@ m.directive('screening', function () {
             });
             if (flexOnly) {
                 //禁用screening-name元素
-                angular.element(el[0].querySelector('.screening-name')).remove();
+                scope.flexOnly = flexOnly;
 
                 //改变screening的样式
                 el.css('padding-left','0');
@@ -181,7 +181,6 @@ m.directive('screening', function () {
 
             // 设置初始化行数
             if (!initrows || initrows<=0) {
-                el.css('overflow','hidden');
                 return;
             }
             // ---- 没有传入参数则不配置尺寸按钮
@@ -190,12 +189,12 @@ m.directive('screening', function () {
             var switchbtn = angular.element(el[0].querySelector('.screening-switch'));
             var btnArrow1 = switchbtn.find('b');
             var btnArrow2 = switchbtn.find('i');
-            var initHeight = scope.initHeight;
+            var initHeight = scope.initHeight * initrows;
 
             // 给按钮绑定收缩事件
             switchbtn.on('click',function () {
                 if (openState) {
-                    el.css({height:initHeight*initrows+'px', overflow:'hidden'})
+                    el.css({height:initHeight+'px', overflow:'hidden'})
                 }else{
                     el.css({height:'', overflow:''})
                 }
@@ -210,9 +209,9 @@ m.directive('screening', function () {
             function resize() {
                 // 容器宽度改变，控制尺寸按钮和容器行数
                 setTimeout(function () {
-                    if (container[0].offsetHeight >= initHeight*initrows) {
+                    if (container[0].offsetHeight > initHeight) {
                         switchbtn.removeClass('ngScreening-hide')
-                        el.css({height:initHeight*initrows+'px', overflow:'hidden'})
+                        el.css({height:initHeight+'px', overflow:'hidden'})
                         if (openState) {
                             el.css({height:'', overflow:''})
                         }

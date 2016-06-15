@@ -1,5 +1,5 @@
 /**
- * ngScreening v0.1.7 last updated
+ * ngScreening v0.1.8 last updated
  *
  * @license: MIT
  * Designed and built by Moer
@@ -16,7 +16,7 @@
 
     /* 公共样式 */
     // 按钮中的箭头
-    @mixin btnArrow(){
+    .btnArrow(){
         position: absolute;
         top: 25%;
         left: 45%;
@@ -50,15 +50,14 @@
         color: #66a6d1;
         cursor: pointer;
         background-color: inherit;
-        box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.1);
         border: 1px solid #ddd;
         border-top: 0;
         text-align: center;
         >b{
-            @include btnArrow();
+            .btnArrow();
         }
         >i{
-            @include btnArrow();
+            .btnArrow();
         }
         &:hover{
             color:#235576;
@@ -66,10 +65,14 @@
     }
 
     .screening-buttons{
-        justify-content:center;
-        align-items:center;
+        text-align: center;
+        padding: 0 !important;
+
         >*{
             margin-right: 20px;
+        }
+        >*:last-of-type{
+            margin-right: 0;
         }
     }
 
@@ -77,11 +80,12 @@
     .screening{
         min-height: 47px;
         line-height: 46px;
-        box-sizing: content-box !important;
+        // box-sizing: content-box !important;
         border-bottom: 1px #ddd solid;
         position: relative;
-        padding: 0 30px 0 0px;
-        display: flex;
+        padding: 0 30px 0 90px;
+        // display: flex;
+        display: block;
 
         .screening-name{
             display: inline-block;
@@ -89,8 +93,12 @@
             width: 80px;
             margin-right: 10px;
             flex-shrink:0;
+            position: absolute;
+            left: 0;
+            top: 0;
         }
         >.screening-container{
+            display: block;
             display: flex;
             justify-content: flex-start;
             flex-grow: 1;
@@ -102,7 +110,7 @@
                 outline: none;
                 margin: 0 6px;
                 background-color: #fff;
-                border: 1px solid #E0E0E0;
+                border: 1px solid #ddd;
                 padding: 5px 12px;
                 -webkit-border-radius: 4px;
                 -moz-border-radius: 4px;
@@ -157,10 +165,10 @@
             }
 
             >b{
-                @include btnArrow();
+                .btnArrow();
             }
             >i{
-                @include btnArrow();
+                .btnArrow();
             }
         }
     }
