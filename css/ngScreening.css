@@ -72,6 +72,7 @@
   .ngScreening .screening {
     min-height: 47px;
     line-height: 46px;
+    box-sizing: content-box !important;
     border-bottom: 1px #ddd solid;
     position: relative;
     padding: 0 30px 0 0px;
