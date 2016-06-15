@@ -1,5 +1,5 @@
 /**
- * ngScreening v0.1.8
+ * ngScreening v0.1.9
  *
  * @license: MIT
  * Designed and built by Moer
@@ -177,6 +177,19 @@ m.directive('screening', function () {
 
                 //改变screening的样式
                 el.css('padding-left','0');
+            }else {
+                // 混合布局时，flex容器默认水平排序为justify-content:center;
+                angular.forEach(container.children(),function (childDom) {
+                    childDom = angular.element(childDom);
+                    if (childDom.hasClass('screening-flex')) {
+                        // 确保screening-flex指令渲染完成
+                        setTimeout(function () {
+                            if (!childDom.css('justify-content')) {
+                                childDom.css('justify-content','center');
+                            }
+                        })
+                    }
+                })
             }
 
             // 设置初始化行数
