@@ -91,6 +91,25 @@ angular.module('yourProject',['ngScreening']);
 </screening>
 ```
 
+### screening-flex
+弹性容器布局，flex中的元素会均分screening行剩余部分  
+  
+而当screening中只有flex布局时，screening的label参数会被禁用
+
+```html
+<screening>
+    <screening-flex label="flex容器1">
+        <input type="text">
+    </screening-flex>
+    <screening-flex label="flex容器2">
+        <input type="text">
+    </screening-flex>
+    <screening-flex label="flex容器3">
+        <input type="text">
+    </screening-flex>
+</screening>
+```
+
 
   
 
