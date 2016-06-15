@@ -69,6 +69,7 @@
   padding: 0 !important;
 }
 .ngScreening .screening-buttons > * {
+  margin: 0;
   margin-right: 20px;
 }
 .ngScreening .screening-buttons > *:last-of-type {
