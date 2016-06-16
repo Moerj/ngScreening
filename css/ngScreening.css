@@ -46,17 +46,17 @@
   top: 50%;
   left: 50%;
   margin-left: -5px;
-  margin-top: -3.5px;
+  margin-top: -2.5px;
   width: 0;
   height: 0;
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
-  border-bottom: 7px solid #66a6d1 ;
+  border-bottom: 5px solid #66a6d1 ;
 }
 .ngScreening-start > .ngScreening-switch > b::before {
   content: '';
   position: absolute;
-  top: -9px;
+  top: -7px;
   left: -5px;
   width: 0;
   height: 0;
@@ -64,7 +64,7 @@
   border-right: 5px solid transparent;
 }
 .ngScreening-start > .ngScreening-switch > b::before {
-  border-bottom: 7px solid #FFF ;
+  border-bottom: 5px solid #FFF ;
   top: 2px;
 }
 .ngScreening-start > .ngScreening-switch > i {
@@ -72,17 +72,17 @@
   top: 50%;
   left: 50%;
   margin-left: -5px;
-  margin-top: -3.5px;
+  margin-top: -2.5px;
   width: 0;
   height: 0;
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
-  border-top: 7px solid #66a6d1 ;
+  border-top: 5px solid #66a6d1 ;
 }
 .ngScreening-start > .ngScreening-switch > i::before {
   content: '';
   position: absolute;
-  top: -9px;
+  top: -7px;
   left: -5px;
   width: 0;
   height: 0;
@@ -90,7 +90,7 @@
   border-right: 5px solid transparent;
 }
 .ngScreening-start > .ngScreening-switch > i::before {
-  border-top: 7px solid #FFF ;
+  border-top: 5px solid #FFF ;
 }
 .ngScreening-start > .ngScreening-switch:hover > * {
   border-top-color: #235576;
@@ -214,17 +214,17 @@
   top: 50%;
   left: 50%;
   margin-left: -5px;
-  margin-top: -3.5px;
+  margin-top: -2.5px;
   width: 0;
   height: 0;
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
-  border-bottom: 7px solid #66a6d1 ;
+  border-bottom: 5px solid #66a6d1 ;
 }
 .ngScreening-start .screening > .screening-switch > b::before {
   content: '';
   position: absolute;
-  top: -9px;
+  top: -7px;
   left: -5px;
   width: 0;
   height: 0;
@@ -232,7 +232,7 @@
   border-right: 5px solid transparent;
 }
 .ngScreening-start .screening > .screening-switch > b::before {
-  border-bottom: 7px solid #FFF ;
+  border-bottom: 5px solid #FFF ;
   top: 2px;
 }
 .ngScreening-start .screening > .screening-switch > i {
@@ -240,17 +240,17 @@
   top: 50%;
   left: 50%;
   margin-left: -5px;
-  margin-top: -3.5px;
+  margin-top: -2.5px;
   width: 0;
   height: 0;
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
-  border-top: 7px solid #66a6d1 ;
+  border-top: 5px solid #66a6d1 ;
 }
 .ngScreening-start .screening > .screening-switch > i::before {
   content: '';
   position: absolute;
-  top: -9px;
+  top: -7px;
   left: -5px;
   width: 0;
   height: 0;
@@ -258,5 +258,5 @@
   border-right: 5px solid transparent;
 }
 .ngScreening-start .screening > .screening-switch > i::before {
-  border-top: 7px solid #FFF ;
+  border-top: 5px solid #FFF ;
 }
