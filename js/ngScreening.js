@@ -1,5 +1,5 @@
 /**
- * ngScreening v0.2.0
+ * ngScreening v0.2.1
  *
  * @license: MIT
  * Designed and built by Moer
@@ -61,12 +61,25 @@ m.directive('ngScreening',function () {
             }
         }],
         link: function (scope, el ) {
-            var initrows = scope.initrows;
-            var container = angular.element(el[0].querySelector('.ngScreening-container'));//填充checkbox的部分
-            var button = container.next();//控制容器尺寸的按钮
-            var search = scope.search;
-            var reset = scope.reset;
-            var screeningButtons;
+            var container = angular.element(el[0].querySelector('.ngScreening-container'));
+
+            var button = container.next();          //控制外壳容器 展开/收起 的按钮
+            var buttonArrow1 = button.find('b');    //按钮中的上箭头
+            var buttonArrow2 = button.find('i');    //下箭头
+
+            var screeningButtons;                   //最后一排操作按钮的容器
+            var search = scope.search;              //搜索按钮
+            var reset = scope.reset;                //重置按钮
+
+            var initrows = scope.initrows;          //初始显示的行数
+            var rows = container.children();        //实际的行数
+            var hasHideRows = initrows>0 && initrows<rows.length; //需要初始隐藏
+
+            function loadFinish() {
+                // 使用<div class="ngScreening"></div>
+                // 防止真实DOM比指令渲染先完成导致页面结构跳动
+                el.removeClass('ngScreening');
+            }
 
             // 增加搜索和重置按钮 (如果有参数才生成)
             if (el.attr('search') || el.attr('reset')) {
@@ -74,33 +87,25 @@ m.directive('ngScreening',function () {
                 container.append(screeningButtons);
                 if (el.attr('search')) {
                     var searchBtn = angular.element('<button type="button" class="btn btn-primary">搜索</button>');
-                    searchBtn.on('click',function () {
+                    searchBtn.on('click',function (e) {
+                        e.stopPropagation();
                         search();
                     });
                     screeningButtons.append(searchBtn)
                 }
                 if (el.attr('reset')) {
                     var resetBtn = angular.element('<button type="button" class="btn btn-default">重置</button>');
-                    resetBtn.on('click',function () {
+                    resetBtn.on('click',function (e) {
+                        e.stopPropagation();
                         reset();
                     });
                     screeningButtons.append(resetBtn)
                 }
             }
 
-            // 设置初始显示行为固定模式
-            if (!initrows || initrows<0) {
-                button.remove();
-                return;
-            }
-
-            var buttonArrow1 = button.find('b');//按钮中的上箭头
-            var buttonArrow2 = button.find('i');//下箭头
-            var rows = container.children();
-            var hasInit = initrows>0 && initrows<rows.length;//初始隐藏行
 
             // 设置初始显示的行
-            if (hasInit) {
+            if (hasHideRows) {
                 // 使用timeout延迟隐藏筛选行，避免隐藏情况行内组件初始化错误
                 setTimeout(function () {
                     buttonArrow1.toggleClass('ngScreening-hide');
@@ -113,20 +118,19 @@ m.directive('ngScreening',function () {
                         screeningButtons.removeClass('ngScreening-hide');
                     }
 
-                    // 使用<div class="ngScreening"></div>
-                    // 防止真实DOM比指令渲染先完成导致页面结构跳动
-                    el.css({
-                        height:'auto',
-                        overflow:'visible'
-                    })
+                    loadFinish();
+                },200)
+
+            }else{
+                setTimeout(function () {
+                    loadFinish();
                 },200)
             }
 
-
             // 面板收缩伸展
             button.on('click',function () {
-                if (hasInit) {
-                    hasInit=false;
+                if (hasHideRows) {
+                    hasHideRows=false;
                     buttonArrow1.toggleClass('ngScreening-hide');
                     buttonArrow2.toggleClass('ngScreening-hide');
                     container.children().removeClass('ngScreening-hide')
