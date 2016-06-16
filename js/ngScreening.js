@@ -106,7 +106,7 @@ m.directive('ngScreening',function () {
 
             // 设置初始显示的行
             if (hasHideRows) {
-                // 使用timeout延迟隐藏筛选行，避免隐藏情况行内组件初始化错误
+                // 使用timeout延迟隐藏筛选行，避免隐藏情况行内第三方组件初始化尺寸错误，比如ui-select
                 setTimeout(function () {
                     buttonArrow1.toggleClass('ngScreening-hide');
                     buttonArrow2.toggleClass('ngScreening-hide');
@@ -119,12 +119,12 @@ m.directive('ngScreening',function () {
                     }
 
                     loadFinish();
-                },200)
+                },300)
 
             }else{
                 setTimeout(function () {
                     loadFinish();
-                },200)
+                },300)
             }
 
             // 面板收缩伸展
@@ -228,22 +228,19 @@ m.directive('screening', function () {
             })
 
 
-            // 给元素绑定一个resize方法，决定什么时候显示和隐藏右侧尺寸按钮可以在服务
             function resize() {
                 // 容器宽度改变，控制尺寸按钮和容器行数
-                setTimeout(function () {
-                    if (container[0].offsetHeight > initHeight) {
-                        switchbtn.removeClass('ngScreening-hide')
-                        el.css({height:initHeight+'px', overflow:'hidden'})
-                        if (openState) {
-                            el.css({height:'', overflow:''})
-                        }
-                    }
-                    else{
-                        switchbtn.addClass('ngScreening-hide')
+                if (container[0].offsetHeight > initHeight) {
+                    switchbtn.removeClass('ngScreening-hide')
+                    el.css({height:initHeight+'px', overflow:'hidden'})
+                    if (openState) {
                         el.css({height:'', overflow:''})
                     }
-                })
+                }
+                else{
+                    switchbtn.addClass('ngScreening-hide')
+                    el.css({height:'', overflow:''})
+                }
             }
 
             // 将重置尺寸的方法绑定只元素，这样服务中可以直接使用。
@@ -264,8 +261,8 @@ m.directive('screening', function () {
             angular.element(window).on('resize',function () {
                 if (!resizeing) {
                     resizeing = true;
+                    resize(el[0]);//重置容器尺寸
                     setTimeout(function () {
-                        resize(el[0]);//重置容器尺寸
                         resizeing = false;
                     },500)
                 }
