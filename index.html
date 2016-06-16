@@ -14,10 +14,11 @@
 
 	<link rel="stylesheet" href="css/ngScreening.css">
 	<link rel="stylesheet" href="css/style.css">
+
 </head>
 <body>
 	<h1 class="PluginName">ngScreening</h2>
-	<p class="Version">ver: 0.1.9</p>
+	<p class="Version">ver: 0.2.0</p>
 	<div class="githubTag">
 		<a class="github" href="https://github.com/Moerj/ngScreening" target="_blank">STAR ON GITHUB</a>
 	</div>
@@ -26,7 +27,7 @@
 
 	<!-- ngScreening start -->
 
-		<ng-screening initrows="3" callback="dataCallback()" search="yourSearch()" reset="yourRest()">
+		<div class="ngScreening" initrows="3" callback="dataCallback()" search="yourSearch()" reset="yourRest()">
 
 
 			<screening label="多选器:" initrows="1">
@@ -84,28 +85,31 @@
 
 				<screening-div label="数据监听" width="200px">
 					<!-- 监听数据模型 -->
-					<screening-watch watch="myColor"></screening-watch>
+					<screening-watch watch="selected.value"></screening-watch>
 					<!-- ui-select组件 -->
-					<select class="form-control" ng-model="myColor"
-					ng-options="option.name for option in colors">
-						<option value="">请选择</option>
-					</select>
+					<ui-select multiple ng-model="selected.value">
+						<ui-select-match>
+							<span ng-bind="$item.name"></span>
+						</ui-select-match>
+						<ui-select-choices repeat="item in (itemArray | filter: $select.search) track by item.id">
+							<span ng-bind="item.name"></span>
+						</ui-select-choices>
+					</ui-select>
 				</screening-div>
 
 			</screening>
 
-		</ng-screening>
+		</div>
 
 	<!-- ngScreening end -->
 
 	</div>
 
+
+	<script src="lib/angular-v1.5.5.js"></script>
+	<script src="lib/select.min.js"></script>
+
+	<script src="js/ngScreening.js"></script>
+	<script src="js/index.js"></script>
 </body>
 </html>
-
-<script src="lib/angular-v1.5.5.js"></script>
-<script src="lib/select.min.js"></script>
-
-<script src="js/ngScreening.js"></script>
-<!-- <script src="js/ngScreening.min.js"></script> -->
-<script src="js/index.js"></script>

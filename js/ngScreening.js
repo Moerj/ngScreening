@@ -1,5 +1,5 @@
 /**
- * ngScreening v0.1.9
+ * ngScreening v0.2.0
  *
  * @license: MIT
  * Designed and built by Moer
@@ -41,7 +41,7 @@ m.service('ngScreening',function () {
 // 筛选器外壳
 m.directive('ngScreening',function () {
     return{
-        restrict: 'E',
+        restrict: 'EC',
         scope: {
             initrows:'@',
             callback:'&',
@@ -50,7 +50,7 @@ m.directive('ngScreening',function () {
         },
         replace: true,
         transclude: true,
-        template: '<div class="ngScreening">' +
+        template: '<div class="ngScreening-start">' +
                     '<div class="ngScreening-container" ng-transclude></div>' +
                     '<div class="ngScreening-switch"><b><</b><i class="ngScreening-hide">></i></div>' +
                 '</div>',
@@ -113,6 +113,12 @@ m.directive('ngScreening',function () {
                         screeningButtons.removeClass('ngScreening-hide');
                     }
 
+                    // 使用<div class="ngScreening"></div>
+                    // 防止真实DOM比指令渲染先完成导致页面结构跳动
+                    el.css({
+                        height:'auto',
+                        overflow:'visible'
+                    })
                 },200)
             }
 

@@ -1,4 +1,4 @@
-# ngScreening v0.1.9
+# ngScreening v0.2.0
 
 angular筛选器组件
 通过控制器定义数据，screening帮你完成数据的渲染、监听、过滤等功能。 
@@ -36,11 +36,15 @@ angular.module('yourProject',['ngScreening']);
 ### ng-screening
 筛选器的整体容器框
 ```html
-<!-- 确保你的控制器包裹指令 -->
-<div ng-controller="yourCtrl">
-    <ng-screening>
-        ...
-    </ng-screening>
+<!-- 创建一个筛选器的外壳 -->
+<ng-screening>
+    ...
+</ng-screening>
+
+<!-- 创建一个筛选器外壳 -->
+<!-- 这种方式可以解决：初始化页面时内部的真实dom暴露，导致页面结构跳动 -->
+<div class="ngScreening">
+    ...
 </div>
 ```
 

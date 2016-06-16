@@ -70,16 +70,6 @@ m.controller('testCtrl',function ($scope, ngScreening) {
     ]
 
 
-    // select
-    $scope.colors = [
-      {name:'black', shade:'dark'},
-      {name:'white', shade:'light', notAnOption: true},
-      {name:'red', shade:'dark'},
-      {name:'blue', shade:'dark', notAnOption: true},
-      {name:'yellow', shade:'light', notAnOption: false}
-    ];
-
-
     $scope.dataCallback = function () {
         console.log('callback has run.');
         // 筛选数据，只会输出选中的数据
@@ -106,6 +96,18 @@ m.controller('testCtrl',function ($scope, ngScreening) {
     $scope.yourRest = function () {
         console.log('reset is run');
     }
+
+
+    // ui-select
+    $scope.itemArray = [
+        {id: 1, name: 'first'},
+        {id: 2, name: 'second'},
+        {id: 3, name: 'third'},
+        {id: 4, name: 'fourth'},
+        {id: 5, name: 'fifth'},
+    ];
+
+    $scope.selected = { value: $scope.itemArray[0] };
 
 
 })

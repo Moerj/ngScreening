@@ -1,5 +1,5 @@
 /**
- * ngScreening v0.1.8 last updated
+ * ngScreening v0.2.0 last updated
  *
  * @license: MIT
  * Designed and built by Moer
@@ -7,6 +7,10 @@
  *
  */
 .ngScreening {
+  height: 0;
+  overflow: hidden;
+}
+.ngScreening-start {
   background-color: #fff;
   display: block;
   width: 100%;
@@ -15,15 +19,15 @@
   /* 公共样式 */
   /* 私有样式 */
 }
-.ngScreening .ngScreening-hide {
+.ngScreening-start .ngScreening-hide {
   display: none !important;
 }
-.ngScreening > .ngScreening-container {
+.ngScreening-start > .ngScreening-container {
   width: 100%;
   border-top: 1px rgba(0, 0, 0, 0.1) solid;
   border-bottom: 1px rgba(0, 0, 0, 0.1) solid;
 }
-.ngScreening > .ngScreening-switch {
+.ngScreening-start > .ngScreening-switch {
   position: absolute;
   bottom: -37px;
   right: 25px;
@@ -37,7 +41,7 @@
   border-top: 0;
   text-align: center;
 }
-.ngScreening > .ngScreening-switch > b {
+.ngScreening-start > .ngScreening-switch > b {
   position: absolute;
   top: 25%;
   left: 45%;
@@ -49,7 +53,7 @@
           transform: rotate(90deg) scale3d(0.7, 1.3, 1);
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-.ngScreening > .ngScreening-switch > i {
+.ngScreening-start > .ngScreening-switch > i {
   position: absolute;
   top: 25%;
   left: 45%;
@@ -61,21 +65,21 @@
           transform: rotate(90deg) scale3d(0.7, 1.3, 1);
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-.ngScreening > .ngScreening-switch:hover {
+.ngScreening-start > .ngScreening-switch:hover {
   color: #235576;
 }
-.ngScreening .screening-buttons {
+.ngScreening-start .screening-buttons {
   text-align: center;
   padding: 0 !important;
 }
-.ngScreening .screening-buttons > * {
+.ngScreening-start .screening-buttons > * {
   margin: 0 !important;
   margin-right: 20px !important;
 }
-.ngScreening .screening-buttons > *:last-of-type {
+.ngScreening-start .screening-buttons > *:last-of-type {
   margin-right: 0;
 }
-.ngScreening .screening {
+.ngScreening-start .screening {
   min-height: 47px;
   line-height: 46px;
   border-bottom: 1px #ddd solid;
@@ -83,7 +87,7 @@
   padding: 0 30px 0 90px;
   display: block;
 }
-.ngScreening .screening .screening-name {
+.ngScreening-start .screening .screening-name {
   display: inline-block;
   text-align: right;
   width: 80px;
@@ -94,7 +98,7 @@
   left: 0;
   top: 0;
 }
-.ngScreening .screening > .screening-container {
+.ngScreening-start .screening > .screening-container {
   display: block;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -108,7 +112,7 @@
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
 }
-.ngScreening .screening > .screening-container .screening-item {
+.ngScreening-start .screening > .screening-container .screening-item {
   /* checkbox */
   list-style: none;
   display: inline-block;
@@ -124,27 +128,27 @@
   line-height: normal;
   height: auto !important;
 }
-.ngScreening .screening > .screening-container .screening-item:hover {
+.ngScreening-start .screening > .screening-container .screening-item:hover {
   background-color: #f2f2f2;
   border-color: #d6d6d6;
 }
-.ngScreening .screening > .screening-container .screening-item-checked {
+.ngScreening-start .screening > .screening-container .screening-item-checked {
   background-color: #66A6D1;
   color: #fff;
 }
-.ngScreening .screening > .screening-container .screening-item-checked:hover {
+.ngScreening-start .screening > .screening-container .screening-item-checked:hover {
   background-color: #3f8fc5 !important;
 }
-.ngScreening .screening > .screening-container .screening-div {
+.ngScreening-start .screening > .screening-container .screening-div {
   /* 自定义div容器 */
   display: inline-block;
   margin-right: 20px;
 }
-.ngScreening .screening > .screening-container .screening-div input {
+.ngScreening-start .screening > .screening-container .screening-div input {
   display: inline-block;
   width: auto;
 }
-.ngScreening .screening > .screening-container .screening-flex {
+.ngScreening-start .screening > .screening-container .screening-flex {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -158,7 +162,7 @@
   -ms-flex-line-pack: start;
       align-content: flex-start;
 }
-.ngScreening .screening > .screening-switch {
+.ngScreening-start .screening > .screening-switch {
   width: 25px;
   height: 25px;
   line-height: 25px;
@@ -170,10 +174,10 @@
   cursor: pointer;
   border-radius: 5px;
 }
-.ngScreening .screening > .screening-switch:hover {
+.ngScreening-start .screening > .screening-switch:hover {
   background-color: #eee;
 }
-.ngScreening .screening > .screening-switch > b {
+.ngScreening-start .screening > .screening-switch > b {
   position: absolute;
   top: 25%;
   left: 45%;
@@ -185,7 +189,7 @@
           transform: rotate(90deg) scale3d(0.7, 1.3, 1);
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-.ngScreening .screening > .screening-switch > i {
+.ngScreening-start .screening > .screening-switch > i {
   position: absolute;
   top: 25%;
   left: 45%;
