@@ -1,5 +1,5 @@
 /**
- * ngScreening v0.2.0 last updated
+ * ngScreening v0.2.1 last updated
  *
  * @license: MIT
  * Designed and built by Moer
@@ -25,15 +25,40 @@
 
     // 按钮中的箭头
     .btnArrow(){
+        .btnArrowUp(){
+            border-bottom: 7px solid #66a6d1 ;
+            &::before{
+                border-bottom: 7px solid #FFF ;
+                top:2px;
+            }
+        }
+        .btnArrowDown(){
+            border-top: 7px solid #66a6d1 ;
+            &::before{
+                border-top: 7px solid #FFF ;
+            }
+        }
+
         position: absolute;
-        top: 25%;
-        left: 45%;
-        display: inline;
-        text-align: center;
-        font-weight: 200;
-        line-height: normal;
-        transform: rotate(90deg) scale3d(0.7,1.3,1);
-        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        top: 50%;
+        left: 50%;
+        margin-left: -5px;
+        margin-top: -3.5px;
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+
+        &::before{
+            content: '';
+            position: absolute;
+            top: -9px;
+            left: -5px;
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+        }
     }
 
     .ngScreening-hide{
@@ -63,12 +88,15 @@
         text-align: center;
         >b{
             .btnArrow();
+            .btnArrowUp();
         }
         >i{
             .btnArrow();
+            .btnArrowDown();
         }
-        &:hover{
-            color:#235576;
+        &:hover > *{
+            border-top-color: #235576;
+            border-bottom-color: #235576;
         }
     }
 
@@ -89,11 +117,9 @@
     .screening{
         min-height: 47px;
         line-height: 46px;
-        // box-sizing: content-box !important;
         border-bottom: 1px #ddd solid;
         position: relative;
         padding: 0 30px 0 90px;
-        // display: flex;
         display: block;
 
         .screening-name{
@@ -153,7 +179,6 @@
                 display:flex;
                 flex-grow:1;/* 每个元素平分剩余空间 */
                 align-items: center;
-                // flex-wrap:wrap;
                 align-content:flex-start;
             }
         }
@@ -170,14 +195,21 @@
             border-radius: 5px;
 
             &:hover{
-                background-color: #eee;
+                @hoverColor:#eee;
+                background-color: @hoverColor;
+                &>*::before{
+                    border-top-color: @hoverColor;
+                    border-bottom-color: @hoverColor;
+                }
             }
 
             >b{
                 .btnArrow();
+                .btnArrowUp();
             }
             >i{
                 .btnArrow();
+                .btnArrowDown();
             }
         }
     }

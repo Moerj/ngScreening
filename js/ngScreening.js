@@ -52,7 +52,7 @@ m.directive('ngScreening',function () {
         transclude: true,
         template: '<div class="ngScreening-start">' +
                     '<div class="ngScreening-container" ng-transclude></div>' +
-                    '<div class="ngScreening-switch"><b><</b><i class="ngScreening-hide">></i></div>' +
+                    '<div class="ngScreening-switch"><b></b><i class="ngScreening-hide"></i></div>' +
                 '</div>',
         controller: ['$scope', function ($scope) {
             this.callback = function () {
@@ -160,7 +160,7 @@ m.directive('screening', function () {
         template: '<div class="screening">'+
                     '<div class="screening-name" ng-hide="flexOnly">{{label}}</div>'+
                     '<div class="screening-container" ng-transclude></div>'+
-                    '<div class="screening-switch ngScreening-hide"><b class="ngScreening-hide"><</b><i>></i></div>'+
+                    '<div class="screening-switch ngScreening-hide"><b class="ngScreening-hide"></b><i></i></div>'+
                 '</div>'
         ,
         controller: ['$scope','$element', function ($scope,$element) {

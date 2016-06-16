@@ -1,5 +1,5 @@
 /**
- * ngScreening v0.2.0 last updated
+ * ngScreening v0.2.1 last updated
  *
  * @license: MIT
  * Designed and built by Moer
@@ -43,30 +43,58 @@
 }
 .ngScreening-start > .ngScreening-switch > b {
   position: absolute;
-  top: 25%;
-  left: 45%;
-  display: inline;
-  text-align: center;
-  font-weight: 200;
-  line-height: normal;
-  -webkit-transform: rotate(90deg) scale3d(0.7, 1.3, 1);
-          transform: rotate(90deg) scale3d(0.7, 1.3, 1);
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  top: 50%;
+  left: 50%;
+  margin-left: -5px;
+  margin-top: -3.5px;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 7px solid #66a6d1 ;
+}
+.ngScreening-start > .ngScreening-switch > b::before {
+  content: '';
+  position: absolute;
+  top: -9px;
+  left: -5px;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+}
+.ngScreening-start > .ngScreening-switch > b::before {
+  border-bottom: 7px solid #FFF ;
+  top: 2px;
 }
 .ngScreening-start > .ngScreening-switch > i {
   position: absolute;
-  top: 25%;
-  left: 45%;
-  display: inline;
-  text-align: center;
-  font-weight: 200;
-  line-height: normal;
-  -webkit-transform: rotate(90deg) scale3d(0.7, 1.3, 1);
-          transform: rotate(90deg) scale3d(0.7, 1.3, 1);
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  top: 50%;
+  left: 50%;
+  margin-left: -5px;
+  margin-top: -3.5px;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 7px solid #66a6d1 ;
 }
-.ngScreening-start > .ngScreening-switch:hover {
-  color: #235576;
+.ngScreening-start > .ngScreening-switch > i::before {
+  content: '';
+  position: absolute;
+  top: -9px;
+  left: -5px;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+}
+.ngScreening-start > .ngScreening-switch > i::before {
+  border-top: 7px solid #FFF ;
+}
+.ngScreening-start > .ngScreening-switch:hover > * {
+  border-top-color: #235576;
+  border-bottom-color: #235576;
 }
 .ngScreening-start .screening-buttons {
   text-align: center;
@@ -177,27 +205,58 @@
 .ngScreening-start .screening > .screening-switch:hover {
   background-color: #eee;
 }
+.ngScreening-start .screening > .screening-switch:hover > *::before {
+  border-top-color: #eee;
+  border-bottom-color: #eee;
+}
 .ngScreening-start .screening > .screening-switch > b {
   position: absolute;
-  top: 25%;
-  left: 45%;
-  display: inline;
-  text-align: center;
-  font-weight: 200;
-  line-height: normal;
-  -webkit-transform: rotate(90deg) scale3d(0.7, 1.3, 1);
-          transform: rotate(90deg) scale3d(0.7, 1.3, 1);
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  top: 50%;
+  left: 50%;
+  margin-left: -5px;
+  margin-top: -3.5px;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 7px solid #66a6d1 ;
+}
+.ngScreening-start .screening > .screening-switch > b::before {
+  content: '';
+  position: absolute;
+  top: -9px;
+  left: -5px;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+}
+.ngScreening-start .screening > .screening-switch > b::before {
+  border-bottom: 7px solid #FFF ;
+  top: 2px;
 }
 .ngScreening-start .screening > .screening-switch > i {
   position: absolute;
-  top: 25%;
-  left: 45%;
-  display: inline;
-  text-align: center;
-  font-weight: 200;
-  line-height: normal;
-  -webkit-transform: rotate(90deg) scale3d(0.7, 1.3, 1);
-          transform: rotate(90deg) scale3d(0.7, 1.3, 1);
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  top: 50%;
+  left: 50%;
+  margin-left: -5px;
+  margin-top: -3.5px;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 7px solid #66a6d1 ;
+}
+.ngScreening-start .screening > .screening-switch > i::before {
+  content: '';
+  position: absolute;
+  top: -9px;
+  left: -5px;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+}
+.ngScreening-start .screening > .screening-switch > i::before {
+  border-top: 7px solid #FFF ;
 }
