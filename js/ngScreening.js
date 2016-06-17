@@ -1,5 +1,5 @@
 /**
- * ngScreening v0.2.1
+ * ngScreening v0.2.2
  *
  * @license: MIT
  * Designed and built by Moer
@@ -51,7 +51,7 @@ m.directive('ngScreening',function () {
         replace: true,
         transclude: true,
         template: '<div class="ngScreening-start">' +
-                    '<div class="ngScreening-container" ng-transclude></div>' +
+                    '<form class="ngScreening-container" ng-transclude></form>' +
                     '<div class="ngScreening-switch"><b></b><i class="ngScreening-hide"></i></div>' +
                 '</div>',
         controller: ['$scope', function ($scope) {
@@ -90,6 +90,7 @@ m.directive('ngScreening',function () {
                     searchBtn.on('click',function (e) {
                         e.stopPropagation();
                         search();
+                        scope.$apply();
                     });
                     screeningButtons.append(searchBtn)
                 }
@@ -98,6 +99,9 @@ m.directive('ngScreening',function () {
                     resetBtn.on('click',function (e) {
                         e.stopPropagation();
                         reset();
+                        scope.$broadcast('reset');// 通知组件内部重置数据
+                        container[0].reset();// form reset
+                        scope.$apply();
                     });
                     screeningButtons.append(resetBtn)
                 }
@@ -287,6 +291,9 @@ m.directive('screeningWatch',function () {
                     pCtrl.callback();
                 }
             })
+            scope.$on('reset',function () {
+                scope.watch = null;
+            })
         }
     }
 })
@@ -356,6 +363,17 @@ function checkbox_radio(isCheckbox) {
                 })
                 this.pCtrl.callback();
             }
+            // 重置多选器的全选按钮
+            $scope.$on('reset', function(event) {
+                if (event.name === 'reset') {
+                    $scope.mulitiActive = false;
+                    angular.forEach($scope.data,function (item) {
+                        if (item.isChecked) {
+                            item.isChecked = false;
+                        }
+                    })
+                }
+            });
         }],
         link: function (scope, el , attrs, pCtrl) {
             scope.pCtrl = pCtrl;

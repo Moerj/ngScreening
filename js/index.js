@@ -90,9 +90,6 @@ m.controller('testCtrl',function ($scope, ngScreening) {
 
     }
 
-    $scope.yourSearch = function () {
-        console.log('search is run');
-    }
     $scope.yourRest = function () {
         console.log('reset is run');
     }

@@ -1,5 +1,5 @@
 /**
- * ngScreening v0.2.1 last updated
+ * ngScreening v0.2.2 last updated
  *
  * @license: MIT
  * Designed and built by Moer
@@ -24,9 +24,13 @@
 .ngScreening-start > .ngScreening-container {
   width: 100%;
   border-top: 1px #ddd solid;
+  display: block;
+  margin: 0;
+  padding: 0;
 }
 .ngScreening-start > .ngScreening-switch {
   position: absolute;
+  z-index: 1;
   bottom: -39px;
   right: 25px;
   width: 40px;

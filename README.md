@@ -1,4 +1,4 @@
-# ngScreening v0.2.1
+# ngScreening v0.2.2
 
 angular筛选器组件
 通过控制器定义数据，screening帮你完成数据的渲染、监听、过滤等功能。 
@@ -244,7 +244,8 @@ app.controller('yourCtrl',function ($scope) {
 ```
 
 ### reset
-定义重置回调函数，界面会生成一个重置按钮
+定义重置回调函数，界面会生成一个重置按钮。  
+点击按钮会充值组件内的数据。包括：单选组、多选组的选中状态，原生dom的输入值，screening-watch的ngModel
 ```html
 <ng-screening search="yourReset()" >
     ...
