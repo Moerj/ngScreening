@@ -18,7 +18,7 @@
 </head>
 <body>
 	<h1 class="PluginName">ngScreening</h2>
-	<p class="Version">ver: 0.2.2</p>
+	<p class="Version">ver: 0.2.3</p>
 	<div class="githubTag">
 		<a class="github" href="https://github.com/Moerj/ngScreening" target="_blank">STAR ON GITHUB</a>
 	</div>
@@ -27,7 +27,7 @@
 
 	<!-- ngScreening start -->
 
-		<div class="ngScreening" initrows="3" callback="dataCallback()" search="dataCallback()" reset="yourRest()">
+		<div class="ngScreening" initrows="3" callback="dataCallback()" search="dataCallback()" reset >
 
 
 			<screening label="多选器:" initrows="1">
@@ -85,7 +85,7 @@
 
 				<screening-div label="第三方组件" width="200px">
 					<!-- 监听数据模型 -->
-					<screening-watch watch="selected.value"></screening-watch>
+					<screening-watch data="selected.value"></screening-watch>
 					<!-- ui-select组件 -->
 					<ui-select multiple ng-model="selected.value">
 						<ui-select-match>

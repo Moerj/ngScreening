@@ -1,5 +1,5 @@
 /**
- * ngScreening v0.2.2
+ * ngScreening v0.2.3
  *
  * @license: MIT
  * Designed and built by Moer
@@ -82,7 +82,7 @@ m.directive('ngScreening',function () {
             }
 
             // 增加搜索和重置按钮 (如果有参数才生成)
-            if (el.attr('search') || el.attr('reset')) {
+            if (el.attr('search') || el.attr('reset')!==undefined) {
                 screeningButtons = angular.element('<div class="screening screening-buttons"></div>')
                 container.append(screeningButtons);
                 if (el.attr('search')) {
@@ -94,13 +94,13 @@ m.directive('ngScreening',function () {
                     });
                     screeningButtons.append(searchBtn)
                 }
-                if (el.attr('reset')) {
+                if (el.attr('reset')!==undefined) {
                     var resetBtn = angular.element('<button type="button" class="btn btn-default">重置</button>');
                     resetBtn.on('click',function (e) {
                         e.stopPropagation();
-                        reset();
-                        scope.$broadcast('reset');// 通知组件内部重置数据
+                        scope.$broadcast('ngScreening-reset');// 通知组件内部重置数据
                         container[0].reset();// form reset
+                        reset();
                         scope.$apply();
                     });
                     screeningButtons.append(resetBtn)
@@ -281,18 +281,25 @@ m.directive('screeningWatch',function () {
     return{
         restrict:'E',
         scope:{
-            watch:'='
+            data:'='
         },
         require: '^ngScreening',
         link: function (scope, el , attrs, pCtrl) {
             el.remove();
-            scope.$watch('watch',function (newVal,oldVal) {
+            scope.$watch('data',function (newVal,oldVal) {
                 if (oldVal != newVal && newVal) {
                     pCtrl.callback();
                 }
             })
-            scope.$on('reset',function () {
-                scope.watch = null;
+            scope.$on('ngScreening-reset',function () {
+                // 根据类型，清空数据
+                if (angular.isString(scope.data)) {
+                    scope.data = '';
+                }else if (angular.isArray(scope.data)) {
+                    scope.data = [];
+                }else{
+                    scope.data = null;
+                }
             })
         }
     }
@@ -364,15 +371,13 @@ function checkbox_radio(isCheckbox) {
                 this.pCtrl.callback();
             }
             // 重置多选器的全选按钮
-            $scope.$on('reset', function(event) {
-                if (event.name === 'reset') {
-                    $scope.mulitiActive = false;
-                    angular.forEach($scope.data,function (item) {
-                        if (item.isChecked) {
-                            item.isChecked = false;
-                        }
-                    })
-                }
+            $scope.$on('ngScreening-reset', function() {
+                $scope.mulitiActive = false;
+                angular.forEach($scope.data,function (item) {
+                    if (item.isChecked) {
+                        item.isChecked = false;
+                    }
+                })
             });
         }],
         link: function (scope, el , attrs, pCtrl) {

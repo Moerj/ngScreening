@@ -90,10 +90,6 @@ m.controller('testCtrl',function ($scope, ngScreening) {
 
     }
 
-    $scope.yourRest = function () {
-        console.log('reset is run');
-    }
-
 
     // ui-select
     $scope.itemArray = [
@@ -105,6 +101,7 @@ m.controller('testCtrl',function ($scope, ngScreening) {
     ];
 
     $scope.selected = { value: $scope.itemArray[0] };
+
 
 
 })
