@@ -86,7 +86,7 @@ m.directive('ngScreening',function () {
                 screeningButtons = angular.element('<div class="screening screening-buttons"></div>')
                 container.append(screeningButtons);
                 if (el.attr('search')) {
-                    var searchBtn = angular.element('<button type="button" class="btn btn-primary">搜索</button>');
+                    var searchBtn = angular.element('<button type="button" class="btn btn-primary btn-sm">搜索</button>');
                     searchBtn.on('click',function (e) {
                         e.stopPropagation();
                         search();
@@ -95,7 +95,7 @@ m.directive('ngScreening',function () {
                     screeningButtons.append(searchBtn)
                 }
                 if (el.attr('reset')!==undefined) {
-                    var resetBtn = angular.element('<button type="button" class="btn btn-default">重置</button>');
+                    var resetBtn = angular.element('<button type="button" class="btn btn-default btn-sm">重置</button>');
                     resetBtn.on('click',function (e) {
                         e.stopPropagation();
                         scope.$broadcast('ngScreening-reset');// 通知组件内部重置数据
