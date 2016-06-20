@@ -1,5 +1,5 @@
 /**
- * ngScreening v0.2.4
+ * ngScreening v0.2.3
  *
  * @license: MIT
  * Designed and built by Moer
@@ -430,12 +430,12 @@ m.directive('screeningFlex',function () {
         scope:{
             width:'@',
             label:'@',
-            align:'@'
+            justifyContent:'@'
         },
         transclude: true,
         replace:true,
         template:
-        '<div class="screening-flex" style="justify-content:{{align}}">' +
+        '<div class="screening-flex" style="justify-content:{{justifyContent}}">' +
             '<span class="screening-name" style="position:relative" ng-if="label">{{label}}</span>' +
             '<div style="width:{{width}};" ng-transclude></div>' +
         '</div>'
