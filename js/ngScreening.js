@@ -1,5 +1,5 @@
 /**
- * ngScreening v0.2.3
+ * ngScreening v0.2.4
  *
  * @license: MIT
  * Designed and built by Moer
@@ -50,10 +50,10 @@ m.directive('ngScreening',function () {
         },
         replace: true,
         transclude: true,
-        template: '<div class="ngScreening-start">' +
-                    '<form class="ngScreening-container" ng-transclude></form>' +
-                    '<div class="ngScreening-switch"><b></b><i class="ngScreening-hide"></i></div>' +
-                '</div>',
+        template: '<div class="ngScreening-start">\
+                    <form class="ngScreening-container" ng-transclude></form>\
+                    <div class="ngScreening-switch"><b></b><i class="ngScreening-hide"></i></div>\
+                </div>',
         controller: ['$scope', function ($scope) {
             this.callback = function () {
                 //执行控制器中的callback，通知控制器，数据已改变
@@ -161,11 +161,11 @@ m.directive('screening', function () {
         replace: true,
         transclude: true,
         require: '^ngScreening',
-        template: '<div class="screening">'+
-                    '<div class="screening-name" ng-hide="flexOnly">{{label}}</div>'+
-                    '<div class="screening-container" ng-transclude></div>'+
-                    '<div class="screening-switch ngScreening-hide"><b class="ngScreening-hide"></b><i></i></div>'+
-                '</div>'
+        template: '<div class="screening">\
+                    <div class="screening-name" ng-hide="flexOnly">{{label}}</div>\
+                    <div class="screening-container" ng-transclude></div>\
+                    <div class="screening-switch ngScreening-hide"><b class="ngScreening-hide"></b><i></i></div>\
+                </div>'
         ,
         controller: ['$scope','$element', function ($scope,$element) {
             // 初始screening行容器高度，是由css控制的
@@ -338,17 +338,16 @@ function checkbox_radio(isCheckbox) {
         // replace: true,
         require: '^ngScreening',
         template: // 多选或单选按钮
-                '<input type="button" class="screening-item btn"'  +
-                "ng-class=\"{'screening-item-checked':mulitiActive}\" /> | " +
-                // checkItemes
-                '<input type="button"' +
-                'ng-repeat="item in data"' +
-                "ng-class=\"{'screening-item-checked':item.isChecked}\"" +
-                'ng-click="checkItem()"' +
-                'ng-if="!item.isHidden"' +
-                'ng-value="item.name"' +
-                'class="screening-item btn"' +
-                'index="{{$index}}">' ,
+                '<input type="button" class="screening-item btn" \
+                ng-class="{\'screening-item-checked\':mulitiActive}" /> | \
+                <input type="button"\
+                ng-repeat="item in data"\
+                ng-class="{\'screening-item-checked\':item.isChecked}"\
+                ng-click="checkItem()"\
+                ng-if="!item.isHidden"\
+                ng-value="item.name"\
+                class="screening-item btn"\
+                index="{{$index}}">' ,
         controller: ['$scope', function ($scope) {
             $scope.mulitiActive = false;
             $scope.checkItem = function () {
@@ -416,10 +415,10 @@ m.directive('screeningDiv',function () {
         transclude: true,
         replace:true,
         template:
-        '<div>' +
-            '<span style="margin:0 10px 0 10px" ng-if="label">{{label}}</span>' +
-            '<div class="screening-div" style="width:{{width}}" ng-transclude></div>' +
-        '</div>'
+        '<div>\
+            <span style="margin:0 10px 0 10px" ng-if="label">{{label}}</span>\
+            <div class="screening-div" style="width:{{width}}" ng-transclude></div>\
+        </div>'
     }
 })
 
@@ -435,10 +434,10 @@ m.directive('screeningFlex',function () {
         transclude: true,
         replace:true,
         template:
-        '<div class="screening-flex" style="justify-content:{{justifyContent}}">' +
-            '<span class="screening-name" style="position:relative" ng-if="label">{{label}}</span>' +
-            '<div style="width:{{width}};" ng-transclude></div>' +
-        '</div>'
+        '<div class="screening-flex" style="justify-content:{{justifyContent}}">\
+            <span class="screening-name" style="position:relative" ng-if="label">{{label}}</span>\
+            <div style="width:{{width}};" ng-transclude></div>\
+        </div>'
     }
 })
 
