@@ -234,17 +234,19 @@ m.directive('screening', function () {
 
             function resize() {
                 // 容器宽度改变，控制尺寸按钮和容器行数
-                if (container[0].offsetHeight > initHeight) {
-                    switchbtn.removeClass('ngScreening-hide')
-                    el.css({height:initHeight+'px', overflow:'hidden'})
-                    if (openState) {
+                setTimeout(function () {
+                    if (container[0].offsetHeight > initHeight) {
+                        switchbtn.removeClass('ngScreening-hide')
+                        el.css({height:initHeight+'px', overflow:'hidden'})
+                        if (openState) {
+                            el.css({height:'', overflow:''})
+                        }
+                    }
+                    else{
+                        switchbtn.addClass('ngScreening-hide')
                         el.css({height:'', overflow:''})
                     }
-                }
-                else{
-                    switchbtn.addClass('ngScreening-hide')
-                    el.css({height:'', overflow:''})
-                }
+                })
             }
 
             // 将重置尺寸的方法绑定只元素，这样服务中可以直接使用。
