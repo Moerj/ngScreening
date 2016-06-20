@@ -1,4 +1,4 @@
-# ngScreening v0.2.3
+# ngScreening v0.2.4
 
 angular筛选器组件
 通过控制器定义数据，screening帮你完成数据的渲染、监听、过滤等功能。 
@@ -100,14 +100,14 @@ angular.module('yourProject',['ngScreening']);
   
 而当screening中只有flex布局时，screening的label参数会被禁用
 
-#### justify-content
-screening-flex指令可以接收的参数，设置flex的均分方式，具体参数同css-flex  
+#### align
+screening-flex指令可以接收的参数，设置flex的均分方式，具体参数同css-flex: justify-content 
   
-当screening有混合布局时，默认justify-content:center
+当screening有混合布局时，默认align:center
 
 ```html
 <screening>
-    <screening-flex label="flex容器1">
+    <screening-flex label="flex容器1" align="center">
         <input type="text">
     </screening-flex>
     <screening-flex label="flex容器2">
