@@ -312,16 +312,13 @@ m.directive('screeningEvent',function () {
     return{
         restrict:'A',
         scope:{
-            screeningEvent:'@'
+            event:'@screeningEvent'
         },
         require: '^ngScreening',
         replace: true,
         link: function (scope, el , attrs, pCtrl) {
-            var event = 'change';
-            if (scope.screeningEvent) {
-                event = scope.screeningEvent;
-            }
-            el.on(event,function () {
+            var e = scope.event ? scope.event : 'change';
+            el.on(e,function () {
                 pCtrl.callback();
                 return false;
             })
