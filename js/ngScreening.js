@@ -339,14 +339,14 @@ function checkbox_radio(isCheckbox) {
         require: '^ngScreening',
         template: // 多选或单选按钮
                 '<input type="button" class="screening-item btn" \
-                ng-class="{\'screening-item-checked\':mulitiActive}" /> | \
+                    ng-class="{\'screening-item-checked\':mulitiActive}" /> | \
                 <input type="button"\
-                ng-repeat="item in data"\
-                ng-class="{\'screening-item-checked\':item.isChecked}"\
-                ng-click="checkItem()"\
-                ng-if="!item.isHidden"\
-                ng-value="item.name"\
-                class="screening-item btn"\
+                    ng-repeat="item in data"\
+                    ng-class="{\'screening-item-checked\':item.isChecked}"\
+                    ng-click="checkItem()"\
+                    ng-if="!item.isHidden"\
+                    ng-value="item.name"\
+                    class="screening-item btn"\
                 index="{{$index}}">' ,
         controller: ['$scope', function ($scope) {
             $scope.mulitiActive = false;
