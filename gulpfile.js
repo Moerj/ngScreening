@@ -59,7 +59,7 @@ gulp.task('js-compress', function(){
 gulp.task('default',  function() {
 
     browserSync.init({
-        port : 9000,
+        // port : 9000,
         // files: "**",
         files: ["./css/*.css", "./**/*.html", "./js/*.js"],
 
