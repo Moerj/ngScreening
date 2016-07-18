@@ -1,4 +1,4 @@
-# ngScreening v0.2.4
+# ngScreening v0.2.5
 
 angular筛选器组件
 通过控制器定义数据，screening帮你完成数据的渲染、监听、过滤等功能。 

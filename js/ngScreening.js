@@ -1,5 +1,5 @@
 /**
- * ngScreening v0.2.4
+ * ngScreening v0.2.5
  *
  * @license: MIT
  * Designed and built by Moer
@@ -61,91 +61,94 @@ m.directive('ngScreening',function () {
             }
         }],
         link: function (scope, el ) {
-            var container = angular.element(el[0].querySelector('.ngScreening-container'));
+            setTimeout(function () {
 
-            var button = container.next();          //控制外壳容器 展开/收起 的按钮
-            var buttonArrow1 = button.find('b');    //按钮中的上箭头
-            var buttonArrow2 = button.find('i');    //下箭头
+                var container = angular.element(el[0].querySelector('.ngScreening-container'));
 
-            var screeningButtons;                   //最后一排操作按钮的容器
-            var search = scope.search;              //搜索按钮
-            var reset = scope.reset;                //重置按钮
+                var button = container.next();          //控制外壳容器 展开/收起 的按钮
+                var buttonArrow1 = button.find('b');    //按钮中的上箭头
+                var buttonArrow2 = button.find('i');    //下箭头
 
-            var initrows = scope.initrows;          //初始显示的行数
-            var rows = container.children();        //实际的行数
-            var hasHideRows = initrows>0 && initrows<rows.length; //需要初始隐藏
+                var screeningButtons;                   //最后一排操作按钮的容器
+                var search = scope.search;              //搜索按钮
+                var reset = scope.reset;                //重置按钮
 
-            function loadFinish() {
-                // 使用<div class="ngScreening"></div>
-                // 防止真实DOM比指令渲染先完成导致页面结构跳动
-                el.removeClass('ngScreening');
-            }
+                var initrows = scope.initrows;          //初始显示的行数
+                var rows = container.children();        //实际的行数
+                var hasHideRows = initrows>0 && initrows<rows.length; //需要初始隐藏
 
-            // 增加搜索和重置按钮 (如果有参数才生成)
-            if (el.attr('search') || el.attr('reset')!==undefined) {
-                screeningButtons = angular.element('<div class="screening screening-buttons"></div>')
-                container.append(screeningButtons);
-                if (el.attr('search')) {
-                    var searchBtn = angular.element('<button type="button" class="btn btn-primary btn-sm">搜索</button>');
-                    searchBtn.on('click',function (e) {
-                        e.stopPropagation();
-                        search();
-                        scope.$apply();
-                    });
-                    screeningButtons.append(searchBtn)
+                function loadFinish() {
+                    // 使用<div class="ngScreening"></div>
+                    // 防止真实DOM比指令渲染先完成导致页面结构跳动
+                    el.removeClass('ngScreening');
                 }
-                if (el.attr('reset')!==undefined) {
-                    var resetBtn = angular.element('<button type="button" class="btn btn-default btn-sm">重置</button>');
-                    resetBtn.on('click',function (e) {
-                        e.stopPropagation();
-                        scope.$broadcast('ngScreening-reset');// 通知组件内部重置数据
-                        container[0].reset();// form reset
-                        reset();
-                        scope.$apply();
-                    });
-                    screeningButtons.append(resetBtn)
+
+                // 增加搜索和重置按钮 (如果有参数才生成)
+                if (el.attr('search') || el.attr('reset')!==undefined) {
+                    screeningButtons = angular.element('<div class="screening screening-buttons"></div>')
+                    container.append(screeningButtons);
+                    if (el.attr('search')) {
+                        var searchBtn = angular.element('<button type="button" class="btn btn-primary btn-sm">搜索</button>');
+                        searchBtn.on('click',function (e) {
+                            e.stopPropagation();
+                            search();
+                            scope.$apply();
+                        });
+                        screeningButtons.append(searchBtn)
+                    }
+                    if (el.attr('reset')!==undefined) {
+                        var resetBtn = angular.element('<button type="button" class="btn btn-default btn-sm">重置</button>');
+                        resetBtn.on('click',function (e) {
+                            e.stopPropagation();
+                            scope.$broadcast('ngScreening-reset');// 通知组件内部重置数据
+                            container[0].reset();// form reset
+                            reset();
+                            scope.$apply();
+                        });
+                        screeningButtons.append(resetBtn)
+                    }
                 }
-            }
 
 
-            // 设置初始显示的行
-            if (hasHideRows) {
-                // 使用timeout延迟隐藏筛选行，避免隐藏情况行内第三方组件初始化尺寸错误，比如ui-select
-                setTimeout(function () {
-                    buttonArrow1.toggleClass('ngScreening-hide');
-                    buttonArrow2.toggleClass('ngScreening-hide');
-                    for (var i = initrows; i < rows.length; i++) {
-                        angular.element(rows[i]).addClass('ngScreening-hide');
-                    }
-                    // screening-buttons行默认初始不隐藏
-                    if (screeningButtons) {
-                        screeningButtons.removeClass('ngScreening-hide');
-                    }
-
-                    loadFinish();
-                },300)
-
-            }else{
-                setTimeout(function () {
-                    loadFinish();
-                },300)
-            }
-
-            // 面板收缩伸展
-            button.on('click',function () {
+                // 设置初始显示的行
                 if (hasHideRows) {
-                    hasHideRows=false;
-                    buttonArrow1.toggleClass('ngScreening-hide');
-                    buttonArrow2.toggleClass('ngScreening-hide');
-                    container.children().removeClass('ngScreening-hide')
-                }else{
-                    container.toggleClass('ngScreening-hide');
-                    buttonArrow1.toggleClass('ngScreening-hide');
-                    buttonArrow2.toggleClass('ngScreening-hide');
-                }
-                return false;
-            })
+                    // 使用timeout延迟隐藏筛选行，避免隐藏情况行内第三方组件初始化尺寸错误，比如ui-select
+                    setTimeout(function () {
+                        buttonArrow1.toggleClass('ngScreening-hide');
+                        buttonArrow2.toggleClass('ngScreening-hide');
+                        for (var i = initrows; i < rows.length; i++) {
+                            angular.element(rows[i]).addClass('ngScreening-hide');
+                        }
+                        // screening-buttons行默认初始不隐藏
+                        if (screeningButtons) {
+                            screeningButtons.removeClass('ngScreening-hide');
+                        }
 
+                        loadFinish();
+                    },300)
+
+                }else{
+                    setTimeout(function () {
+                        loadFinish();
+                    },300)
+                }
+
+                // 面板收缩伸展
+                button.on('click',function () {
+                    if (hasHideRows) {
+                        hasHideRows=false;
+                        buttonArrow1.toggleClass('ngScreening-hide');
+                        buttonArrow2.toggleClass('ngScreening-hide');
+                        container.children().removeClass('ngScreening-hide')
+                    }else{
+                        container.toggleClass('ngScreening-hide');
+                        buttonArrow1.toggleClass('ngScreening-hide');
+                        buttonArrow2.toggleClass('ngScreening-hide');
+                    }
+                    return false;
+                })
+
+            })
         }
     }
 })
@@ -172,106 +175,108 @@ m.directive('screening', function () {
             $scope.initHeight = $element[0].clientHeight;
         }],
         link: function (scope, el) {
-            var initrows = scope.initrows;
-            var container = angular.element(el[0].querySelector('.screening-container'));
+            setTimeout(function () {
 
-            // 检测容器中是否只有flex布局
-            var containerChildren = container.children();
-            var flexOnly = true;
-            angular.forEach(containerChildren,function (dom) {
-                var child = angular.element(dom);
-                if (!child.hasClass('screening-flex')) {
-                    flexOnly = false;
-                    return false;
-                }
-            });
-            if (flexOnly) {
-                //禁用screening-name元素
-                scope.flexOnly = flexOnly;
+                var initrows = scope.initrows;
+                var container = angular.element(el[0].querySelector('.screening-container'));
 
-                //改变screening的样式
-                el.css('padding-left','0');
-            }else {
-                // 混合布局时，flex容器默认水平排序为justify-content:center;
-                angular.forEach(container.children(),function (childDom) {
-                    childDom = angular.element(childDom);
-                    if (childDom.hasClass('screening-flex')) {
-                        // 确保screening-flex指令渲染完成
-                        setTimeout(function () {
-                            if (!childDom.css('justify-content')) {
-                                childDom.css('justify-content','center');
-                            }
-                        })
+                // 检测容器中是否只有flex布局
+                var containerChildren = container.children();
+                var flexOnly = true;
+                angular.forEach(containerChildren,function (dom) {
+                    var child = angular.element(dom);
+                    if (!child.hasClass('screening-flex')) {
+                        flexOnly = false;
+                        return false;
                     }
-                })
-            }
+                });
+                if (flexOnly) {
+                    //禁用screening-name元素
+                    scope.flexOnly = flexOnly;
 
-            // 设置初始化行数
-            if (!initrows || initrows<=0) {
-                return;
-            }
-            // ---- 没有传入参数则不配置尺寸按钮
-
-            var openState = false;
-            var switchbtn = angular.element(el[0].querySelector('.screening-switch'));
-            var btnArrow1 = switchbtn.find('b');
-            var btnArrow2 = switchbtn.find('i');
-            var initHeight = scope.initHeight * initrows;
-
-            // 给按钮绑定收缩事件
-            switchbtn.on('click',function () {
-                if (openState) {
-                    el.css({height:initHeight+'px', overflow:'hidden'})
-                }else{
-                    el.css({height:'', overflow:''})
-                }
-                btnArrow1.toggleClass('ngScreening-hide');
-                btnArrow2.toggleClass('ngScreening-hide');
-                openState = !openState;
-                return false;
-            })
-
-
-            function resize() {
-                // 容器宽度改变，控制尺寸按钮和容器行数
-                setTimeout(function () {
-                    if (container[0].offsetHeight > initHeight) {
-                        switchbtn.removeClass('ngScreening-hide')
-                        el.css({height:initHeight+'px', overflow:'hidden'})
-                        if (openState) {
-                            el.css({height:'', overflow:''})
+                    //改变screening的样式
+                    el.css('padding-left','0');
+                }else {
+                    // 混合布局时，flex容器默认水平排序为justify-content:center;
+                    angular.forEach(container.children(),function (childDom) {
+                        childDom = angular.element(childDom);
+                        if (childDom.hasClass('screening-flex')) {
+                            // 确保screening-flex指令渲染完成
+                            setTimeout(function () {
+                                if (!childDom.css('justify-content')) {
+                                    childDom.css('justify-content','center');
+                                }
+                            })
                         }
-                    }
-                    else{
-                        switchbtn.addClass('ngScreening-hide')
+                    })
+                }
+                // 设置初始化行数
+                if (!initrows || initrows<=0) {
+                    return;
+                }
+                // ---- 没有传入参数则不配置尺寸按钮
+                var openState = false;
+                var switchbtn = angular.element(el[0].querySelector('.screening-switch'));
+                var btnArrow1 = switchbtn.find('b');
+                var btnArrow2 = switchbtn.find('i');
+                var initHeight = scope.initHeight * initrows;
+
+                // 给按钮绑定收缩事件
+                switchbtn.on('click',function () {
+                    if (openState) {
+                        el.css({height:initHeight+'px', overflow:'hidden'})
+                    }else{
                         el.css({height:'', overflow:''})
                     }
+                    btnArrow1.toggleClass('ngScreening-hide');
+                    btnArrow2.toggleClass('ngScreening-hide');
+                    openState = !openState;
+                    return false;
                 })
-            }
 
-            // 将重置尺寸的方法绑定只元素，这样服务中可以直接使用。
-            el[0]._screening_resize = resize;
 
-            // 初始化数据 重置一次尺寸，用于显示尺寸按钮
-            var watch = scope.$watch(function () {
-                return container[0].offsetHeight;
-            },function (newVal, oldVal) {
-                if (newVal!=oldVal) {
-                    watch();//销毁watch
-                    resize(el[0]);//重置容器尺寸
-                }
-            })
-
-            // 窗口尺寸改变，重置容器
-            var resizeing = false;
-            angular.element(window).on('resize',function () {
-                if (!resizeing) {
-                    resizeing = true;
-                    resize(el[0]);//重置容器尺寸
+                function resize() {
+                    // 容器宽度改变，控制尺寸按钮和容器行数
                     setTimeout(function () {
-                        resizeing = false;
-                    },500)
+                        if (container[0].offsetHeight > initHeight) {
+                            switchbtn.removeClass('ngScreening-hide')
+                            el.css({height:initHeight+'px', overflow:'hidden'})
+                            if (openState) {
+                                el.css({height:'', overflow:''})
+                            }
+                        }
+                        else{
+                            switchbtn.addClass('ngScreening-hide')
+                            el.css({height:'', overflow:''})
+                        }
+                    })
                 }
+
+                // 将重置尺寸的方法绑定只元素，这样服务中可以直接使用。
+                el[0]._screening_resize = resize;
+
+                // 初始化数据 重置一次尺寸，用于显示尺寸按钮
+                var watch = scope.$watch(function () {
+                    return container[0].offsetHeight;
+                },function (newVal, oldVal) {
+                    if (newVal!=oldVal) {
+                        watch();//销毁watch
+                        resize(el[0]);//重置容器尺寸
+                    }
+                })
+
+                // 窗口尺寸改变，重置容器
+                var resizeing = false;
+                angular.element(window).on('resize',function () {
+                    if (!resizeing) {
+                        resizeing = true;
+                        resize(el[0]);//重置容器尺寸
+                        setTimeout(function () {
+                            resizeing = false;
+                        },500)
+                    }
+                })
+
             })
 
         }

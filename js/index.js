@@ -103,6 +103,19 @@ m.controller('testCtrl',function ($scope, ngScreening) {
     $scope.selected = { value: $scope.itemArray[0] };
 
 
+    // test
+    $scope.items = [
+        {
+            label: 'label1',
+            multi: false
+        },
+        {
+            label: 'label2',
+            multi: true
+        }
+    ]
+
+
 
 })
 

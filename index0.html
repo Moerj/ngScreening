@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="APP">
+<head>
+	<meta charset="UTF-8">
+	<title>ngScreening</title>
+	<meta name="keywords" content="ngScreening">
+	<meta name="description" content="angular筛选组件,angular data filter">
+	<meta name="author" content="Moer,199525807@qq.com">
+	<meta name="robots" content="index,follow">
+	<link rel="shortcut icon" type="image/ico" href="favicon.ico" >
+
+	<link rel="stylesheet" href="lib/bootstarp.min.css">
+	<link rel="stylesheet" href="lib/select.min.css">
+
+	<link rel="stylesheet" href="css/ngScreening.css">
+	<link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+	<h1 class="PluginName">ngScreening</h2>
+	<p class="Version">ver: 0.2.4</p>
+	<div class="githubTag">
+		<a class="github" href="https://github.com/Moerj/ngScreening" target="_blank">STAR ON GITHUB</a>
+	</div>
+
+	<div style="padding-top:50px" ng-controller="testCtrl">
+
+	<!-- ngScreening start -->
+
+		<div class="ngScreening" initrows="1" callback="dataCallback()" search="dataCallback()" reset >
+
+
+			<screening label="{{item.label}}" ng-repeat="item in items">
+
+				<screening-checkbox data="data.g1" ng-if="item.multi"></screening-checkbox>
+				<screening-radio data="data.g1" ng-if="!item.multi"></screening-radio>
+
+			</screening>
+
+
+
+		</div>
+
+	<!-- ngScreening end -->
+
+	</div>
+
+
+	<script src="lib/angular-v1.5.5.js"></script>
+	<script src="lib/select.min.js"></script>
+
+	<script src="js/ngScreening.js"></script>
+	<script src="js/index.js"></script>
+</body>
+</html>

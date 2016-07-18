@@ -72,4 +72,5 @@ gulp.task('default',  function() {
 
     gulp.watch('sass/**/*.scss', ['sass']);
     gulp.watch('less/**/*.less', ['less']);
+    gulp.watch('js/**/*.js', ['js-compress']);
 });
