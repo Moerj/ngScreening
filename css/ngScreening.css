@@ -1,5 +1,5 @@
 /**
- * ngScreening v0.2.2 last updated
+ * ngScreening v0.2.5 last updated
  *
  * @license: MIT
  * Designed and built by Moer
@@ -120,7 +120,7 @@
 .ngScreening-start .screening .screening-name {
   display: inline-block;
   text-align: right;
-  width: 80px;
+  min-width: 80px;
   margin-right: 10px;
   -ms-flex-negative: 0;
       flex-shrink: 0;
