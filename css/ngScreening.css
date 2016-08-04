@@ -1,5 +1,5 @@
 /**
- * ngScreening v0.2.5 last updated
+ * ngScreening v0.2.6 last updated
  *
  * @license: MIT
  * Designed and built by Moer
@@ -174,7 +174,7 @@
   display: inline-block;
   margin-right: 20px;
 }
-.ngScreening-start .screening > .screening-container .screening-div input {
+.ngScreening-start .screening > .screening-container .screening-div > input {
   display: inline-block;
   width: auto;
 }
