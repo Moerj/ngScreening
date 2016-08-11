@@ -7,9 +7,9 @@
  *
  */
 
-"use strict";
 
 (function() {
+"use strict";
 
 var m = angular.module('ngScreening',[]);
 
