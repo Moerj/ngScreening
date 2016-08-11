@@ -7,7 +7,9 @@
  *
  */
 
-!(function(angular) {
+"use strict";
+
+(function() {
 
 var m = angular.module('ngScreening',[]);
 
@@ -449,4 +451,4 @@ m.directive('screeningFlex',function () {
     }
 })
 
-})(angular)
+})()
