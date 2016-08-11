@@ -1,5 +1,5 @@
 /**
- * ngScreening v0.2.5
+ * ngScreening v0.2.6
  *
  * @license: MIT
  * Designed and built by Moer
@@ -109,7 +109,7 @@ m.directive('ngScreening',function () {
                     }
                 }
 
-
+                    
                 // 设置初始显示的行
                 if (hasHideRows) {
                     // 使用timeout延迟隐藏筛选行，避免隐藏情况行内第三方组件初始化尺寸错误，比如ui-select
@@ -125,28 +125,33 @@ m.directive('ngScreening',function () {
                         }
 
                         loadFinish();
-                    },300)
+                    }, 300)
 
-                }else{
+                    // 面板收缩伸展
+                    button.on('click', function () {
+                        if (hasHideRows) {
+                            hasHideRows = false;
+                            buttonArrow1.toggleClass('ngScreening-hide');
+                            buttonArrow2.toggleClass('ngScreening-hide');
+                            container.children().removeClass('ngScreening-hide')
+                        } else {
+                            container.toggleClass('ngScreening-hide');
+                            buttonArrow1.toggleClass('ngScreening-hide');
+                            buttonArrow2.toggleClass('ngScreening-hide');
+                        }
+                        return false;
+                    })
+
+                } else {
+                    button.remove();
                     setTimeout(function () {
                         loadFinish();
-                    },300)
+                    }, 300)
                 }
 
-                // 面板收缩伸展
-                button.on('click',function () {
-                    if (hasHideRows) {
-                        hasHideRows=false;
-                        buttonArrow1.toggleClass('ngScreening-hide');
-                        buttonArrow2.toggleClass('ngScreening-hide');
-                        container.children().removeClass('ngScreening-hide')
-                    }else{
-                        container.toggleClass('ngScreening-hide');
-                        buttonArrow1.toggleClass('ngScreening-hide');
-                        buttonArrow2.toggleClass('ngScreening-hide');
-                    }
-                    return false;
-                })
+                
+
+
 
             })
         }
