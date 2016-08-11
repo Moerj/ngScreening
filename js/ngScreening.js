@@ -190,9 +190,8 @@ m.directive('screening', function () {
                 var flexOnly = true;
                 angular.forEach(containerChildren,function (dom) {
                     var child = angular.element(dom);
-                    if (!child.hasClass('screening-flex')) {
+                    if (flexOnly && !child.hasClass('screening-flex')) {
                         flexOnly = false;
-                        return false;
                     }
                 });
                 if (flexOnly) {
