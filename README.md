@@ -344,7 +344,7 @@ app.controller('yourCtrl',function ($scope, ngScreening) {
     </screening>
 </ng-screening>
 
-<!-- initrows==最大行数或参数'all'，初始所有行，伸缩按钮显示 -->
+<!-- initrows == 最大行数 或 参数'all'，初始显示所有行，伸缩按钮显示 -->
 <ng-screening initrows="all">
     ...
 </ng-screening>
