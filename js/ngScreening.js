@@ -1,5 +1,5 @@
 /**
- * ngScreening v0.2.7
+ * ngScreening v0.2.8
  *
  * @license: MIT
  * Designed and built by Moer
@@ -75,6 +75,9 @@ m.directive('ngScreening',function () {
                 var search = scope.search;              //搜索按钮
                 var reset = scope.reset;                //重置按钮
 
+                //s1. initrows < 0 || undefined 显示所有行，隐藏 button
+                //s2. initrows > 0 && initrows < rows.length , 隐藏指定行数量，显示 button
+                //s3. initrows == rows.length || initrows == 'all' , 显示所有行，显示 button
                 var initrows = scope.initrows;          //初始显示的行数
                 var rows = container.children();        //实际的行数
                 var hasHideRows = initrows>0 && initrows<rows.length; //需要初始隐藏
@@ -111,9 +114,32 @@ m.directive('ngScreening',function () {
                     }
                 }
 
-                    
+
+                // 面板收缩伸展
+                button.on('click', function () {
+                    if (hasHideRows) {
+                        hasHideRows = false;
+                        buttonArrow1.toggleClass('ngScreening-hide');
+                        buttonArrow2.toggleClass('ngScreening-hide');
+                        container.children().removeClass('ngScreening-hide')
+                    } else {
+                        container.toggleClass('ngScreening-hide');
+                        buttonArrow1.toggleClass('ngScreening-hide');
+                        buttonArrow2.toggleClass('ngScreening-hide');
+                    }
+                    return false;
+                })
+
                 // 设置初始显示的行
-                if (hasHideRows) {
+                if(initrows<=0 || initrows==undefined) {
+
+                    // s1
+                    button.remove();
+                     loadFinish();
+                    
+                }
+                else if (hasHideRows) {
+                    // s2
                     // 使用timeout延迟隐藏筛选行，避免隐藏情况行内第三方组件初始化尺寸错误，比如ui-select
                     setTimeout(function () {
                         buttonArrow1.toggleClass('ngScreening-hide');
@@ -125,35 +151,15 @@ m.directive('ngScreening',function () {
                         if (screeningButtons) {
                             screeningButtons.removeClass('ngScreening-hide');
                         }
-
-                        loadFinish();
+                         loadFinish();
                     }, 300)
 
-                    // 面板收缩伸展
-                    button.on('click', function () {
-                        if (hasHideRows) {
-                            hasHideRows = false;
-                            buttonArrow1.toggleClass('ngScreening-hide');
-                            buttonArrow2.toggleClass('ngScreening-hide');
-                            container.children().removeClass('ngScreening-hide')
-                        } else {
-                            container.toggleClass('ngScreening-hide');
-                            buttonArrow1.toggleClass('ngScreening-hide');
-                            buttonArrow2.toggleClass('ngScreening-hide');
-                        }
-                        return false;
-                    })
-
-                } else {
-                    button.remove();
-                    setTimeout(function () {
-                        loadFinish();
-                    }, 300)
                 }
+                else if (initrows == rows.length || initrows == 'all') {
 
-                
-
-
+                    // s3
+                    loadFinish();
+                }
 
             })
         }

@@ -1,4 +1,4 @@
-# ngScreening v0.2.7
+# ngScreening v0.2.8
 
 angular筛选器组件
 通过控制器定义数据，screening帮你完成数据的渲染、监听、过滤等功能。 
@@ -342,6 +342,11 @@ app.controller('yourCtrl',function ($scope, ngScreening) {
     <screening>
         <screening-checkbox data="yourData" ></screening-checkbox>
     </screening>
+</ng-screening>
+
+<!-- initrows==最大行数或参数'all'，初始所有行，伸缩按钮显示 -->
+<ng-screening initrows="all">
+    ...
 </ng-screening>
 ```
 
