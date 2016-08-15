@@ -1,5 +1,5 @@
 /**
- * ngScreening v0.2.8
+ * ngScreening v0.2.9
  *
  * @license: MIT
  * Designed and built by Moer
@@ -357,12 +357,14 @@ function checkbox_radio(isCheckbox) {
                 '<input type="button" class="screening-item btn" \
                     ng-class="{\'screening-item-checked\':mulitiActive}" \
                 /> | \
-                <input type="button" class="screening-item btn" index="{{$index}}"\
+                <input type="button" class="screening-item btn"\
                     ng-repeat="item in data"\
                     ng-class="{\'screening-item-checked\':item.isChecked}"\
                     ng-click="checkItem()"\
                     ng-if="!item.isHidden"\
                     ng-value="item.name"\
+                    data-index="{{$index}}"\
+                    data-this={{item}}\
                 >' ,
         controller: ['$scope', function ($scope) {
             $scope.mulitiActive = false;
