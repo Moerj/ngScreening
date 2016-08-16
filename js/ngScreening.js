@@ -1,5 +1,5 @@
 /**
- * ngScreening v0.3.1
+ * ngScreening v0.3.2
  *
  * @license: MIT
  * Designed and built by Moer
@@ -194,8 +194,7 @@
         return {
             restrict: 'AE',
             scope: {
-                label: "@",
-                initrows: '@'
+                label: "@"
             },
             replace: true,
             transclude: true,
@@ -211,7 +210,7 @@
             }],
             link: function(scope, el) {
 
-                var initrows = scope.initrows;
+                var initrows = 1; //所有子行在宽度不够时，都会隐藏换行内容
                 var container = angular.element(el[0].querySelector('.screening-container'));
 
                 // ---- 没有传入参数则不配置尺寸按钮
@@ -268,11 +267,6 @@
                     }
                 })
 
-
-                // 设置初始化行数
-                if (!initrows || initrows <= 0) {
-                    return;
-                }
 
                 // 将重置尺寸的方法绑定给元素，这样服务中可以直接使用。
                 el[0]._screening_resize = resize;

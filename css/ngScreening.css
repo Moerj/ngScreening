@@ -1,5 +1,5 @@
 /**
- * ngScreening v0.2.6 last updated
+ * ngScreening v0.3.2 last updated
  *
  * @license: MIT
  * Designed and built by Moer
@@ -141,6 +141,8 @@
           flex-grow: 1;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+  max-height: 150px;
+  overflow: auto;
 }
 .ngScreening-start .screening > .screening-container .screening-item {
   /* checkbox */
