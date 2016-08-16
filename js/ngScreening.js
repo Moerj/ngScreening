@@ -1,5 +1,5 @@
 /**
- * ngScreening v0.3.0
+ * ngScreening v0.3.1
  *
  * @license: MIT
  * Designed and built by Moer
@@ -26,17 +26,34 @@
                 return newArray;
             },
             resize: function(el) { //重置 screening 中 container高度，触发按钮隐藏显示
+                // typeof el === domObj
                 if (el) {
                     el._screening_resize();
                 } else {
-                    var els = document.getElementsByClassName('screening');
-                    angular.forEach(els, function(el) {
-                        if (el._screening_resize) {
-                            el._screening_resize();
-                        }
-                    })
+                    _resizeAll()
                 }
             }
+        }
+    })
+
+    // 窗口尺寸改变，触发重置容器
+    function _resizeAll() {
+        var screenings = document.getElementsByClassName('screening');
+        for (var i = 0; i < screenings.length; i++) {
+            if (screenings[i]._screening_resize) {
+
+                screenings[i]._screening_resize()
+            }
+        }
+    }
+    var _resizeing = false;
+    angular.element(window).on('resize', function() {
+        if (!_resizeing) {
+            _resizeing = true;
+            setTimeout(function() {
+                _resizeAll();
+                _resizeing = false;
+            }, 200)
         }
     })
 
@@ -118,12 +135,20 @@
                     // 面板收缩伸展
                     button.on('click', function() {
                         if (hasHideRows) {
+                            // 初始有隐藏行时，点击会先显示全部行
                             hasHideRows = false;
                             buttonArrow1.toggleClass('ngScreening-hide');
                             buttonArrow2.toggleClass('ngScreening-hide');
-                            container.children().removeClass('ngScreening-hide')
+                            container.children().removeClass('ngScreening-hide');
                         } else {
-                            container.toggleClass('ngScreening-hide');
+                            // 隐藏所有行
+                            angular.forEach(container.children(), function(row) {
+                                if (row.attributes['important'] === undefined) {
+                                    angular.element(row).toggleClass('ngScreening-hide');
+                                } else {
+                                    _resizeAll();
+                                }
+                            });
                             buttonArrow1.toggleClass('ngScreening-hide');
                             buttonArrow2.toggleClass('ngScreening-hide');
                         }
@@ -189,6 +214,28 @@
                 var initrows = scope.initrows;
                 var container = angular.element(el[0].querySelector('.screening-container'));
 
+                // ---- 没有传入参数则不配置尺寸按钮
+                var openState = false;
+                var switchbtn = angular.element(el[0].querySelector('.screening-switch'));
+                var btnArrow1 = switchbtn.find('b');
+                var btnArrow2 = switchbtn.find('i');
+                var initHeight = scope.initHeight * initrows;
+
+                function resize() {
+                    // 容器宽度改变，控制尺寸按钮和容器行数
+                    if (container[0].offsetHeight > initHeight) {
+                        switchbtn.removeClass('ngScreening-hide')
+                        if (openState) {
+                            el.css({ height: '', overflow: '' })
+                        } else {
+                            el.css({ height: initHeight + 'px', overflow: 'hidden' })
+                        }
+                    } else {
+                        switchbtn.addClass('ngScreening-hide')
+                        el.css({ height: '', overflow: '' })
+                    }
+                }
+
                 // 检测容器中是否只有flex布局
                 setTimeout(function() {
                     var containerChildren = container.children();
@@ -221,16 +268,15 @@
                     }
                 })
 
+
                 // 设置初始化行数
                 if (!initrows || initrows <= 0) {
                     return;
                 }
-                // ---- 没有传入参数则不配置尺寸按钮
-                var openState = false;
-                var switchbtn = angular.element(el[0].querySelector('.screening-switch'));
-                var btnArrow1 = switchbtn.find('b');
-                var btnArrow2 = switchbtn.find('i');
-                var initHeight = scope.initHeight * initrows;
+
+                // 将重置尺寸的方法绑定给元素，这样服务中可以直接使用。
+                el[0]._screening_resize = resize;
+
 
                 // 给按钮绑定收缩事件
                 switchbtn.on('click', function() {
@@ -246,40 +292,8 @@
                 })
 
 
-                function resize() {
-                    // 容器宽度改变，控制尺寸按钮和容器行数
-                    setTimeout(function() {
-                        if (container[0].offsetHeight > initHeight) {
-                            switchbtn.removeClass('ngScreening-hide')
-                            el.css({ height: initHeight + 'px', overflow: 'hidden' })
-                            if (openState) {
-                                el.css({ height: '', overflow: '' })
-                            }
-                        } else {
-                            switchbtn.addClass('ngScreening-hide')
-                            el.css({ height: '', overflow: '' })
-                        }
-                    }, 300)//这里的触发延迟是必要的，
-                    // 拖拽窗口时，最终尺寸并非马上就可以获取，拖拽完成有一定时间过程，所以 resize 执行了但需要推迟计算。
-                }
-
-                // 将重置尺寸的方法绑定给元素，这样服务中可以直接使用。
-                el[0]._screening_resize = resize;
-
-                // 窗口尺寸改变，触发重置容器
-                var resizeing = false;
-                angular.element(window).on('resize', function() {
-                    if (!resizeing && !el.hasClass('ngScreening-hide')) {
-                        resizeing = true;
-                        resize(el[0]); //重置容器尺寸
-                        setTimeout(function() {
-                            resizeing = false;
-                        }, 500)
-                    }
-                })
-
                 //初始化重置一次尺寸
-                resize(el[0]); 
+                resize(el[0]);
 
             }
         }

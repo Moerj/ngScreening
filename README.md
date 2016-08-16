@@ -1,4 +1,4 @@
-# ngScreening v0.3.0
+# ngScreening v0.3.1
 
 angular筛选器组件
 通过控制器定义数据，screening帮你完成数据的渲染、监听、过滤等功能。 
@@ -365,6 +365,13 @@ screening-div设置宽度
 ```html
 <!-- 设置容器为500像素 -->
 <screening-div width="500px"></screening-div>
+```
+
+### important
+让screening行常驻显示，不受外框隐藏控制
+```html
+<screening important>
+</screening>
 ```
 
   
