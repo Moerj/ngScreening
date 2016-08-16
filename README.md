@@ -1,4 +1,4 @@
-# ngScreening v0.3.2
+# ngScreening v0.3.3
 
 angular筛选器组件
 通过控制器定义数据，screening帮你完成数据的渲染、监听、过滤等功能。 
@@ -336,7 +336,7 @@ app.controller('yourCtrl',function ($scope, ngScreening) {
     ... 被隐藏 ... 
 </ng-screening>
 
-<!-- 固定初始化行数，隐藏组件右下角伸缩按钮 -->
+<!-- 固定初始化行数，隐藏组件伸缩按钮 -->
 <ng-screening>
     <!-- checkbox组默认全部显示，没有伸缩按钮 -->
     <screening>

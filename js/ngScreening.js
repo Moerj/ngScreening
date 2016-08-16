@@ -1,5 +1,5 @@
 /**
- * ngScreening v0.3.2
+ * ngScreening v0.3.3
  *
  * @license: MIT
  * Designed and built by Moer
@@ -71,7 +71,9 @@
             transclude: true,
             template: '<div class="ngScreening-start">\
                     <form class="ngScreening-container" ng-transclude></form>\
-                    <div class="ngScreening-switch"><b></b><i class="ngScreening-hide"></i></div>\
+                    <div class="ngScreening-control">\
+                        <div class="ngScreening-switch"><b></b><i class="ngScreening-hide"></i></div>\
+                    </div>\
                 </div>',
             controller: ['$scope', function($scope) {
                 this.callback = function() {
@@ -83,8 +85,9 @@
                 setTimeout(function() {
 
                     var container = angular.element(el[0].querySelector('.ngScreening-container'));
+                    var control = angular.element(el[0].querySelector('.ngScreening-control'));
 
-                    var button = container.next(); //控制外壳容器 展开/收起 的按钮
+                    var button = angular.element(el[0].querySelector('.ngScreening-switch')); //控制外壳容器 展开/收起 的按钮
                     var buttonArrow1 = button.find('b'); //按钮中的上箭头
                     var buttonArrow2 = button.find('i'); //下箭头
 
@@ -107,8 +110,6 @@
 
                     // 增加搜索和重置按钮 (如果有参数才生成)
                     if (el.attr('search') || el.attr('reset') !== undefined) {
-                        screeningButtons = angular.element('<div class="screening screening-buttons"></div>')
-                        container.append(screeningButtons);
                         if (el.attr('search')) {
                             var searchBtn = angular.element('<button type="button" class="btn btn-primary btn-sm">搜索</button>');
                             searchBtn.on('click', function(e) {
@@ -116,7 +117,7 @@
                                 search();
                                 scope.$apply();
                             });
-                            screeningButtons.append(searchBtn)
+                            control.append(searchBtn)
                         }
                         if (el.attr('reset') !== undefined) {
                             var resetBtn = angular.element('<button type="button" class="btn btn-default btn-sm">重置</button>');
@@ -127,8 +128,11 @@
                                 reset();
                                 scope.$apply();
                             });
-                            screeningButtons.append(resetBtn)
+                            control.append(resetBtn)
                         }
+                    } else {
+                        // 没有搜索和重置按钮时，伸缩按钮加宽
+                        button.css('width', '80px')
                     }
 
 
@@ -146,7 +150,10 @@
                                 if (row.attributes['important'] === undefined) {
                                     angular.element(row).toggleClass('ngScreening-hide');
                                 } else {
-                                    _resizeAll();
+                                    setTimeout(function() {
+
+                                        _resizeAll();
+                                    })
                                 }
                             });
                             buttonArrow1.toggleClass('ngScreening-hide');
@@ -159,7 +166,7 @@
                     if (initrows <= 0 || initrows == undefined) {
 
                         // s1
-                        button.remove();
+                        control.remove();
                         loadFinish();
 
                     } else if (hasHideRows) {
@@ -225,13 +232,13 @@
                     if (container[0].offsetHeight > initHeight) {
                         switchbtn.removeClass('ngScreening-hide')
                         if (openState) {
-                            el.css({ height: '', overflow: '' })
+                            el.css({ height: '', overflow: 'auto' })
                         } else {
                             el.css({ height: initHeight + 'px', overflow: 'hidden' })
                         }
                     } else {
                         switchbtn.addClass('ngScreening-hide')
-                        el.css({ height: '', overflow: '' })
+                        el.css({ height: '', overflow: 'visible' })
                     }
                 }
 
@@ -277,7 +284,7 @@
                     if (openState) {
                         el.css({ height: initHeight + 'px', overflow: 'hidden' })
                     } else {
-                        el.css({ height: '', overflow: '' })
+                        el.css({ height: '', overflow: 'auto' })
                     }
                     btnArrow1.toggleClass('ngScreening-hide');
                     btnArrow2.toggleClass('ngScreening-hide');
@@ -286,8 +293,16 @@
                 })
 
 
-                //初始化重置一次尺寸
-                resize(el[0]);
+                // 初始化数据 重置一次尺寸，用于显示尺寸按钮
+                // 用 watch 监听高度变化，也就是里面的数据渲染完成了
+                var watch = scope.$watch(function () {
+                    return container[0].offsetHeight;
+                },function (newVal, oldVal) {
+                    if (newVal!=oldVal) {
+                        watch();//销毁watch
+                        resize(el[0]);//重置容器尺寸
+                    }
+                })
 
             }
         }

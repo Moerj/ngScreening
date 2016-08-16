@@ -1,5 +1,5 @@
 /**
- * ngScreening v0.3.2 last updated
+ * ngScreening v0.3.3 last updated
  *
  * @license: MIT
  * Designed and built by Moer
@@ -28,22 +28,44 @@
   margin: 0;
   padding: 0;
 }
-.ngScreening-start > .ngScreening-switch {
+.ngScreening-start > .ngScreening-control {
   position: absolute;
   z-index: 1;
+  width: auto;
+  height: 40px;
   bottom: -39px;
-  right: 25px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  background-color: inherit;
+  padding-right: 10px;
+  padding-top: 4px;
+  border: 1px solid #ddd;
+  border-bottom-width: 2px;
+  box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.1);
+}
+.ngScreening-start > .ngScreening-control > * {
+  float: left;
+  margin-left: 10px;
+}
+.ngScreening-start .ngScreening-switch {
+  position: absolute;
+  top: -1px;
+  right: -40px;
+  margin-right: 0;
   width: 40px;
   height: 40px;
   font-size: 15px;
   color: #66a6d1;
   cursor: pointer;
   background-color: inherit;
-  border: 1px solid #ddd;
   border-top: 0;
   text-align: center;
+  border: 1px solid #ddd;
+  border-bottom-width: 2px;
+  box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.1);
 }
-.ngScreening-start > .ngScreening-switch > b {
+.ngScreening-start .ngScreening-switch > b {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -55,7 +77,7 @@
   border-right: 5px solid transparent;
   border-bottom: 5px solid #66a6d1 ;
 }
-.ngScreening-start > .ngScreening-switch > b::before {
+.ngScreening-start .ngScreening-switch > b::before {
   content: '';
   position: absolute;
   top: -7px;
@@ -65,11 +87,11 @@
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
 }
-.ngScreening-start > .ngScreening-switch > b::before {
+.ngScreening-start .ngScreening-switch > b::before {
   border-bottom: 5px solid #FFF ;
   top: 2px;
 }
-.ngScreening-start > .ngScreening-switch > i {
+.ngScreening-start .ngScreening-switch > i {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -81,7 +103,7 @@
   border-right: 5px solid transparent;
   border-top: 5px solid #66a6d1 ;
 }
-.ngScreening-start > .ngScreening-switch > i::before {
+.ngScreening-start .ngScreening-switch > i::before {
   content: '';
   position: absolute;
   top: -7px;
@@ -91,10 +113,10 @@
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
 }
-.ngScreening-start > .ngScreening-switch > i::before {
+.ngScreening-start .ngScreening-switch > i::before {
   border-top: 5px solid #FFF ;
 }
-.ngScreening-start > .ngScreening-switch:hover > * {
+.ngScreening-start .ngScreening-switch:hover > * {
   border-top-color: #235576;
   border-bottom-color: #235576;
 }
@@ -142,7 +164,6 @@
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   max-height: 150px;
-  overflow: auto;
 }
 .ngScreening-start .screening > .screening-container .screening-item {
   /* checkbox */
@@ -200,7 +221,7 @@
   line-height: 25px;
   position: absolute;
   top: 10px;
-  right: 10px;
+  right: 0px;
   text-align: center;
   font-size: 12px;
   cursor: pointer;
