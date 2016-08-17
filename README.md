@@ -145,7 +145,8 @@ app.controller('yourCtrl',function ($scope) {
 })
 ```
 
-### isChecked (defualt: undefined)
+### isChecked  
+defualt: undefined    
 设置数据，视图上会响应已选中的数据
 ```javascript
 app.controller('yourCtrl',function ($scope) {
@@ -164,7 +165,8 @@ app.controller('yourCtrl',function ($scope) {
 })
 ```
 
-### isHidden (defualt: undefined)
+### isHidden  
+defualt: undefined  
 设置一个选择项隐藏
 ```javascript
 app.controller('yourCtrl',function ($scope) {
@@ -187,7 +189,8 @@ app.controller('yourCtrl',function ($scope) {
 
 ## 监听
 
-### screening-event (default: 'change')
+### screening-event   
+default: 'change'  
 监听dom元素事件，事件触发时会执行callback
 ```html
 <!-- 定义一个搜索功能 -->
@@ -325,7 +328,8 @@ app.controller('yourCtrl',function ($scope, ngScreening) {
 </screening>
 ```
 
-### initrows (defualt: undefined)
+### initrows  
+defualt: undefined    
 初始化显示的 screening screening-checkbox screening-radio 的行数
 ```html
 <!-- 默认显示3行筛选器，其余的会收起隐藏 -->
@@ -350,7 +354,8 @@ app.controller('yourCtrl',function ($scope, ngScreening) {
 </ng-screening>
 ```
 
-### multi-name (default: checkbox-全选, radio-单选)
+### multi-name  
+default: checkbox-全选, radio-单选  
 全选的控制按钮名称
 ```html
 <!-- 控制按钮点击后可以全部选中或反选 -->
