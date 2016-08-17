@@ -92,7 +92,7 @@
                     var buttonArrow2 = button.find('i'); //下箭头
 
                     var screeningButtons; //最后一排操作按钮的容器
-                    var search = scope.search; //搜索按钮
+                    var search = scope.search; //查询按钮
                     var reset = scope.reset; //重置按钮
 
                     //s1. initrows < 0 || undefined 显示所有行，隐藏 button
@@ -108,10 +108,10 @@
                         el.removeClass('ngScreening');
                     }
 
-                    // 增加搜索和重置按钮 (如果有参数才生成)
+                    // 增加查询和重置按钮 (如果有参数才生成)
                     if (el.attr('search') || el.attr('reset') !== undefined) {
                         if (el.attr('search')) {
-                            var searchBtn = angular.element('<button type="button" class="btn btn-primary btn-sm">搜索</button>');
+                            var searchBtn = angular.element('<button type="button" class="btn btn-primary btn-sm">查询</button>');
                             searchBtn.on('click', function(e) {
                                 e.stopPropagation();
                                 search();
@@ -131,7 +131,7 @@
                             control.append(resetBtn)
                         }
                     } else {
-                        // 没有搜索和重置按钮时，伸缩按钮加宽
+                        // 没有查询和重置按钮时，伸缩按钮加宽
                         button.css('width', '80px')
                     }
 
