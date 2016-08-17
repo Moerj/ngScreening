@@ -1,5 +1,5 @@
 /**
- * ngScreening v0.3.3
+ * ngScreening v0.3.4
  *
  * @license: MIT
  * Designed and built by Moer
@@ -27,29 +27,31 @@
             },
             resize: function(el) { //重置 screening 中 container高度，触发按钮隐藏显示
                 // typeof el === domObj
-                if (el) {
+                if (el)
                     el._screening_resize();
-                } else {
-                    _resizeAll()
-                }
+                else
+                    _resizeAll();
             }
         }
     })
 
     // 窗口尺寸改变，触发重置容器
     function _resizeAll() {
-        var screenings = document.getElementsByClassName('screening');
-        for (var i = 0; i < screenings.length; i++) {
-            if (screenings[i]._screening_resize) {
-
-                screenings[i]._screening_resize()
+        setTimeout(function() {
+            var screenings = document.getElementsByClassName('screening');
+            for (var i = 0; i < screenings.length; i++) {
+                if (screenings[i]._screening_resize) {
+                    screenings[i]._screening_resize()
+                }
             }
-        }
+        })
     }
     var _resizeing = false;
     angular.element(window).on('resize', function() {
         if (!_resizeing) {
             _resizeing = true;
+
+            // window resize触发重置，需要设置一个延迟，等待拖拽浏览器动作结束。
             setTimeout(function() {
                 _resizeAll();
                 _resizeing = false;
@@ -149,11 +151,7 @@
                             angular.forEach(container.children(), function(row) {
                                 if (row.attributes['important'] === undefined) {
                                     angular.element(row).toggleClass('ngScreening-hide');
-                                } else {
-                                    setTimeout(function() {
-
-                                        _resizeAll();
-                                    })
+                                    row._screening_resize();
                                 }
                             });
                             buttonArrow1.toggleClass('ngScreening-hide');
@@ -225,11 +223,12 @@
                 var switchbtn = angular.element(el[0].querySelector('.screening-switch'));
                 var btnArrow1 = switchbtn.find('b');
                 var btnArrow2 = switchbtn.find('i');
-                var initHeight = scope.initHeight * initrows;
+                var initHeight = parseInt(scope.initHeight * initrows);
 
                 function resize() {
                     // 容器宽度改变，控制尺寸按钮和容器行数
-                    if (container[0].offsetHeight > initHeight) {
+                    var currHeight = parseInt(container[0].offsetHeight);
+                    if (currHeight > initHeight) {
                         switchbtn.removeClass('ngScreening-hide')
                         if (openState) {
                             el.css({ height: '', overflow: 'auto' })
@@ -295,12 +294,12 @@
 
                 // 初始化数据 重置一次尺寸，用于显示尺寸按钮
                 // 用 watch 监听高度变化，也就是里面的数据渲染完成了
-                var watch = scope.$watch(function () {
+                var watch = scope.$watch(function() {
                     return container[0].offsetHeight;
-                },function (newVal, oldVal) {
-                    if (newVal!=oldVal) {
-                        watch();//销毁watch
-                        resize(el[0]);//重置容器尺寸
+                }, function(newVal, oldVal) {
+                    if (newVal != oldVal) {
+                        watch(); //销毁watch
+                        resize(el[0]); //重置容器尺寸
                     }
                 })
 
