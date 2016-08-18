@@ -1,5 +1,5 @@
 /**
- * ngScreening v0.3.4
+ * ngScreening v0.3.5
  *
  * @license: MIT
  * Designed and built by Moer
@@ -164,7 +164,7 @@
                     if (initrows <= 0 || initrows == undefined) {
 
                         // s1
-                        control.remove();
+                        button.remove();
                         loadFinish();
 
                     } else if (hasHideRows) {
@@ -187,6 +187,11 @@
 
                         // s3
                         loadFinish();
+                    }
+
+                    // 判断 control 容器是否需隐藏
+                    if (control.children().length==0) {
+                        control.remove();
                     }
 
                 })
