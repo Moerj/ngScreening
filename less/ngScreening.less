@@ -97,6 +97,15 @@
             margin-left: 10px;
             padding: 5px 10px;
         }
+        .btn-default{
+            // 防止项目修改了default样式
+            color: #333;
+            background-color: #fff;
+            border-color: #ccc;
+            &:focus{
+                background-color: #fff;
+            }
+        }
     }
 
     .ngScreening-switch{

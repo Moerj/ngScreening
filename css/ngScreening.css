@@ -50,6 +50,14 @@
   margin-left: 10px;
   padding: 5px 10px;
 }
+.ngScreening-start > .ngScreening-control .btn-default {
+  color: #333;
+  background-color: #fff;
+  border-color: #ccc;
+}
+.ngScreening-start > .ngScreening-control .btn-default:focus {
+  background-color: #fff;
+}
 .ngScreening-start .ngScreening-switch {
   position: absolute;
   top: -1px;
