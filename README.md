@@ -382,6 +382,11 @@ screening-div设置宽度
 ### overflow
 定义一行在宽度不够时的显示方式，默认auto(行高度不够时出现滚动条)  
 如果有下拉菜单等元素放在行内，可以设置overflow="visible"，这样保证下拉时正常显示。
+```html
+<screening overflow="visible">
+    <select></select>
+</screening>
+```
 
   
 

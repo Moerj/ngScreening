@@ -1,5 +1,5 @@
 /**
- * ngScreening v0.3.6 last updated
+ * ngScreening v0.3.8 last updated
  *
  * @license: MIT
  * Designed and built by Moer
@@ -46,7 +46,9 @@
 }
 .ngScreening-start > .ngScreening-control > * {
   float: left;
+  margin: 0;
   margin-left: 10px;
+  padding: 5px 10px;
 }
 .ngScreening-start .ngScreening-switch {
   position: absolute;
@@ -59,11 +61,11 @@
   color: #66a6d1;
   cursor: pointer;
   background-color: inherit;
-  border-top: 0;
   text-align: center;
   border: 1px solid #ddd;
   border-bottom-width: 2px;
   box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.1);
+  border-top: 0;
 }
 .ngScreening-start .ngScreening-switch > b {
   position: absolute;
@@ -170,7 +172,7 @@
   list-style: none;
   display: inline-block;
   outline: none;
-  margin: 9px 6px 5px;
+  margin: 11px 6px 5px;
   height: 26px !important;
   background-color: #fff;
   border: 1px solid #ddd;
@@ -179,7 +181,6 @@
   cursor: pointer;
   font-size: 11px;
   color: #333;
-  line-height: normal;
 }
 .ngScreening-start .screening > .screening-container .screening-item:hover {
   background-color: #f2f2f2;

@@ -223,9 +223,7 @@
 
                 var initrows = 1; //所有子行在宽度不够时，都会隐藏换行内容
                 var container = angular.element(el[0].querySelector('.screening-container'));
-
-                // ---- 没有传入参数则不配置尺寸按钮
-                var openState = false;
+                var openState = false;//当前行是否折叠
                 var switchbtn = angular.element(el[0].querySelector('.screening-switch'));
                 var btnArrow1 = switchbtn.find('b');
                 var btnArrow2 = switchbtn.find('i');
@@ -236,13 +234,15 @@
                     // 容器宽度改变，控制尺寸按钮和容器行数
                     var currHeight = parseInt(container[0].offsetHeight);
                     if (currHeight > initHeight) {
+                        // 宽度不够，换行
                         switchbtn.removeClass('ngScreening-hide')
                         if (openState) {
-                            el.css({ height: '', overflow: 'auto' })
+                            el.css({ height: '', overflow: overflow })
                         } else {
                             el.css({ height: initHeight + 'px', overflow: 'hidden' })
                         }
                     } else {
+                        // 宽度足够，只显示一行
                         switchbtn.addClass('ngScreening-hide')
                         el.css({ height: '', overflow: 'visible' })
                     }
