@@ -113,7 +113,7 @@
                     // 增加查询和重置按钮 (如果有参数才生成)
                     if (el.attr('search') || el.attr('reset') !== undefined) {
                         if (el.attr('search')) {
-                            var searchBtn = angular.element('<button type="button" class="screening-btn screening-btn-primary">查询</button>');
+                            var searchBtn = angular.element('<button type="button" class="screening-btn screening-btn-search">查询</button>');
                             searchBtn.on('click', function(e) {
                                 e.stopPropagation();
                                 search();

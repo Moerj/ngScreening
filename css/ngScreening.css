@@ -51,14 +51,14 @@
   background-color: #f2f2f2;
   border-color: #d6d6d6;
 }
-.ngScreening-start .screening-btn-primary {
+.ngScreening-start .screening-btn-search {
+  background-color: #18a689;
+  border-color: #4cae4c;
   color: #fff;
-  background-color: #337ab7;
-  border-color: #2e6da4;
 }
-.ngScreening-start .screening-btn-primary:hover {
-  background-color: #286090;
-  border-color: #204d74;
+.ngScreening-start .screening-btn-search:hover {
+  background-color: #159077;
+  border-color: #159077;
 }
 .ngScreening-start .ngScreening-hide {
   display: none !important;
