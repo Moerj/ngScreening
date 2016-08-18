@@ -1,5 +1,5 @@
 /**
- * ngScreening v0.3.7
+ * ngScreening v0.3.9
  *
  * @license: MIT
  * Designed and built by Moer
@@ -113,7 +113,7 @@
                     // 增加查询和重置按钮 (如果有参数才生成)
                     if (el.attr('search') || el.attr('reset') !== undefined) {
                         if (el.attr('search')) {
-                            var searchBtn = angular.element('<button type="button" class="btn btn-primary btn-sm">查询</button>');
+                            var searchBtn = angular.element('<button type="button" class="screening-btn screening-btn-primary">查询</button>');
                             searchBtn.on('click', function(e) {
                                 e.stopPropagation();
                                 search();
@@ -122,7 +122,7 @@
                             control.append(searchBtn)
                         }
                         if (el.attr('reset') !== undefined) {
-                            var resetBtn = angular.element('<button type="button" class="btn btn-default btn-sm">重置</button>');
+                            var resetBtn = angular.element('<button type="button" class="screening-btn">重置</button>');
                             resetBtn.on('click', function(e) {
                                 e.stopPropagation();
                                 scope.$broadcast('ngScreening-reset'); // 通知组件内部重置数据
@@ -373,10 +373,10 @@
             // replace: true,
             require: '^ngScreening',
             template: // 多选或单选按钮
-                '<input type="button" class="screening-item btn" \
+                '<input type="button" class="screening-item screening-btn" \
                     ng-class="{\'screening-item-checked\':mulitiActive}" \
                 /> | \
-                <input type="button" class="screening-item btn"\
+                <input type="button" class="screening-item screening-btn"\
                     ng-repeat="item in data"\
                     ng-class="{\'screening-item-checked\':item.isChecked}"\
                     ng-click="checkItem()"\
