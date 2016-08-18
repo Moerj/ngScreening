@@ -1,4 +1,4 @@
-# ngScreening v0.3.3
+# ngScreening v0.3.7
 
 angular筛选器组件
 通过控制器定义数据，screening帮你完成数据的渲染、监听、过滤等功能。 
@@ -373,11 +373,15 @@ screening-div设置宽度
 ```
 
 ### important
-让screening行常驻显示，不受外框隐藏控制
+让行常驻显示，不受外框隐藏控制
 ```html
 <screening important>
 </screening>
 ```
+
+### overflow
+定义一行在宽度不够时的显示方式，默认auto(行高度不够时出现滚动条)  
+如果有下拉菜单等元素放在行内，可以设置overflow="visible"，这样保证下拉时正常显示。
 
   
 

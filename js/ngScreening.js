@@ -1,5 +1,5 @@
 /**
- * ngScreening v0.3.6
+ * ngScreening v0.3.7
  *
  * @license: MIT
  * Designed and built by Moer
@@ -204,7 +204,8 @@
         return {
             restrict: 'AE',
             scope: {
-                label: "@"
+                label: "@",
+                overflow: "@"
             },
             replace: true,
             transclude: true,
@@ -229,6 +230,7 @@
                 var btnArrow1 = switchbtn.find('b');
                 var btnArrow2 = switchbtn.find('i');
                 var initHeight = parseInt(scope.initHeight * initrows);
+                var overflow = scope.overflow || 'auto';
 
                 function resize() {
                     // 容器宽度改变，控制尺寸按钮和容器行数
@@ -288,7 +290,7 @@
                     if (openState) {
                         el.css({ height: initHeight + 'px', overflow: 'hidden' })
                     } else {
-                        el.css({ height: '', overflow: 'auto' })
+                        el.css({ height: '', overflow: overflow })
                     }
                     btnArrow1.toggleClass('ngScreening-hide');
                     btnArrow2.toggleClass('ngScreening-hide');
