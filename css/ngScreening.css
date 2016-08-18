@@ -1,5 +1,5 @@
 /**
- * ngScreening v0.3.3 last updated
+ * ngScreening v0.3.6 last updated
  *
  * @license: MIT
  * Designed and built by Moer
@@ -170,7 +170,8 @@
   list-style: none;
   display: inline-block;
   outline: none;
-  margin: 0 6px;
+  margin: 9px 6px 5px;
+  height: 26px !important;
   background-color: #fff;
   border: 1px solid #ddd;
   padding: 5px 12px;
@@ -179,7 +180,6 @@
   font-size: 11px;
   color: #333;
   line-height: normal;
-  height: auto !important;
 }
 .ngScreening-start .screening > .screening-container .screening-item:hover {
   background-color: #f2f2f2;

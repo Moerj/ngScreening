@@ -1,5 +1,5 @@
 /**
- * ngScreening v0.3.5
+ * ngScreening v0.3.6
  *
  * @license: MIT
  * Designed and built by Moer
@@ -190,7 +190,7 @@
                     }
 
                     // 判断 control 容器是否需隐藏
-                    if (control.children().length==0) {
+                    if (control.children().length == 0) {
                         control.remove();
                     }
 
@@ -429,6 +429,13 @@
                 } else {
                     scope.multiName ? multiCtrl.val(scope.multiName) : multiCtrl.val('单选')
                 }
+
+                // 移除外层容器，el.unwarp()
+                setTimeout(function(){
+                    var allChildren = el.find('*');
+                    el.after(allChildren);
+                    el.remove();
+                })
             }
         }
     }
