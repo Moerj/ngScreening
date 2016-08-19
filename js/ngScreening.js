@@ -1,5 +1,5 @@
 /**
- * ngScreening v0.3.9
+ * ngScreening v0.4.0
  *
  * @license: MIT
  * Designed and built by Moer
@@ -223,7 +223,7 @@
 
                 var initrows = 1; //所有子行在宽度不够时，都会隐藏换行内容
                 var container = angular.element(el[0].querySelector('.screening-container'));
-                var openState = false;//当前行是否折叠
+                var openState = false; //当前行是否折叠
                 var switchbtn = angular.element(el[0].querySelector('.screening-switch'));
                 var btnArrow1 = switchbtn.find('b');
                 var btnArrow2 = switchbtn.find('i');
@@ -372,11 +372,13 @@
             },
             // replace: true,
             require: '^ngScreening',
+            transclude: true,
             template: // 多选或单选按钮
-                '<input type="button" class="screening-item screening-btn" \
+                '<input type="button" class="screening-item screening-btn" value="{{multiName}}"\
                     ng-class="{\'screening-item-checked\':mulitiActive}" \
+                    ng-click="mulitiToggle()"\
                 /> | \
-                <input type="button" class="screening-item screening-btn"\
+                <input type="button" class="screening-item screening-btn" value="{{multiName}}"\
                     ng-repeat="item in data"\
                     ng-class="{\'screening-item-checked\':item.isChecked}"\
                     ng-click="checkItem()"\
@@ -384,9 +386,14 @@
                     ng-value="item.name"\
                     data-index="{{$index}}"\
                     data-this={{item}}\
-                >',
+                ><div ng-transclude style="display:inline-block"></div>',
             controller: ['$scope', function($scope) {
-                $scope.mulitiActive = false;
+                // 设置名称
+                if (!$scope.multiName) {
+                    $scope.multiName = isCheckbox ? '全选' : '单选';
+                }
+
+                // 按钮点选
                 $scope.checkItem = function() {
                     this.item.isChecked = !this.item.isChecked;
                     if (!isCheckbox) { // radio单选
@@ -399,14 +406,23 @@
                     this.pCtrl.callback();
                     return false;
                 }
+
+                // 全选按钮的激活状态
+                $scope.mulitiActive = false;
+
+                // 全选按钮
                 $scope.mulitiToggle = function() {
-                        $scope.mulitiActive = !$scope.mulitiActive;
-                        angular.forEach(this.data, function(val) {
-                            val.isChecked = $scope.mulitiActive
-                        })
-                        this.pCtrl.callback();
+                    if (!isCheckbox) {
+                        return;// 单选状态以下无效
                     }
-                    // 重置多选器的全选按钮
+                    $scope.mulitiActive = !$scope.mulitiActive;
+                    angular.forEach(this.data, function(val) {
+                        val.isChecked = $scope.mulitiActive
+                    })
+                    this.pCtrl.callback();
+                }
+
+                // 接收信号，重置全选按钮
                 $scope.$on('ngScreening-reset', function() {
                     $scope.mulitiActive = false;
                     angular.forEach($scope.data, function(item) {
@@ -418,26 +434,6 @@
             }],
             link: function(scope, el, attrs, pCtrl) {
                 scope.pCtrl = pCtrl;
-                // 多选或单选按钮
-                var multiCtrl = el.children().eq(0)
-                if (isCheckbox) {
-                    scope.multiName ? multiCtrl.val(scope.multiName) : multiCtrl.val('全选')
-                    scope.mulitiActive = false;
-                    multiCtrl.on('click', function() {
-                        scope.mulitiToggle();
-                        scope.$apply()
-                        return false;
-                    })
-                } else {
-                    scope.multiName ? multiCtrl.val(scope.multiName) : multiCtrl.val('单选')
-                }
-
-                // 移除外层容器，el.unwarp()
-                setTimeout(function(){
-                    var allChildren = el.find('*');
-                    el.after(allChildren);
-                    el.remove();
-                })
             }
         }
     }
