@@ -1,5 +1,5 @@
 /**
- * ngScreening v0.4.2 last updated
+ * ngScreening v0.4.3 last updated
  *
  * @license: MIT
  * Designed and built by Moer
@@ -74,15 +74,15 @@
   position: absolute;
   z-index: 1;
   width: auto;
-  height: 40px;
-  bottom: -39px;
+  height: 43px;
+  bottom: -42px;
   left: 50%;
   box-sizing: border-box;
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
   background-color: inherit;
   padding-right: 10px;
-  padding-top: 4px;
+  padding-top: 5px;
   border: 1px solid #ddd;
   border-bottom-width: 2px;
   box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.1);
@@ -99,7 +99,7 @@
   right: -40px;
   margin-right: 0;
   width: 40px;
-  height: 40px;
+  height: 43px;
   font-size: 15px;
   color: #66a6d1;
   cursor: pointer;
