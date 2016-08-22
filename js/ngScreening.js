@@ -1,5 +1,5 @@
 /**
- * ngScreening v0.4.1
+ * ngScreening v0.4.2
  *
  * @license: MIT
  * Designed and built by Moer
@@ -210,7 +210,7 @@
             replace: true,
             transclude: true,
             require: '^ngScreening',
-            template: '<div class="screening">\
+            template: '<div class="screening" >\
                     <div class="screening-name" ng-hide="flexOnly">{{label}}</div>\
                     <div class="screening-container" ng-transclude></div>\
                     <div class="screening-switch ngScreening-hide"><b class="ngScreening-hide"></b><i></i></div>\
@@ -228,16 +228,19 @@
                 var btnArrow1 = switchbtn.find('b');
                 var btnArrow2 = switchbtn.find('i');
                 var initHeight = parseInt(scope.initHeight * initrows);
-                var overflow = scope.overflow || 'auto';
+                var overflow = scope.overflow;
 
                 function resize() {
+                    if (overflow === 'visible') {
+                        return;
+                    }
                     // 容器宽度改变，控制尺寸按钮和容器行数
                     var currHeight = parseInt(container[0].offsetHeight);
                     if (currHeight > initHeight) {
                         // 宽度不够，换行
                         switchbtn.removeClass('ngScreening-hide')
                         if (openState) {
-                            el.css({ height: '', overflow: overflow })
+                            el.css({ height: '', overflow: 'auto' })
                         } else {
                             el.css({ height: initHeight + 'px', overflow: 'hidden' })
                         }
