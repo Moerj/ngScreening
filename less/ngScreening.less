@@ -1,5 +1,5 @@
 /**
- * ngScreening v0.4.1 last updated
+ * ngScreening v0.4.0.2 last updated
  *
  * @license: MIT
  * Designed and built by Moer
@@ -208,10 +208,14 @@
             flex-grow: 1;
             flex-wrap:wrap;
 
+            /*.screening-itembox{
+                
+            }*/
+
             .screening-item{ /* checkbox */
                 list-style: none;
                 display: inline-block;
-                margin: 3px 6px 5px;
+                margin: 2px 6px 5px;
                 height: 26px !important;
                 line-height: 50%;
                 padding: 5px 12px;
@@ -242,7 +246,8 @@
                 align-items: center;
                 align-content:flex-start;
                 .screening-item{
-                    margin-top: 0;
+                    // 调整 flex 下的 item 行间距
+                    margin-top: -2px;
                     margin-bottom: 0;
                 }
             }

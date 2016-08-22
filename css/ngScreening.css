@@ -1,5 +1,5 @@
 /**
- * ngScreening v0.4.1 last updated
+ * ngScreening v0.4.0.2 last updated
  *
  * @license: MIT
  * Designed and built by Moer
@@ -211,12 +211,15 @@
           flex-grow: 1;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+  /*.screening-itembox{
+                
+            }*/
 }
 .ngScreening-start .screening > .screening-container .screening-item {
   /* checkbox */
   list-style: none;
   display: inline-block;
-  margin: 3px 6px 5px;
+  margin: 2px 6px 5px;
   height: 26px !important;
   line-height: 50%;
   padding: 5px 12px;
@@ -257,7 +260,7 @@
       align-content: flex-start;
 }
 .ngScreening-start .screening > .screening-container .screening-flex .screening-item {
-  margin-top: 0;
+  margin-top: -2px;
   margin-bottom: 0;
 }
 .ngScreening-start .screening > .screening-switch {
