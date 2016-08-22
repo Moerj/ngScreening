@@ -370,11 +370,12 @@
                 data: '=',
                 multiName: '@'
             },
-            // replace: true,
+            replace: true,
             require: '^ngScreening',
             transclude: true,
             template: // 多选或单选按钮
-                '<input type="button" class="screening-item screening-btn" value="{{multiName}}"\
+                '<div class="screening-itembox">\
+                <input type="button" class="screening-item screening-btn" value="{{multiName}}"\
                     ng-class="{\'screening-item-checked\':mulitiActive}" \
                     ng-click="mulitiToggle()"\
                 /> | \
@@ -386,7 +387,8 @@
                     ng-value="item.name"\
                     data-index="{{$index}}"\
                     data-this={{item}}\
-                ><div ng-transclude style="display:inline-block"></div>',
+                ><div ng-transclude style="display:inline-block"></div>\
+                </div>',
             controller: ['$scope', function($scope) {
                 // 设置名称
                 if (!$scope.multiName) {
