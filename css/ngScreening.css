@@ -1,5 +1,5 @@
 /**
- * ngScreening v0.4.1.02 last updated
+ * ngScreening v0.4.2 last updated
  *
  * @license: MIT
  * Designed and built by Moer
@@ -258,6 +258,10 @@
           align-items: center;
   -ms-flex-line-pack: start;
       align-content: flex-start;
+}
+.ngScreening-start .screening > .screening-container .screening-flex > .screening-name {
+  -ms-flex-item-align: start;
+      align-self: flex-start;
 }
 .ngScreening-start .screening > .screening-container .screening-flex .screening-item {
   margin-top: -2px;
