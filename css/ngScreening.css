@@ -198,7 +198,6 @@
   top: 0;
 }
 .ngScreening-start .screening > .screening-container {
-  max-height: 150px;
   display: block;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -212,7 +211,7 @@
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   /*.screening-itembox{
-                
+                // 尚未使用
             }*/
 }
 .ngScreening-start .screening > .screening-container .screening-item {

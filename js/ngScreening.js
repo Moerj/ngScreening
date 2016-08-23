@@ -1,5 +1,5 @@
 /**
- * ngScreening v0.4.2
+ * ngScreening v0.4.3
  *
  * @license: MIT
  * Designed and built by Moer
@@ -8,24 +8,24 @@
  */
 
 
-(function() {
+(function () {
     "use strict";
 
     var m = angular.module('ngScreening', []);
 
     // 筛选服务
-    m.service('ngScreening', function() {
+    m.service('ngScreening', function () {
         return {
-            getChecked: function(data) {
+            getChecked: function (data) {
                 var newArray = [];
-                angular.forEach(data, function(key) {
+                angular.forEach(data, function (key) {
                     if (key.isChecked && !key.isHidden) {
                         newArray.push(key)
                     }
                 })
                 return newArray;
             },
-            resize: function(el) { //重置 screening 中 container高度，触发按钮隐藏显示
+            resize: function (el) { //重置 screening 中 container高度，触发按钮隐藏显示
                 // typeof el === domObj
                 if (el)
                     el._screening_resize();
@@ -37,7 +37,7 @@
 
     // 窗口尺寸改变，触发重置容器
     function _resizeAll() {
-        setTimeout(function() {
+        setTimeout(function () {
             var screenings = document.getElementsByClassName('screening');
             for (var i = 0; i < screenings.length; i++) {
                 if (screenings[i]._screening_resize) {
@@ -47,12 +47,12 @@
         })
     }
     var _resizeing = false;
-    angular.element(window).on('resize', function() {
+    angular.element(window).on('resize', function () {
         if (!_resizeing) {
             _resizeing = true;
 
             // window resize触发重置，需要设置一个延迟，等待拖拽浏览器动作结束。
-            setTimeout(function() {
+            setTimeout(function () {
                 _resizeAll();
                 _resizeing = false;
             }, 200)
@@ -60,7 +60,7 @@
     })
 
     // 筛选器外壳
-    m.directive('ngScreening', function() {
+    m.directive('ngScreening', function () {
         return {
             restrict: 'EC',
             scope: {
@@ -77,14 +77,14 @@
                         <div class="ngScreening-switch"><b></b><i class="ngScreening-hide"></i></div>\
                     </div>\
                 </div>',
-            controller: ['$scope', function($scope) {
-                this.callback = function() {
+            controller: ['$scope', function ($scope) {
+                this.callback = function () {
                     //执行控制器中的callback，通知控制器，数据已改变
                     return $scope.callback();
                 }
             }],
-            link: function(scope, el) {
-                setTimeout(function() {
+            link: function (scope, el) {
+                setTimeout(function () {
 
                     var container = angular.element(el[0].querySelector('.ngScreening-container'));
                     var control = angular.element(el[0].querySelector('.ngScreening-control'));
@@ -114,7 +114,7 @@
                     if (el.attr('search') || el.attr('reset') !== undefined) {
                         if (el.attr('search')) {
                             var searchBtn = angular.element('<button type="button" class="screening-btn screening-btn-search">查询</button>');
-                            searchBtn.on('click', function(e) {
+                            searchBtn.on('click', function (e) {
                                 e.stopPropagation();
                                 search();
                                 scope.$apply();
@@ -123,7 +123,7 @@
                         }
                         if (el.attr('reset') !== undefined) {
                             var resetBtn = angular.element('<button type="button" class="screening-btn">重置</button>');
-                            resetBtn.on('click', function(e) {
+                            resetBtn.on('click', function (e) {
                                 e.stopPropagation();
                                 scope.$broadcast('ngScreening-reset'); // 通知组件内部重置数据
                                 container[0].reset(); // form reset
@@ -139,7 +139,7 @@
 
 
                     // 面板收缩伸展
-                    button.on('click', function() {
+                    button.on('click', function () {
                         if (hasHideRows) {
                             // 初始有隐藏行时，点击会先显示全部行
                             hasHideRows = false;
@@ -148,7 +148,7 @@
                             container.children().removeClass('ngScreening-hide');
                         } else {
                             // 隐藏所有行
-                            angular.forEach(container.children(), function(row) {
+                            angular.forEach(container.children(), function (row) {
                                 if (row.attributes['important'] === undefined) {
                                     angular.element(row).toggleClass('ngScreening-hide');
                                     row._screening_resize();
@@ -170,7 +170,7 @@
                     } else if (hasHideRows) {
                         // s2
                         // 使用timeout延迟隐藏筛选行，避免隐藏情况行内第三方组件初始化尺寸错误，比如ui-select
-                        setTimeout(function() {
+                        setTimeout(function () {
                             buttonArrow1.toggleClass('ngScreening-hide');
                             buttonArrow2.toggleClass('ngScreening-hide');
                             for (var i = initrows; i < rows.length; i++) {
@@ -200,12 +200,11 @@
     })
 
     // 筛选器容器
-    m.directive('screening', function() {
+    m.directive('screening', function () {
         return {
             restrict: 'AE',
             scope: {
                 label: "@",
-                overflow: "@"
             },
             replace: true,
             transclude: true,
@@ -215,47 +214,45 @@
                     <div class="screening-container" ng-transclude></div>\
                     <div class="screening-switch ngScreening-hide"><b class="ngScreening-hide"></b><i></i></div>\
                 </div>',
-            controller: ['$scope', '$element', function($scope, $element) {
+            controller: ['$scope', '$element', function ($scope, $element) {
                 // 初始screening行容器高度，是由css控制的
                 $scope.initHeight = $element[0].clientHeight;
             }],
-            link: function(scope, el) {
+            link: function (scope, el) {
 
                 var initrows = 1; //所有子行在宽度不够时，都会隐藏换行内容
                 var container = angular.element(el[0].querySelector('.screening-container'));
-                var openState = false; //当前行是否折叠
+                var isOpen = false; //当前行是否折叠
                 var switchbtn = angular.element(el[0].querySelector('.screening-switch'));
                 var btnArrow1 = switchbtn.find('b');
                 var btnArrow2 = switchbtn.find('i');
                 var initHeight = parseInt(scope.initHeight * initrows);
-                var overflow = scope.overflow;
+                var open = { height: '', overflow: 'visible' }
+                var fold = { height: initHeight + 'px', overflow: 'hidden' }
 
                 function resize() {
-                    if (overflow === 'visible') {
-                        return;
-                    }
                     // 容器宽度改变，控制尺寸按钮和容器行数
                     var currHeight = parseInt(container[0].offsetHeight);
                     if (currHeight > initHeight) {
                         // 宽度不够，换行
                         switchbtn.removeClass('ngScreening-hide')
-                        if (openState) {
-                            el.css({ height: '', overflow: 'auto' })
+                        if (isOpen) {
+                            el.css(open)
                         } else {
-                            el.css({ height: initHeight + 'px', overflow: 'hidden' })
+                            el.css(fold)
                         }
                     } else {
                         // 宽度足够，只显示一行
                         switchbtn.addClass('ngScreening-hide')
-                        el.css({ height: '', overflow: 'visible' })
+                        el.css(open)
                     }
                 }
 
                 // 检测容器中是否只有flex布局
-                setTimeout(function() {
+                setTimeout(function () {
                     var containerChildren = container.children();
                     var flexOnly = true;
-                    angular.forEach(containerChildren, function(dom) {
+                    angular.forEach(containerChildren, function (dom) {
                         var child = angular.element(dom);
                         if (flexOnly && !child.hasClass('screening-flex')) {
                             flexOnly = false;
@@ -269,11 +266,11 @@
                         el.css('padding-left', '0');
                     } else {
                         // 混合布局时，flex容器默认水平排序为justify-content:center;
-                        angular.forEach(container.children(), function(childDom) {
+                        angular.forEach(container.children(), function (childDom) {
                             childDom = angular.element(childDom);
                             if (childDom.hasClass('screening-flex')) {
                                 // 确保screening-flex指令渲染完成
-                                setTimeout(function() {
+                                setTimeout(function () {
                                     if (!childDom.css('justify-content')) {
                                         childDom.css('justify-content', 'center');
                                     }
@@ -289,24 +286,24 @@
 
 
                 // 给按钮绑定收缩事件
-                switchbtn.on('click', function() {
-                    if (openState) {
-                        el.css({ height: initHeight + 'px', overflow: 'hidden' })
+                switchbtn.on('click', function () {
+                    if (isOpen) {
+                        el.css(fold)
                     } else {
-                        el.css({ height: '', overflow: overflow })
+                        el.css(open)
                     }
                     btnArrow1.toggleClass('ngScreening-hide');
                     btnArrow2.toggleClass('ngScreening-hide');
-                    openState = !openState;
+                    isOpen = !isOpen;
                     return false;
                 })
 
 
                 // 初始化数据 重置一次尺寸，用于显示尺寸按钮
                 // 用 watch 监听高度变化，也就是里面的数据渲染完成了
-                var watch = scope.$watch(function() {
+                var watch = scope.$watch(function () {
                     return container[0].offsetHeight;
-                }, function(newVal, oldVal) {
+                }, function (newVal, oldVal) {
                     if (newVal != oldVal) {
                         watch(); //销毁watch
                         resize(el[0]); //重置容器尺寸
@@ -318,21 +315,21 @@
     })
 
     // watch model
-    m.directive('screeningWatch', function() {
+    m.directive('screeningWatch', function () {
         return {
             restrict: 'E',
             scope: {
                 data: '='
             },
             require: '^ngScreening',
-            link: function(scope, el, attrs, pCtrl) {
+            link: function (scope, el, attrs, pCtrl) {
                 el.remove();
-                scope.$watch('data', function(newVal, oldVal) {
+                scope.$watch('data', function (newVal, oldVal) {
                     if (oldVal != newVal && newVal) {
                         pCtrl.callback();
                     }
                 })
-                scope.$on('ngScreening-reset', function() {
+                scope.$on('ngScreening-reset', function () {
                     // 根据类型，清空数据
                     if (angular.isString(scope.data)) {
                         scope.data = '';
@@ -347,7 +344,7 @@
     })
 
     // DOM event listening
-    m.directive('screeningEvent', function() {
+    m.directive('screeningEvent', function () {
         return {
             restrict: 'A',
             scope: {
@@ -355,9 +352,9 @@
             },
             require: '^ngScreening',
             replace: true,
-            link: function(scope, el, attrs, pCtrl) {
+            link: function (scope, el, attrs, pCtrl) {
                 var e = scope.event ? scope.event : 'change';
-                el.on(e, function() {
+                el.on(e, function () {
                     pCtrl.callback();
                     return false;
                 })
@@ -377,7 +374,7 @@
             require: '^ngScreening',
             transclude: true,
             template: // 多选或单选按钮
-                '<div class="screening-itembox">\
+            '<div class="screening-itembox">\
                 <input type="button" class="screening-item screening-btn" value="{{multiName}}"\
                     ng-class="{\'screening-item-checked\':mulitiActive}" \
                     ng-click="mulitiToggle()"\
@@ -392,17 +389,17 @@
                     data-this={{item}}\
                 ><div ng-transclude style="display:inline-block"></div>\
                 </div>',
-            controller: ['$scope', function($scope) {
+            controller: ['$scope', function ($scope) {
                 // 设置名称
                 if (!$scope.multiName) {
                     $scope.multiName = isCheckbox ? '全选' : '单选';
                 }
 
                 // 按钮点选
-                $scope.checkItem = function() {
+                $scope.checkItem = function () {
                     this.item.isChecked = !this.item.isChecked;
                     if (!isCheckbox) { // radio单选
-                        angular.forEach($scope.data, function(val) {
+                        angular.forEach($scope.data, function (val) {
                             if (val != this.item) {
                                 val.isChecked = false;
                             }
@@ -416,41 +413,41 @@
                 $scope.mulitiActive = false;
 
                 // 全选按钮
-                $scope.mulitiToggle = function() {
+                $scope.mulitiToggle = function () {
                     if (!isCheckbox) {
                         return;// 单选状态以下无效
                     }
                     $scope.mulitiActive = !$scope.mulitiActive;
-                    angular.forEach(this.data, function(val) {
+                    angular.forEach(this.data, function (val) {
                         val.isChecked = $scope.mulitiActive
                     })
                     this.pCtrl.callback();
                 }
 
                 // 接收信号，重置全选按钮
-                $scope.$on('ngScreening-reset', function() {
+                $scope.$on('ngScreening-reset', function () {
                     $scope.mulitiActive = false;
-                    angular.forEach($scope.data, function(item) {
+                    angular.forEach($scope.data, function (item) {
                         if (item.isChecked) {
                             item.isChecked = false;
                         }
                     })
                 });
             }],
-            link: function(scope, el, attrs, pCtrl) {
+            link: function (scope, el, attrs, pCtrl) {
                 scope.pCtrl = pCtrl;
             }
         }
     }
-    m.directive('screeningCheckbox', function() {
+    m.directive('screeningCheckbox', function () {
         return checkbox_radio(true); //多选指令
     })
-    m.directive('screeningRadio', function() {
+    m.directive('screeningRadio', function () {
         return checkbox_radio(); //单选
     })
 
     // 自定义筛选组件
-    m.directive('screeningDiv', function() {
+    m.directive('screeningDiv', function () {
         return {
             restrict: 'E',
             scope: {
@@ -467,7 +464,7 @@
     })
 
     // 自定义按钮容器
-    m.directive('screeningFlex', function() {
+    m.directive('screeningFlex', function () {
         return {
             restrict: 'E',
             scope: {

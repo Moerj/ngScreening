@@ -9,7 +9,7 @@
 
 
 .ngScreening{
-    // init
+    // class 方式渲染 angular 指令，保证初始化无闪动
     height: 0;
     overflow: hidden;
 }
@@ -201,7 +201,7 @@
             top: 0;
         }
         >.screening-container{
-            max-height: 150px;
+            // max-height: 150px;//超过高度出现滚动条，和绝对定位组件逻辑冲突
             display: block;
             display: flex;
             justify-content: flex-start;
@@ -209,7 +209,7 @@
             flex-wrap:wrap;
 
             /*.screening-itembox{
-                
+                // 尚未使用
             }*/
 
             .screening-item{ /* checkbox */
