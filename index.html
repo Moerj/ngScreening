@@ -18,7 +18,7 @@
 </head>
 <body>
 	<h1 class="PluginName">ngScreening</h2>
-	<p class="Version">ver: 0.4.0</p>
+	<p class="Version">ver: 0.4.4</p>
 	<div class="githubTag">
 		<a class="github" href="https://github.com/Moerj/ngScreening" target="_blank">STAR ON GITHUB</a>
 	</div>
@@ -32,10 +32,17 @@
 
 			<screening label="多选器:" initrows="1" important>
 				<screening-checkbox data="data.g1">
-					<screening-div label="div多元素">
-						<!-- 监听监听输入框事件 -->
-						<input screening-event="change" type="text" class="form-control"></input>
-						<button screening-event="click" type="button" class="btn btn-default">搜索</button>
+					<screening-div label="小尺寸">
+						<input screening-event="change" type="text" class="form-control size-sm"></input>
+						<button screening-event="click" type="button" class="btn btn-default size-sm">搜索</button>
+					</screening-div>
+					<screening-div label="中尺寸">
+						<input screening-event="change" type="text" class="form-control size-md"></input>
+						<button screening-event="click" type="button" class="btn btn-default size-md">搜索</button>
+					</screening-div>
+					<screening-div label="大尺寸">
+						<input screening-event="change" type="text" class="form-control size-lg"></input>
+						<button screening-event="click" type="button" class="btn btn-default size-lg">搜索</button>
 					</screening-div>
 				</screening-checkbox>
 				

@@ -1,4 +1,4 @@
-# ngScreening v0.4.3
+# ngScreening v0.4.4
 
 angular筛选器组件
 通过控制器定义数据，screening帮你完成数据的渲染、监听、过滤等功能。 
@@ -378,6 +378,13 @@ screening-div设置宽度
 <screening important>
 </screening>
 ```
+  
+
+## class - 公共样式
+在 screening 行中的元素可以用的公共样式如下
+- size-lg 大尺寸
+- size-md 中尺寸
+- size-sm 小尺寸
 
 
 ## Support

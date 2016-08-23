@@ -1,5 +1,5 @@
 /**
- * ngScreening v0.4.3 last updated
+ * ngScreening v0.4.4 last updated
  *
  * @license: MIT
  * Designed and built by Moer
@@ -183,12 +183,32 @@
 
     // 子容器
     .screening{
-        min-height: 47px;
+        @size-lg:47px;
+        @size-md:34px;
+        @size-sm:26px;
+
+        min-height: @size-lg;
         line-height: 46px;
         border-bottom: 1px #ddd solid;
         position: relative;
         padding: 0 30px 0 90px;
         display: block;
+
+        .size-lg{
+            height: @size-lg;
+            line-height: 1.5;
+            font-size: 16px;
+        }
+        .size-md{
+            height: @size-md;
+            line-height: 1;
+            font-size: 14px;
+        }
+        .size-sm{
+            height: @size-sm;
+            line-height: 0.5;
+            font-size: 12px;
+        }
 
         .screening-name{
             display: inline-block;
@@ -201,23 +221,17 @@
             top: 0;
         }
         >.screening-container{
-            // max-height: 150px;//超过高度出现滚动条，和绝对定位组件逻辑冲突
             display: block;
             display: flex;
             justify-content: flex-start;
             flex-grow: 1;
             flex-wrap:wrap;
 
-            /*.screening-itembox{
-                // 尚未使用
-            }*/
-
             .screening-item{ /* checkbox */
+                .size-sm();
                 list-style: none;
                 display: inline-block;
                 margin: 2px 6px 5px;
-                height: 26px !important;
-                line-height: 50%;
                 padding: 5px 12px;
                 border-radius: 4px;
                 &:hover{
@@ -234,10 +248,13 @@
             }
             .screening-div{ /* 自定义div容器 */
                 display: inline-block;
-                margin-right: 20px;
-                >input{
+                >.screening-div-contanier{
                     display: inline-block;
-                    width: auto;
+                    margin-right: 20px;
+                    >input{
+                        display: inline-block;
+                        width: auto;
+                    }
                 }
             }
             .screening-flex{

@@ -1,5 +1,5 @@
 /**
- * ngScreening v0.4.3
+ * ngScreening v0.4.4
  *
  * @license: MIT
  * Designed and built by Moer
@@ -387,7 +387,7 @@
                     ng-value="item.name"\
                     data-index="{{$index}}"\
                     data-this={{item}}\
-                ><div ng-transclude style="display:inline-block"></div>\
+                ><div ng-transclude class="itembox-other" style="display:inline-block"></div>\
                 </div>',
             controller: ['$scope', function ($scope) {
                 // 设置名称
@@ -456,9 +456,9 @@
             },
             transclude: true,
             replace: true,
-            template: '<div>\
-            <span style="margin:0 10px 0 10px" ng-if="label">{{label}}</span>\
-            <div class="screening-div" style="width:{{width}}" ng-transclude></div>\
+            template: '<div class="screening-div">\
+            <span class="screening-div-name" style="margin:0 10px 0 10px" ng-if="label">{{label}}</span>\
+            <div class="screening-div-contanier" style="width:{{width}};" ng-transclude></div>\
         </div>'
         }
     })
