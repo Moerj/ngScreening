@@ -1,5 +1,5 @@
 /**
- * ngScreening v0.4.4
+ * ngScreening v0.4.5
  *
  * @license: MIT
  * Designed and built by Moer
@@ -204,7 +204,7 @@
         return {
             restrict: 'AE',
             scope: {
-                label: "@",
+                label: "@"
             },
             replace: true,
             transclude: true,
@@ -233,7 +233,7 @@
                 function resize() {
                     // 容器宽度改变，控制尺寸按钮和容器行数
                     var currHeight = parseInt(container[0].offsetHeight);
-                    if (currHeight > initHeight) {
+                    if (currHeight >= initHeight*2) {
                         // 宽度不够，换行
                         switchbtn.removeClass('ngScreening-hide')
                         if (isOpen) {
