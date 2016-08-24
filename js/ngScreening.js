@@ -1,5 +1,5 @@
 /**
- * ngScreening v0.4.5
+ * ngScreening v0.4.6
  *
  * @license: MIT
  * Designed and built by Moer
@@ -73,29 +73,52 @@
             transclude: true,
             template: '<div class="ngScreening-start">\
                     <form class="ngScreening-container" ng-transclude></form>\
-                    <div class="ngScreening-control">\
-                        <div class="ngScreening-switch"><b></b><i class="ngScreening-hide"></i></div>\
+                    <div ng-if="hasControl" class="ngScreening-control">\
+                        <button ng-click="dosearch()" ng-if="hasSearch" type="button" class="screening-btn screening-btn-search">查询</button>\
+                        <button ng-click="doreset()" ng-if="hasReset" type="button" class="screening-btn">重置</button>\
+                        <div ng-if="hasSwitch" ng-style="switchStyle" class="ngScreening-switch"><b></b><i class="ngScreening-hide"></i></div>\
                     </div>\
                 </div>',
-            controller: ['$scope', function ($scope) {
+            controller: ['$scope', '$attrs', function ($scope, $attrs) {
                 this.callback = function () {
                     //执行控制器中的callback，通知控制器，数据已改变
                     return $scope.callback();
                 }
+                $scope.dosearch = function () {
+                    $scope.search();
+                }
+                $scope.doreset = function () {
+                    $scope.$broadcast('ngScreening-reset'); // 通知组件内部重置数据
+                    $scope.container[0].reset(); // form reset
+                    $scope.reset();
+                }
+
+                // control 区域的按钮呈现逻辑
+                if ($attrs.search) {
+                    $scope.hasSearch = true
+                }
+                if ($attrs.reset !== undefined) {
+                    $scope.hasReset = true
+                }
+                if (!$scope.hasSearch && !$scope.hasReset) {
+                    // 没有 search 和 reset 按钮时，switch 按钮加大尺寸
+                    $scope.switchStyle = {
+                        width: '80px',
+                        height: '46px'
+                    }
+                }
+                if ($scope.initrows) {
+                    $scope.hasSwitch = true
+                }
+                $scope.hasControl = $scope.hasSearch || $scope.hasReset || $scope.hasSwitch;
             }],
             link: function (scope, el) {
                 setTimeout(function () {
 
-                    var container = angular.element(el[0].querySelector('.ngScreening-container'));
-                    var control = angular.element(el[0].querySelector('.ngScreening-control'));
-
+                    var container = scope.container = angular.element(el[0].querySelector('.ngScreening-container'));
                     var button = angular.element(el[0].querySelector('.ngScreening-switch')); //控制外壳容器 展开/收起 的按钮
                     var buttonArrow1 = button.find('b'); //按钮中的上箭头
                     var buttonArrow2 = button.find('i'); //下箭头
-
-                    var screeningButtons; //最后一排操作按钮的容器
-                    var search = scope.search; //查询按钮
-                    var reset = scope.reset; //重置按钮
 
                     //s1. initrows < 0 || undefined 显示所有行，隐藏 button
                     //s2. initrows > 0 && initrows < rows.length , 隐藏指定行数量，显示 button
@@ -109,34 +132,6 @@
                         // 防止真实DOM比指令渲染先完成导致页面结构跳动
                         el.removeClass('ngScreening');
                     }
-
-                    // 增加查询和重置按钮 (如果有参数才生成)
-                    if (el.attr('search') || el.attr('reset') !== undefined) {
-                        if (el.attr('search')) {
-                            var searchBtn = angular.element('<button type="button" class="screening-btn screening-btn-search">查询</button>');
-                            searchBtn.on('click', function (e) {
-                                e.stopPropagation();
-                                search();
-                                scope.$apply();
-                            });
-                            control.append(searchBtn)
-                        }
-                        if (el.attr('reset') !== undefined) {
-                            var resetBtn = angular.element('<button type="button" class="screening-btn">重置</button>');
-                            resetBtn.on('click', function (e) {
-                                e.stopPropagation();
-                                scope.$broadcast('ngScreening-reset'); // 通知组件内部重置数据
-                                container[0].reset(); // form reset
-                                reset();
-                                scope.$apply();
-                            });
-                            control.append(resetBtn)
-                        }
-                    } else {
-                        // 没有查询和重置按钮时，伸缩按钮加宽
-                        button.css('width', '80px')
-                    }
-
 
                     // 面板收缩伸展
                     button.on('click', function () {
@@ -161,13 +156,7 @@
                     })
 
                     // 设置初始显示的行
-                    if (initrows <= 0 || initrows == undefined) {
-
-                        // s1
-                        button.remove();
-                        loadFinish();
-
-                    } else if (hasHideRows) {
+                    if (hasHideRows) {
                         // s2
                         // 使用timeout延迟隐藏筛选行，避免隐藏情况行内第三方组件初始化尺寸错误，比如ui-select
                         setTimeout(function () {
@@ -176,22 +165,13 @@
                             for (var i = initrows; i < rows.length; i++) {
                                 angular.element(rows[i]).addClass('ngScreening-hide');
                             }
-                            // screening-buttons行默认初始不隐藏
-                            if (screeningButtons) {
-                                screeningButtons.removeClass('ngScreening-hide');
-                            }
                             loadFinish();
                         }, 300)
 
-                    } else if (initrows == rows.length || initrows == 'all') {
+                    } else {
 
-                        // s3
+                        // s1 || s3
                         loadFinish();
-                    }
-
-                    // 判断 control 容器是否需隐藏
-                    if (control.children().length == 0) {
-                        control.remove();
                     }
 
                 })
@@ -233,7 +213,7 @@
                 function resize() {
                     // 容器宽度改变，控制尺寸按钮和容器行数
                     var currHeight = parseInt(container[0].offsetHeight);
-                    if (currHeight >= initHeight*2) {
+                    if (currHeight >= initHeight * 2) {
                         // 宽度不够，换行
                         switchbtn.removeClass('ngScreening-hide')
                         if (isOpen) {
