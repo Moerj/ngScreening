@@ -5,7 +5,7 @@ angular筛选器组件
  
 
 ## DEMO
-http://moerj.com/Github/ngScreening/
+http://moerj.github.io/ngScreening/
   
 
 ## Getting Started
