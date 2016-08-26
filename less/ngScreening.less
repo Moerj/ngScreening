@@ -1,0 +1,307 @@
+/**
+ * ngScreening v0.4.5 last updated
+ *
+ * @license: MIT
+ * Designed and built by Moer
+ * github   https://github.com/Moerj/ngScreening
+ *
+ */
+
+
+.ngScreening{
+    // class 方式渲染 angular 指令，保证初始化无闪动
+    height: 0;
+    overflow: hidden;
+}
+
+.ngScreening-start{
+    background-color: #fff;
+    display: block;
+    position: relative;
+    padding: 0 15px;
+
+    /* 公共样式 */
+
+    // 按钮中的箭头
+    .btnArrow(){
+        .btnArrowUp(){
+            border-bottom: 5px solid #66a6d1 ;
+            &::before{
+                border-bottom: 5px solid #FFF ;
+                top:2px;
+            }
+        }
+        .btnArrowDown(){
+            border-top: 5px solid #66a6d1 ;
+            &::before{
+                border-top: 5px solid #FFF ;
+            }
+        }
+
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-left: -5px;
+        margin-top: -2.5px;
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+
+        &::before{
+            content: '';
+            position: absolute;
+            top: -7px;
+            left: -5px;
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+        }
+    }
+
+    .screening-btn{
+        display: inline-block;
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 1.5;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        touch-action: manipulation;
+        cursor: pointer;
+        user-select: none;
+        background-image: none;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        background-color: #fff;
+        outline: none;
+        transition: 0.25s linear;
+        color: #333;
+        &:active{
+            background-image: none;
+            outline: 0;
+            box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
+        }
+        &:hover{
+            background-color: #f2f2f2;
+            border-color: #d6d6d6;
+        }
+    }
+    .screening-btn-search{
+        background-color: #18a689;
+        border-color: #4cae4c;
+        color: #fff;
+        &:hover{
+            background-color: #159077;
+            border-color: #159077;
+        }
+    }
+
+    .ngScreening-hide{
+        display: none !important;
+    }
+
+
+    /* 私有样式 */
+    >.ngScreening-container{
+        width: 100%;
+        border-top: 1px #ddd solid;
+        display: block;
+        margin: 0;
+        padding: 0;
+    }
+
+    .control-border(){
+        border: 1px solid #ddd;
+        border-bottom-width:2px; 
+        box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.1);
+    }
+    >.ngScreening-control{
+        position: absolute;
+        z-index: 1;
+        width: auto;
+        height: 43px;
+        bottom: -42px;
+        left: 50%;
+        box-sizing: border-box;
+        transform: translateX(-50%);
+        background-color: inherit;
+        padding-right: 10px;
+        padding-top: 5px;
+        .control-border();
+        >*{
+            float: left;
+            margin:0;
+            margin-left: 10px;
+            padding: 5px 10px;
+        }
+    }
+
+    .ngScreening-switch{
+        position: absolute;
+        top: -1px;
+        right: -40px;
+        margin-right: 0;
+        width: 40px;
+        height: 43px;
+        font-size: 15px;
+        color: #66a6d1;
+        cursor: pointer;
+        background-color: inherit;
+        text-align: center;
+        .control-border();
+        border-top: 0;
+        padding: 0;
+        box-sizing: border-box;
+        >b{
+            .btnArrow();
+            .btnArrowUp();
+        }
+        >i{
+            .btnArrow();
+            .btnArrowDown();
+        }
+        &:hover > *{
+            border-top-color: #235576;
+            border-bottom-color: #235576;
+        }
+    }
+
+    .screening-buttons{
+        text-align: center;
+        padding: 0 !important;
+
+        >*{
+            margin: 0 !important;
+            margin-right: 20px !important;
+        }
+        >*:last-of-type{
+            margin-right: 0;
+        }
+    }
+
+    // 子容器
+    .screening{
+        @size-lg:47px;
+        @size-md:34px;
+        @size-sm:26px;
+
+        min-height: @size-lg; //行的基础高度
+        line-height: 46px;
+        border-bottom: 1px #ddd solid;
+        position: relative;
+        padding: 0 30px 0 90px;
+        display: block;
+
+        .size-lg{
+            height: @size-lg;
+            line-height: 1.5;
+            font-size: 16px;
+        }
+        .size-md{
+            height: @size-md;
+            line-height: 1;
+            font-size: 14px;
+        }
+        .size-sm{
+            height: @size-sm;
+            line-height: 0.5;
+            font-size: 12px;
+        }
+
+        .screening-name{
+            display: inline-block;
+            text-align: right;
+            min-width: 80px;
+            margin-right: 10px;
+            flex-shrink:0;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        >.screening-container{
+            display: block;
+            display: flex;
+            justify-content: flex-start;
+            flex-grow: 1;
+            flex-wrap:wrap;
+
+            .screening-item{ /* checkbox */
+                .size-sm();
+                list-style: none;
+                display: inline-block;
+                margin: 2px 6px 5px;
+                padding: 5px 12px;
+                border-radius: 4px;
+                &:hover{
+                    background-color: #f2f2f2;
+                    border-color: #d6d6d6;
+                }
+            }
+            .screening-item-checked{
+                background-color: #66A6D1;
+                color: #fff;
+                &:hover{
+                    background-color: #3f8fc5 !important;
+                }
+            }
+            .screening-div{ /* 自定义div容器 */
+                display: inline-block;
+                >.screening-div-contanier{
+                    display: inline-block;
+                    margin-right: 20px;
+                    >input{
+                        display: inline-block;
+                        width: auto;
+                    }
+                }
+            }
+            .screening-flex{
+                display:flex;
+                flex-grow:1;/* 每个元素平分剩余空间 */
+                align-items: center;
+                align-content:flex-start;
+                >.screening-name{
+                    // flex的 label 在整行总是居于左上角
+                    align-self: flex-start;
+                }
+                .screening-item{
+                    // 调整 flex 下的 item 行间距
+                    margin-top: -2px;
+                    margin-bottom: 0;
+                }
+            }
+        }
+        >.screening-switch{
+            width: 25px;
+            height: 25px;
+            line-height: 25px;
+            position: absolute;
+            top: 10px;
+            right: 0px;
+            text-align: center;
+            font-size: 12px;
+            cursor: pointer;
+            border-radius: 5px;
+
+            &:hover{
+                @hoverColor:#eee;
+                background-color: @hoverColor;
+                &>*::before{
+                    border-top-color: @hoverColor;
+                    border-bottom-color: @hoverColor;
+                }
+            }
+
+            >b{
+                .btnArrow();
+                .btnArrowUp();
+            }
+            >i{
+                .btnArrow();
+                .btnArrowDown();
+            }
+        }
+    }
+}
