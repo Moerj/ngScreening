@@ -1,4 +1,4 @@
-# ngScreening v0.4.6
+# ngScreening v0.4.7
 
 angular筛选器组件
 通过控制器定义数据，screening帮你完成数据的渲染、监听、过滤等功能。 
@@ -119,6 +119,11 @@ screening-flex指令可以接收的参数，设置flex的均分方式，具体�
 </screening>
 ```
 
+### screening-toggle
+这个指令写在组件外部的按钮上，用来定义一个外部toggle按钮
+```html
+    <button screening-toggle>外部控制按钮（收起/展开）</button>
+```
 
   
 
@@ -309,8 +314,20 @@ app.controller('yourCtrl',function ($scope, ngScreening) {
     ngScreening.resize()
 
     // 重置指定的screening容器，参数为DOM对象
-    var DOM = document.getElementById('yourScreening');
     ngScreening.resize(DOM)
+
+})
+```
+
+### toggle()
+展开或收起整个组件
+```javascript
+app.controller('yourCtrl',function ($scope, ngScreening) {
+    // 控制页面上所有screening容器
+    ngScreening.toggle()
+
+    // 控制指定的screening容器，参数为DOM对象
+    ngScreening.toggle(DOM)
 
 })
 ```

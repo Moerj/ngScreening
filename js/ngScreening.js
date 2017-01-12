@@ -16,6 +16,7 @@
     // 筛选服务
     m.service('ngScreening', function () {
         return {
+            // 获取选择组件的选中项
             getChecked: function (data) {
                 var newArray = [];
                 angular.forEach(data, function (key) {
@@ -25,13 +26,32 @@
                 })
                 return newArray;
             },
-            resize: function (el) { //重置 screening 中 container高度，触发按钮隐藏显示
+
+            //重置 screening 中 container高度，触发按钮隐藏显示
+            resize: function (el) {
                 // typeof el === domObj
                 if (el)
                     el._screening_resize();
                 else
                     _resizeAll();
+            },
+
+            // 收起、展开整个组件
+            toggle: function (el) {
+                if (el && el._dotoggle) {
+                    el._dotoggle()
+                } else {
+                    var els = angular.element(document.querySelector('.ngScreening-start'))
+                    for (var i = 0; i < els.length; i++) {
+                        if (els[i]._dotoggle) {
+                            els[i]._dotoggle();
+                        }
+                    }
+                }
             }
+
+
+
         }
     })
 
@@ -133,8 +153,8 @@
                         el.removeClass('ngScreening');
                     }
 
-                    // 面板收缩伸展
-                    button.on('click', function () {
+                    // 整个筛选器的展开、收起
+                    el[0]._dotoggle = function () {
                         if (hasHideRows) {
                             // 初始有隐藏行时，点击会先显示全部行
                             hasHideRows = false;
@@ -152,6 +172,11 @@
                             buttonArrow1.toggleClass('ngScreening-hide');
                             buttonArrow2.toggleClass('ngScreening-hide');
                         }
+                    }
+
+                    // 面板收缩伸展
+                    button.on('click', function () {
+                        el[0]._dotoggle();
                         return false;
                     })
 
@@ -207,8 +232,14 @@
                 var btnArrow1 = switchbtn.find('b');
                 var btnArrow2 = switchbtn.find('i');
                 var initHeight = parseInt(scope.initHeight * initrows);
-                var open = { height: '', overflow: 'visible' }
-                var fold = { height: initHeight + 'px', overflow: 'hidden' }
+                var open = {
+                    height: '',
+                    overflow: 'visible'
+                }
+                var fold = {
+                    height: initHeight + 'px',
+                    overflow: 'hidden'
+                }
 
                 function resize() {
                     // 容器宽度改变，控制尺寸按钮和容器行数
@@ -354,7 +385,7 @@
             require: '^ngScreening',
             transclude: true,
             template: // 多选或单选按钮
-            '<div class="screening-itembox">\
+                '<div class="screening-itembox">\
                 <input type="button" class="screening-item screening-btn" value="{{multiName}}"\
                     ng-class="{\'screening-item-checked\':mulitiActive}" \
                     ng-click="mulitiToggle()"\
@@ -395,7 +426,7 @@
                 // 全选按钮
                 $scope.mulitiToggle = function () {
                     if (!isCheckbox) {
-                        return;// 单选状态以下无效
+                        return; // 单选状态以下无效
                     }
                     $scope.mulitiActive = !$scope.mulitiActive;
                     angular.forEach(this.data, function (val) {
@@ -460,5 +491,25 @@
         </div>'
         }
     })
+
+    m.directive('screeningToggle', ['ngScreening', function (ngScreening) {
+        return {
+            restrict: 'A',
+            scope: {
+                screeningToggle: '@'
+            },
+            link: function (scope, el, attrs) {
+                el.on('click', function () {
+                    var selectors = attrs.screeningToggle
+                    var matchElement
+                    if (selectors) {
+                        matchElement = document.querySelector(selectors)
+                    }
+                    ngScreening.toggle(matchElement)
+
+                })
+            }
+        }
+    }])
 
 })()
