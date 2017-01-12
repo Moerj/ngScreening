@@ -1,0 +1,30 @@
+@color: #f3f3f3;
+.ngScreening-start {
+    background-color: @color;
+    .ngScreening-switch {
+        width: 46px;
+        height: 30px;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        background-color: #fff;
+        box-shadow: none;
+        i:before {
+            border-top: 5px solid @color;
+        }
+        b:before {
+            border-bottom: 5px solid @color;
+        }
+    }
+    .ngScreening-control {
+        left: 0;
+        right: 0;
+        transform: translateX(0);
+        text-align: center;
+        >* {
+            float: none;
+            top: auto;
+            display: inline-block;
+            right: auto;
+        }
+    }
+}
