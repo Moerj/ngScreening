@@ -1,5 +1,5 @@
 /**
- * ngScreening v0.4.6
+ * ngScreening v0.4.7
  *
  * @license: MIT
  * Designed and built by Moer
