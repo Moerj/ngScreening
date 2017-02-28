@@ -9,15 +9,18 @@ http://moerj.github.io/ngScreening/
   
 
 ## Getting Started
-在使用前，你需要引入 angular
+
+```cmd
+npm install ng-screening
+```
 
 ```javascript
 
-require('angular');
+require('angular');//在使用前，你需要引入 angular
 
-require('ngScreening');
+require('ngScreening');//引入组件
 
-angular.module('yourProject',['ngScreening']);
+angular.module('yourProject',['ngScreening']);//注册组件
 
 ```
 
