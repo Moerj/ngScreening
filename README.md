@@ -26,11 +26,9 @@ angular.module('yourProject',['ngScreening']);//注册组件
 
   
 ## How to use
-1. <a href="#step1">布局</a> 在html页面上定义好容器
-2. <a href="#step2">数据操作</a> 传入数据，开启监听
-3. <a href="#step3">callback</a> 响应筛选数据变化
-
-  
+1. 布局: 在html页面上定义好容器
+2. 数据操作: 传入数据，开启监听
+3. callback 响应筛选数据变化
 
 
 
