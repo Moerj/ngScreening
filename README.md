@@ -34,7 +34,7 @@ angular.module('yourProject',['ngScreening']);//注册组件
 
 
 
-<h2 id="step1">布局</h2>
+## 布局<h2 id="step1"></h2>
 
 ### ng-screening
 筛选器的整体容器框
@@ -130,7 +130,7 @@ screening-flex指令可以接收的参数，设置flex的均分方式，具体�
 
   
 
-<h2 id="step2">数据操作</h2>
+## 数据操作<h2 id="step2"></h2>
 
 ### data
 传入数据，自动渲染，自动绑定
@@ -223,7 +223,8 @@ default: 'change'
   
 
 ## 数据更新
-<h3 id="step3">callback</h3>
+
+### callback <h3 id="step3"></h3>
 定义一个你的回调函数，它会在数据更新时通知你
 ```html
 <!-- callback 只能定义在 ng-screening 上 -->
