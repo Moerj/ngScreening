@@ -1,5 +1,5 @@
 /**
- * ngScreening v0.4.7
+ * ngScreening v0.4.8
  *
  * @license: MIT
  * Designed and built by Moer
@@ -487,7 +487,7 @@
             replace: true,
             template: '<div class="screening-flex" style="justify-content:{{justifyContent}}">\
             <span class="screening-name" style="position:relative" ng-if="label">{{label}}</span>\
-            <div style="width:{{width}};" ng-transclude></div>\
+            <div style="width:{{width}};display:flex;align-items:center;" ng-transclude></div>\
         </div>'
         }
     })
