@@ -1,5 +1,5 @@
 /**
- * ngScreening v0.4.6 last updated
+ * ngScreening v0.4.7 last updated
  *
  * @license: MIT
  * Designed and built by Moer
@@ -114,7 +114,7 @@
 
     .control-border(){
         border: 1px solid #ddd;
-        border-bottom-width:2px; 
+        border-bottom-width:2px;
         box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.1);
     }
     >.ngScreening-control{
@@ -182,7 +182,7 @@
     }
 
     // 子容器
-    .screening{
+     .screening{
         @size-lg:47px;
         @size-md:34px;
         @size-sm:26px;
@@ -252,10 +252,17 @@
                 >.screening-div-contanier{
                     display: flex;
                     align-items: center;
-                    margin-right: 20px;
+
+                    // 重置内部行高
+                    line-height:normal;
+                    // display:inherit;
+                    // input{
+                    //     height:33px !important;
+                    // }
+
                     >input{
                         display: inline-block;
-                        width: auto;
+                        width:auto;
                     }
                 }
             }
