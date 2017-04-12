@@ -1,8 +1,8 @@
 {
   "name": "ng-screening",
-  "version": "0.4.7b",
+  "version": "0.4.8",
   "description": "Angularjs Screening, 筛选器组件",
-  "main": "index.html",
+  "main": "js/ngScreening.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
