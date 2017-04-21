@@ -1,4 +1,4 @@
-# ngScreening v0.4.7
+# ngScreening v0.4.9
 
 angular筛选器组件
 通过控制器定义数据，screening帮你完成数据的渲染、监听、过滤等功能。 
@@ -367,9 +367,15 @@ defualt: undefined
     </screening>
 </ng-screening>
 
-<!-- initrows == 最大行数 或 参数'all'，初始显示所有行，伸缩按钮显示 -->
-<ng-screening initrows="all">
+<!-- initrows == 最大行数，初始显示所有行，伸缩按钮显示 -->
+<ng-screening initrows="100">
     ...
+</ng-screening>
+
+<ng-screening>
+    <screening initrows="2">
+        <!-- 子行中用这种方式可以防止多余部分隐藏, 超出指定数值的行数-->
+    </screening>
 </ng-screening>
 ```
 
