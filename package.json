@@ -1,6 +1,6 @@
 {
   "name": "ng-screening",
-  "version": "0.4.8",
+  "version": "0.4.9",
   "description": "Angularjs Screening, 筛选器组件",
   "main": "js/ngScreening.js",
   "scripts": {
