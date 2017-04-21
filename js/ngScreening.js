@@ -1,5 +1,5 @@
 /**
- * ngScreening v0.4.8
+ * ngScreening v0.4.9
  *
  * @license: MIT
  * Designed and built by Moer
@@ -142,7 +142,7 @@
 
                     //s1. initrows < 0 || undefined 显示所有行，隐藏 button
                     //s2. initrows > 0 && initrows < rows.length , 隐藏指定行数量，显示 button
-                    //s3. initrows == rows.length || initrows == 'all' , 显示所有行，显示 button
+                    //s3. initrows == rows.length , 显示所有行，显示 button
                     var initrows = scope.initrows; //初始显示的行数
                     var rows = container.children(); //实际的行数
                     var hasHideRows = initrows > 0 && initrows < rows.length; //需要初始隐藏
@@ -209,7 +209,8 @@
         return {
             restrict: 'AE',
             scope: {
-                label: "@"
+                label: "@",
+                initrows: "@"
             },
             replace: true,
             transclude: true,
@@ -224,8 +225,7 @@
                 $scope.initHeight = $element[0].clientHeight;
             }],
             link: function (scope, el) {
-
-                var initrows = 1; //所有子行在宽度不够时，都会隐藏换行内容
+                var initrows = scope.initrows || 1; //所有子行在宽度不够时，都会隐藏换行内容
                 var container = angular.element(el[0].querySelector('.screening-container'));
                 var isOpen = false; //当前行是否折叠
                 var switchbtn = angular.element(el[0].querySelector('.screening-switch'));

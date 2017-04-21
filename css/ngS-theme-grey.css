@@ -1,5 +1,5 @@
 .ngScreening-start {
-  background-color: #f3f3f3;
+  background-color: #fff;
 }
 .ngScreening-start .ngScreening-switch {
   width: 46px;
@@ -10,10 +10,10 @@
   box-shadow: none;
 }
 .ngScreening-start .ngScreening-switch i:before {
-  border-top: 5px solid #f3f3f3;
+  border-top: 5px solid #fff;
 }
 .ngScreening-start .ngScreening-switch b:before {
-  border-bottom: 5px solid #f3f3f3;
+  border-bottom: 5px solid #fff;
 }
 .ngScreening-start .ngScreening-control {
   left: 0;
@@ -21,6 +21,8 @@
   -webkit-transform: translateX(0);
           transform: translateX(0);
   text-align: center;
+  bottom: -43px;
+  border: 0;
 }
 .ngScreening-start .ngScreening-control > * {
   float: none;
