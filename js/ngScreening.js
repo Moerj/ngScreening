@@ -1,5 +1,5 @@
 /**
- * ngScreening v1.0.0
+ * ngScreening v1.0.1
  *
  * @license: MIT
  * Designed and built by Moer
@@ -242,6 +242,12 @@
                 }
 
                 function resize() {
+                    // 禁用当前行的折叠
+                    if (scope.initrows=='-1') {
+                        switchbtn.addClass('ngScreening-hide')
+                        return
+                    }
+
                     // 容器宽度改变，控制尺寸按钮和容器行数
                     var currHeight = parseInt(container[0].offsetHeight);
                     if (currHeight >= initHeight * 2) {
@@ -317,7 +323,7 @@
                 }, function (newVal, oldVal) {
                     if (newVal != oldVal) {
                         watch(); //销毁watch
-                        resize(el[0]); //重置容器尺寸
+                        resize(); //重置容器尺寸
                     }
                 })
 

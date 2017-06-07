@@ -34,19 +34,19 @@
 
 			<screening label="多选器:" initrows="1" important>
 				<screening-checkbox data="data.g1">
-					<screening-div label="小尺寸">
-						<input screening-event="change" type="text" class="form-control size-sm">
-						<button screening-event="click" type="button" class="btn btn-default size-sm">搜索</button>
-					</screening-div>
-					<screening-div label="中尺寸">
-						<input screening-event="change" type="text" class="form-control size-md">
-						<button screening-event="click" type="button" class="btn btn-default size-md">搜索</button>
-					</screening-div>
-					<screening-div label="大尺寸">
-						<input screening-event="change" type="text" class="form-control size-lg">
-						<button screening-event="click" type="button" class="btn btn-default size-lg">搜索</button>
-					</screening-div>
 				</screening-checkbox>
+				<screening-div label="小尺寸">
+					<input screening-event="change" type="text" class="form-control size-sm">
+					<button screening-event="click" type="button" class="btn btn-default size-sm">搜索</button>
+				</screening-div>
+				<screening-div label="中尺寸">
+					<input screening-event="change" type="text" class="form-control size-md">
+					<button screening-event="click" type="button" class="btn btn-default size-md">搜索</button>
+				</screening-div>
+				<screening-div label="大尺寸">
+					<input screening-event="change" type="text" class="form-control size-lg">
+					<button screening-event="click" type="button" class="btn btn-default size-lg">搜索</button>
+				</screening-div>
 				
 			</screening>
 
@@ -97,7 +97,8 @@
 
 			</screening>
 
-			<screening label="案例5:" overflow="visible">
+			<!-- initrows="-1" 禁用当前行的折叠 -->
+			<screening label="案例5:" initrows="-1">
 
 				<screening-div label="第三方组件" width="200px">
 					<!-- 监听数据模型 -->
