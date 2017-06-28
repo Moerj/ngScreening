@@ -1,5 +1,5 @@
 /**
- * ngScreening v1.0.1
+ * ngScreening v1.0.2
  *
  * @license: MIT
  * Designed and built by Moer
@@ -342,7 +342,7 @@
             link: function (scope, el, attrs, pCtrl) {
                 el.remove();
                 scope.$watch('data', function (newVal, oldVal) {
-                    if (oldVal != newVal && newVal) {
+                    if (oldVal != newVal) {
                         pCtrl.callback();
                     }
                 })
