@@ -7,7 +7,6 @@
  *
  */
 
-
 (function () {
     "use strict";
 
@@ -216,7 +215,7 @@
             transclude: true,
             require: '^ngScreening',
             template: '<div class="screening" >\
-                    <div class="screening-name" ng-hide="flexOnly">{{label}}</div>\
+                    <div class="screening-name" ng-hide="flexOnly" ng-style="labelStyle">{{label}}</div>\
                     <div class="screening-container" ng-transclude></div>\
                     <div class="screening-switch ngScreening-hide"><b class="ngScreening-hide"></b><i></i></div>\
                 </div>',
@@ -239,6 +238,11 @@
                 var fold = {
                     height: initHeight + 'px',
                     overflow: 'hidden'
+                }
+
+                // 设置label样式
+                if (!scope.label) {
+                    el.css('padding-left', '19px');
                 }
 
                 function resize() {
